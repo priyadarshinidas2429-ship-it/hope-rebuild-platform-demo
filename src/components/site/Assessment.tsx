@@ -17,7 +17,7 @@ export function Assessment() {
   const [answers, setAnswers] = useState<(0 | 1 | 2)[]>([]);
   const [step, setStep] = useState(0);
   const done = step >= questions.length;
-  const score = answers.reduce((a, b) => a + b, 0);
+  const score = answers.reduce<number>((a, b) => a + b, 0);
   const max = questions.length * 2;
   const pct = (score / max) * 100;
   const level = pct < 30 ? "low" : pct < 60 ? "moderate" : "high";
