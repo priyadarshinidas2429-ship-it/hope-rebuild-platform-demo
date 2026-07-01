@@ -836,7 +836,7 @@ function Home() {
       </footer>
 
       {/* FLOATING ACTIONS */}
-      <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-3">
+      <div className="fixed bottom-20 md:bottom-4 right-4 z-50 flex flex-col gap-3">
         <a href={PHONE_TEL} aria-label="Emergency call" className="h-14 w-14 rounded-full bg-emergency text-white grid place-items-center shadow-elegant animate-pulse-ring">
           <AlertCircle className="h-6 w-6" />
         </a>
@@ -845,6 +845,16 @@ function Home() {
         </a>
         <a href={PHONE_TEL} aria-label="Call now" className="h-14 w-14 rounded-full gradient-primary text-primary-foreground grid place-items-center shadow-elegant hover:scale-110 transition">
           <Phone className="h-6 w-6" />
+        </a>
+      </div>
+
+      {/* MOBILE STICKY CONTACT BAR */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 grid grid-cols-2 gap-0 border-t bg-background/95 backdrop-blur-xl shadow-elegant">
+        <a href={PHONE_TEL} className="flex items-center justify-center gap-2 py-3.5 gradient-primary text-primary-foreground font-semibold text-sm">
+          <Phone className="h-4 w-4" /> Call Now
+        </a>
+        <a href={WHATSAPP} target="_blank" rel="noopener" className="flex items-center justify-center gap-2 py-3.5 bg-whatsapp text-white font-semibold text-sm">
+          <MessageCircle className="h-4 w-4" /> WhatsApp
         </a>
       </div>
     </div>
