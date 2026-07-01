@@ -704,7 +704,7 @@ function Home() {
                 { i: MapPin, t: "Address", d: ADDRESS },
                 { i: Phone, t: "Phone", d: PHONE, href: PHONE_TEL },
                 { i: MessageCircle, t: "WhatsApp", d: "Chat with us anytime", href: WHATSAPP },
-                { i: Mail, t: "Email", d: "care@midnaporehope.org", href: "mailto:care@midnaporehope.org" },
+                { i: Mail, t: "Email", d: EMAIL, href: `mailto:${EMAIL}` },
                 { i: Clock, t: "Hours", d: "Open 24 hours · 7 days" },
               ].map(({ i: I, t, d, href }) => (
                 <div key={t} className="flex gap-4">
@@ -734,13 +734,30 @@ function Home() {
               </form>
             </Card>
           </div>
-          <div className="mt-8 overflow-hidden rounded-2xl shadow-card border bg-card">
-            <iframe
-              title="Midnapore Hope Society location"
-              src="https://www.google.com/maps?q=Midnapore+Hope+Society+Bidhan+Nagar+East+Saratpally+Midnapore&output=embed"
-              className="w-full h-[360px] border-0"
-              loading="lazy"
-            />
+          {/* FIND US */}
+          <div id="find-us" className="mt-10 grid lg:grid-cols-[1fr_1.2fr] gap-6">
+            <Card className="p-7 border-0 shadow-card bg-card flex flex-col">
+              <Badge className="mb-3 bg-primary/10 text-primary border-0 w-fit">Find Us</Badge>
+              <h3 className="font-display text-2xl font-bold mb-2">Visit Our Centre</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-5">{ADDRESS}</p>
+              <div className="space-y-3 text-sm mb-6">
+                <div className="flex items-center gap-2"><Clock className="h-4 w-4 text-primary" /> Open 24 hours · 7 days a week</div>
+                <div className="flex items-center gap-2"><Phone className="h-4 w-4 text-primary" /> {PHONE}</div>
+                <div className="flex items-center gap-2"><Mail className="h-4 w-4 text-primary" /> {EMAIL}</div>
+              </div>
+              <div className="mt-auto grid sm:grid-cols-2 gap-3">
+                <Button asChild className="gradient-primary text-primary-foreground border-0"><a href={PHONE_TEL}><Phone className="mr-2 h-4 w-4" /> Call Now</a></Button>
+                <Button asChild variant="outline"><a href={MAPS_DIRECTIONS} target="_blank" rel="noopener"><MapPin className="mr-2 h-4 w-4" /> Get Directions</a></Button>
+              </div>
+            </Card>
+            <div className="overflow-hidden rounded-2xl shadow-card border bg-card min-h-[320px]">
+              <iframe
+                title="Midnapore Hope Society location"
+                src="https://www.google.com/maps?q=Midnapore+Hope+Society+Bidhan+Nagar+East+Saratpally+Midnapore&output=embed"
+                className="w-full h-full min-h-[320px] border-0"
+                loading="lazy"
+              />
+            </div>
           </div>
         </div>
       </section>
