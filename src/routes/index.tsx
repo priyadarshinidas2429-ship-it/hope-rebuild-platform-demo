@@ -694,16 +694,21 @@ function Home() {
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { i: Users, t: "Awareness Campaigns", d: "District-wide campaigns on de-addiction and mental wellness." },
-              { i: Heart, t: "Community Programs", d: "Free counseling camps in schools, colleges and neighborhoods." },
-              { i: FileText, t: "Educational Workshops", d: "Workshops for parents, teachers and youth on addiction prevention." },
-            ].map(({ i: I, t, d }) => (
-              <Card key={t} className="p-7 border-0 shadow-card bg-card hover:-translate-y-1 transition">
-                <div className="h-12 w-12 rounded-xl gradient-accent grid place-items-center mb-4">
-                  <I className="h-6 w-6 text-accent-foreground" />
+              { i: Users, t: "Awareness Campaigns", d: "District-wide campaigns on de-addiction and mental wellness.", img: realRally.url },
+              { i: Heart, t: "Community Programs", d: "Free counseling camps in schools, colleges and neighborhoods.", img: realAntiDrug.url },
+              { i: FileText, t: "Educational Workshops", d: "Workshops for parents, teachers and youth on addiction prevention.", img: realAwareness.url },
+            ].map(({ i: I, t, d, img }) => (
+              <Card key={t} className="overflow-hidden border-0 shadow-card bg-card hover:-translate-y-1 hover:shadow-elegant transition group">
+                <div className="aspect-[16/10] overflow-hidden">
+                  <img src={img} alt={t} loading="lazy" className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700" />
                 </div>
-                <h3 className="font-display font-bold text-lg mb-2">{t}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{d}</p>
+                <div className="p-6">
+                  <div className="h-11 w-11 rounded-xl gradient-accent grid place-items-center mb-3 -mt-10 relative shadow-elegant ring-4 ring-card">
+                    <I className="h-5 w-5 text-accent-foreground" />
+                  </div>
+                  <h3 className="font-display font-bold text-lg mb-2">{t}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{d}</p>
+                </div>
               </Card>
             ))}
           </div>
