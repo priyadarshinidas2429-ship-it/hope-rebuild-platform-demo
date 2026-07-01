@@ -614,9 +614,34 @@ function Home() {
         </div>
       </section>
 
+      {/* FAQ ACCORDION */}
+      <section id="faq" className="py-20 md:py-28">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <Badge className="mb-4 bg-primary/10 text-primary border-0">Frequently Asked Questions</Badge>
+            <h2 className="font-display text-3xl md:text-5xl font-bold">Answers Families Ask Most</h2>
+            <p className="mt-3 text-muted-foreground text-lg">Clear, honest answers about admission, treatment and recovery at Midnapore Hope Society.</p>
+          </div>
+          <Card className="p-4 md:p-8 border-0 shadow-elegant bg-card">
+            <Accordion type="single" collapsible className="w-full">
+              {FAQS.map((f, i) => (
+                <AccordionItem key={f.q} value={`item-${i}`}>
+                  <AccordionTrigger className="text-left font-display font-semibold text-base md:text-lg py-5 hover:no-underline">{f.q}</AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground leading-relaxed text-sm md:text-base pb-5">{f.a}</AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </Card>
+          <div className="mt-8 text-center">
+            <Button asChild size="lg" className="gradient-primary text-primary-foreground border-0 shadow-soft">
+              <a href={PHONE_TEL}><Phone className="mr-2 h-4 w-4" /> Still have questions? Talk to a counselor</a>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* COMPARISON */}
       <section className="py-20 md:py-28">
-        {/* placeholder anchor kept */}
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <Badge className="mb-4 bg-accent-soft text-accent border-0">Compare</Badge>
