@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Phone, MessageCircle, Calendar, Shield, Users, Heart, Clock, Wine, Pill,
   Brain, Sparkles, RefreshCw, ChevronRight, MapPin, Mail, Check, X, Search,
