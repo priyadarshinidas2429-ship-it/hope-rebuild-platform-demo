@@ -16,6 +16,7 @@ import { Counter } from "@/components/site/Counter";
 import { Assessment } from "@/components/site/Assessment";
 import { ChatFAQ } from "@/components/site/ChatFAQ";
 import { Gallery } from "@/components/site/Gallery";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 import heroImg from "@/assets/hero-hope.jpg";
 import aboutImg from "@/assets/about-team.jpg";
@@ -24,11 +25,46 @@ import facCounsel from "@/assets/facility-counseling.jpg";
 import facDining from "@/assets/facility-dining.jpg";
 import facRec from "@/assets/facility-recreation.jpg";
 import facOut from "@/assets/facility-outdoor.jpg";
+import realCelebration from "@/assets/real/community-celebration.jpg.asset.json";
+import realMedCamp from "@/assets/real/medical-camp.jpg.asset.json";
+import realAwareness from "@/assets/real/awareness-event.jpg.asset.json";
+import realEvent from "@/assets/real/hope-society-event.jpg.asset.json";
+import realAntiDrug from "@/assets/real/antidrug-campaign.jpg.asset.json";
+import realBanner from "@/assets/real/hope-society-banner.jpg.asset.json";
+import realRally from "@/assets/real/antidrug-rally.jpg.asset.json";
 
 const PHONE = "07602995502";
 const PHONE_TEL = "tel:+917602995502";
 const WHATSAPP = "https://wa.me/917602995502";
 const ADDRESS = "Dakbanglow Road, opposite of DAV School, Bidhan Nagar East, Saratpally, Midnapore, West Bengal 721101";
+const EMAIL = "mdnhopesociety@gmail.com";
+const MAPS_DIRECTIONS = "https://www.google.com/maps/dir/?api=1&destination=Midnapore+Hope+Society+Bidhan+Nagar+East+Saratpally+Midnapore";
+
+// Single source of truth for statistics — edit here to update site-wide.
+export const HOPE_STATS = {
+  headline: [
+    { v: 500, s: "+", l: "Families Assisted" },
+    { v: 6, s: "+", l: "Recovery Programs" },
+    { v: 10, s: "+", l: "Years of Service" },
+    { v: 24, s: "/7", l: "Support Available" },
+  ],
+  impact: [
+    { l: "Recovery Programs Completed", v: 420, s: "+", c: "primary" as const },
+    { l: "Counseling Sessions Delivered", v: 5800, s: "+", c: "accent" as const },
+    { l: "Family Support Services", v: 950, s: "+", c: "primary" as const },
+    { l: "Ongoing Aftercare Members", v: 180, s: "+", c: "accent" as const },
+  ],
+};
+
+const FAQS = [
+  { q: "How long does treatment usually take?", a: "Programs typically range from 30 to 180 days depending on individual needs. Our counselors design a personalized plan after the initial confidential assessment." },
+  { q: "Is treatment confidential?", a: "Yes. Every interaction — from your first call to discharge and aftercare — is strictly confidential. Records are protected and never shared without written consent." },
+  { q: "Are family visits allowed?", a: "Absolutely. Family involvement is central to lasting recovery. Scheduled visits, family counseling sessions and progress updates are part of every program." },
+  { q: "Do you provide counseling?", a: "Yes — one-on-one CBT, motivational counseling, group therapy and family counseling are all delivered by experienced, qualified therapists." },
+  { q: "Is medical supervision available?", a: "Our facility offers 24/7 medical supervision, including doctor-led detox, medication management and on-call emergency support." },
+  { q: "What happens after recovery?", a: "Aftercare includes relapse-prevention groups, monthly follow-ups, family check-ins and 24/7 helpline access for at least 12 months post-discharge." },
+  { q: "How do I begin admission?", a: "Call or WhatsApp us anytime. We conduct a brief confidential assessment, share the program and — in most cases — offer same-day admission." },
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
