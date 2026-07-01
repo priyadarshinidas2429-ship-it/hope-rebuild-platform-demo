@@ -28,6 +28,7 @@ import facOut from "@/assets/facility-outdoor.jpg";
 import realCelebration from "@/assets/real/community-celebration.jpg.asset.json";
 import realMedCamp from "@/assets/real/medical-camp.jpg.asset.json";
 import realAwareness from "@/assets/real/awareness-event.jpg.asset.json";
+import hopeLogo from "@/assets/hope-logo.jpg.asset.json";
 import realEvent from "@/assets/real/hope-society-event.jpg.asset.json";
 import realAntiDrug from "@/assets/real/antidrug-campaign.jpg.asset.json";
 import realBanner from "@/assets/real/hope-society-banner.jpg.asset.json";
