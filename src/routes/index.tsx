@@ -28,6 +28,7 @@ import facOut from "@/assets/facility-outdoor.jpg";
 import realCelebration from "@/assets/real/community-celebration.jpg.asset.json";
 import realMedCamp from "@/assets/real/medical-camp.jpg.asset.json";
 import realAwareness from "@/assets/real/awareness-event.jpg.asset.json";
+import hopeLogo from "@/assets/hope-logo.jpg.asset.json";
 import realEvent from "@/assets/real/hope-society-event.jpg.asset.json";
 import realAntiDrug from "@/assets/real/antidrug-campaign.jpg.asset.json";
 import realBanner from "@/assets/real/hope-society-banner.jpg.asset.json";
@@ -152,9 +153,11 @@ function Home() {
       <header className="sticky top-0 z-40 backdrop-blur-xl bg-background/85 border-b">
         <div className="container mx-auto px-4 py-3 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4">
           <a href="#top" className="flex min-w-0 items-center gap-3">
-            <div className="h-10 w-10 shrink-0 rounded-xl gradient-primary grid place-items-center shadow-soft">
-              <Heart className="h-5 w-5 text-primary-foreground" />
-            </div>
+            <img
+              src={hopeLogo.url}
+              alt="Midnapore Hope Society logo"
+              className="h-11 w-11 shrink-0 rounded-xl object-cover shadow-soft ring-1 ring-border"
+            />
             <div className="min-w-0">
               <p className="font-display font-bold text-base sm:text-lg leading-tight truncate">Midnapore Hope Society</p>
               <p className="text-xs text-muted-foreground leading-tight truncate">মেদিনীপুর হোপ সোসাইটি · 5.0 ★ (18)</p>
@@ -813,9 +816,11 @@ function Home() {
           <div className="grid md:grid-cols-4 gap-10 mb-12">
             <div className="md:col-span-2">
               <div className="flex items-center gap-3 mb-4">
-                <div className="h-10 w-10 rounded-xl bg-white/15 grid place-items-center">
-                  <Heart className="h-5 w-5" />
-                </div>
+                <img
+                  src={hopeLogo.url}
+                  alt="Midnapore Hope Society logo"
+                  className="h-11 w-11 rounded-xl object-cover ring-1 ring-white/20"
+                />
                 <div>
                   <p className="font-display font-bold text-lg">Midnapore Hope Society</p>
                   <p className="text-xs opacity-80">মেদিনীপুর হোপ সোসাইটি</p>
