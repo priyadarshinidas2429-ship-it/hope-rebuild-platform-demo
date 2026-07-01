@@ -413,7 +413,8 @@ function Home() {
         <div className="container mx-auto px-4 max-w-6xl relative">
           <div className="text-center max-w-2xl mx-auto mb-14">
             <Badge className="mb-4 bg-white/20 text-white border-white/30">Why Choose Us</Badge>
-            <h2 className="font-display text-3xl md:text-5xl font-bold">A Premium Standard of Care</h2>
+            <h2 className="font-display text-3xl md:text-5xl font-bold">Why Families Trust Midnapore Hope Society</h2>
+            <p className="mt-3 opacity-90 text-lg">Six reasons families across West Bengal choose us as their recovery partner.</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
@@ -505,12 +506,15 @@ function Home() {
             <p className="mt-3 text-muted-foreground text-lg">Step inside our facility designed for comfort, dignity and recovery.</p>
           </div>
           <Gallery images={[
+            { src: realBanner.url, alt: "Midnapore Hope Society facility banner", label: "Our Centre" },
             { src: facRoom, alt: "Patient Room", label: "Patient Rooms" },
             { src: facCounsel, alt: "Counseling", label: "Counseling Rooms" },
             { src: facDining, alt: "Dining", label: "Dining Area" },
-            { src: facRec, alt: "Recreation", label: "Recreation Spaces" },
+            { src: realCelebration.url, alt: "Recovery celebration with residents", label: "Community Life" },
+            { src: realMedCamp.url, alt: "Medical camp session", label: "Medical Camps" },
             { src: facOut, alt: "Outdoor", label: "Outdoor Spaces" },
-            { src: aboutImg, alt: "Therapy", label: "Therapy Sessions" },
+            { src: facRec, alt: "Recreation", label: "Recreation Spaces" },
+            { src: realEvent.url, alt: "Awareness event", label: "Awareness Events" },
           ]} />
         </div>
       </section>
