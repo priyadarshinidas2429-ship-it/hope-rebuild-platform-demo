@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hope-rebuild-platform-demo.lovable.app/sitemap.xml

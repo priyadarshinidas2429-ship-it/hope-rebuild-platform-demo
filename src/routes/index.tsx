@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Phone, MessageCircle, Calendar, Shield, Users, Heart, Clock, Wine, Pill,
   Brain, Sparkles, RefreshCw, ChevronRight, MapPin, Mail, Check, X, Search,
@@ -16,6 +16,7 @@ import { Counter } from "@/components/site/Counter";
 import { Assessment } from "@/components/site/Assessment";
 import { ChatFAQ } from "@/components/site/ChatFAQ";
 import { Gallery } from "@/components/site/Gallery";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 import heroImg from "@/assets/hero-hope.jpg";
 import aboutImg from "@/assets/about-team.jpg";
@@ -24,24 +25,59 @@ import facCounsel from "@/assets/facility-counseling.jpg";
 import facDining from "@/assets/facility-dining.jpg";
 import facRec from "@/assets/facility-recreation.jpg";
 import facOut from "@/assets/facility-outdoor.jpg";
+import realCelebration from "@/assets/real/community-celebration.jpg.asset.json";
+import realMedCamp from "@/assets/real/medical-camp.jpg.asset.json";
+import realAwareness from "@/assets/real/awareness-event.jpg.asset.json";
+import realEvent from "@/assets/real/hope-society-event.jpg.asset.json";
+import realAntiDrug from "@/assets/real/antidrug-campaign.jpg.asset.json";
+import realBanner from "@/assets/real/hope-society-banner.jpg.asset.json";
+import realRally from "@/assets/real/antidrug-rally.jpg.asset.json";
 
 const PHONE = "07602995502";
 const PHONE_TEL = "tel:+917602995502";
 const WHATSAPP = "https://wa.me/917602995502";
 const ADDRESS = "Dakbanglow Road, opposite of DAV School, Bidhan Nagar East, Saratpally, Midnapore, West Bengal 721101";
+const EMAIL = "mdnhopesociety@gmail.com";
+const MAPS_DIRECTIONS = "https://www.google.com/maps/dir/?api=1&destination=Midnapore+Hope+Society+Bidhan+Nagar+East+Saratpally+Midnapore";
+
+// Single source of truth for statistics — edit here to update site-wide.
+export const HOPE_STATS = {
+  headline: [
+    { v: 500, s: "+", l: "Families Assisted" },
+    { v: 6, s: "+", l: "Recovery Programs" },
+    { v: 10, s: "+", l: "Years of Service" },
+    { v: 24, s: "/7", l: "Support Available" },
+  ],
+  impact: [
+    { l: "Recovery Programs Completed", v: 420, s: "+", c: "primary" as const },
+    { l: "Counseling Sessions Delivered", v: 5800, s: "+", c: "accent" as const },
+    { l: "Family Support Services", v: 950, s: "+", c: "primary" as const },
+    { l: "Ongoing Aftercare Members", v: 180, s: "+", c: "accent" as const },
+  ],
+};
+
+const FAQS = [
+  { q: "How long does treatment usually take?", a: "Programs typically range from 30 to 180 days depending on individual needs. Our counselors design a personalized plan after the initial confidential assessment." },
+  { q: "Is treatment confidential?", a: "Yes. Every interaction — from your first call to discharge and aftercare — is strictly confidential. Records are protected and never shared without written consent." },
+  { q: "Are family visits allowed?", a: "Absolutely. Family involvement is central to lasting recovery. Scheduled visits, family counseling sessions and progress updates are part of every program." },
+  { q: "Do you provide counseling?", a: "Yes — one-on-one CBT, motivational counseling, group therapy and family counseling are all delivered by experienced, qualified therapists." },
+  { q: "Is medical supervision available?", a: "Our facility offers 24/7 medical supervision, including doctor-led detox, medication management and on-call emergency support." },
+  { q: "What happens after recovery?", a: "Aftercare includes relapse-prevention groups, monthly follow-ups, family check-ins and 24/7 helpline access for at least 12 months post-discharge." },
+  { q: "How do I begin admission?", a: "Call or WhatsApp us anytime. We conduct a brief confidential assessment, share the program and — in most cases — offer same-day admission." },
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Midnapore Hope Society — Nasha Mukti Kendra & Rehabilitation Centre, Midnapore" },
-      { name: "description", content: "Premium addiction treatment, de-addiction & rehabilitation centre in Midnapore, West Bengal. 24/7 confidential support for alcohol, drug recovery, counseling & family therapy." },
+      { name: "description", content: "Midnapore Hope Society — trusted Rehabilitation Centre & De-Addiction Centre in Midnapore, West Bengal. Addiction recovery, counseling services, family support programs and 24/7 confidential care." },
       { property: "og:title", content: "Midnapore Hope Society — Rehabilitation Centre Midnapore" },
       { property: "og:description", content: "Trusted Nasha Mukti Kendra in Midnapore. Confidential, family-focused addiction recovery and counseling." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
       { property: "og:image", content: heroImg },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "keywords", content: "Nasha Mukti Kendra Midnapore, Addiction Treatment Centre Midnapore, Rehabilitation Centre West Bengal, Alcohol Recovery Centre Midnapore, Drug De Addiction Centre Midnapore" },
+      { name: "keywords", content: "Rehabilitation Centre Midnapore, De Addiction Centre Midnapore, Addiction Recovery, Counseling Services, Family Support Programs, Nasha Mukti Kendra Midnapore, Alcohol Recovery Centre, Drug De Addiction Centre West Bengal" },
     ],
     links: [{ rel: "canonical", href: "/" }],
     scripts: [{
@@ -53,6 +89,7 @@ export const Route = createFileRoute("/")({
         alternateName: "মেদিনীপুর হোপ সোসাইটি",
         description: "Addiction treatment and rehabilitation centre serving Midnapore and West Bengal.",
         telephone: "+91-7602995502",
+        email: "mdnhopesociety@gmail.com",
         address: {
           "@type": "PostalAddress",
           streetAddress: "Dakbanglow Road, opposite of DAV School, Bidhan Nagar East, Saratpally",
@@ -63,6 +100,19 @@ export const Route = createFileRoute("/")({
         },
         openingHours: "Mo-Su 00:00-23:59",
         aggregateRating: { "@type": "AggregateRating", ratingValue: "5.0", reviewCount: "18" },
+      }),
+    }, {
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [
+          { "@type": "Question", name: "How long does treatment usually take?", acceptedAnswer: { "@type": "Answer", text: "Programs typically range from 30 to 180 days depending on individual needs. Our counselors design a personalized plan after the initial confidential assessment." } },
+          { "@type": "Question", name: "Is treatment confidential?", acceptedAnswer: { "@type": "Answer", text: "Yes. Every interaction — from your first call to discharge and aftercare — is strictly confidential." } },
+          { "@type": "Question", name: "Are family visits allowed?", acceptedAnswer: { "@type": "Answer", text: "Yes. Scheduled visits, family counseling sessions and progress updates are part of every program." } },
+          { "@type": "Question", name: "Is medical supervision available?", acceptedAnswer: { "@type": "Answer", text: "Our facility offers 24/7 medical supervision, including doctor-led detox, medication management and on-call emergency support." } },
+          { "@type": "Question", name: "How do I begin admission?", acceptedAnswer: { "@type": "Answer", text: "Call or WhatsApp us anytime. We conduct a brief confidential assessment and in most cases offer same-day admission." } },
+        ],
       }),
     }],
   }),
@@ -183,12 +233,7 @@ function Home() {
       <section className="py-16 md:py-20 bg-secondary/30">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { v: 500, s: "+", l: "Families Assisted" },
-              { v: 6, s: "+", l: "Recovery Programs" },
-              { v: 10, s: "+", l: "Years of Service" },
-              { v: 24, s: "/7", l: "Support Available" },
-            ].map((stat) => (
+            {HOPE_STATS.headline.map((stat) => (
               <Card key={stat.l} className="p-6 md:p-8 text-center border-0 shadow-card bg-card hover:shadow-elegant transition-all hover:-translate-y-1">
                 <p className="font-display text-4xl md:text-5xl font-extrabold text-gradient">
                   <Counter to={stat.v} suffix={stat.s} />
@@ -382,7 +427,8 @@ function Home() {
         <div className="container mx-auto px-4 max-w-6xl relative">
           <div className="text-center max-w-2xl mx-auto mb-14">
             <Badge className="mb-4 bg-white/20 text-white border-white/30">Why Choose Us</Badge>
-            <h2 className="font-display text-3xl md:text-5xl font-bold">A Premium Standard of Care</h2>
+            <h2 className="font-display text-3xl md:text-5xl font-bold">Why Families Trust Midnapore Hope Society</h2>
+            <p className="mt-3 opacity-90 text-lg">Six reasons families across West Bengal choose us as their recovery partner.</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
@@ -412,12 +458,7 @@ function Home() {
           </div>
           <Card className="p-8 md:p-12 border-0 shadow-elegant bg-card">
             <div className="grid md:grid-cols-2 gap-10">
-              {[
-                { l: "Recovery Programs Completed", v: 420, s: "+", c: "primary" },
-                { l: "Counseling Sessions Delivered", v: 5800, s: "+", c: "accent" },
-                { l: "Family Support Services", v: 950, s: "+", c: "primary" },
-                { l: "Ongoing Aftercare Members", v: 180, s: "+", c: "accent" },
-              ].map((m) => (
+              {HOPE_STATS.impact.map((m) => (
                 <div key={m.l}>
                   <div className="flex items-baseline justify-between mb-2">
                     <p className="text-sm font-semibold text-muted-foreground">{m.l}</p>
@@ -479,12 +520,15 @@ function Home() {
             <p className="mt-3 text-muted-foreground text-lg">Step inside our facility designed for comfort, dignity and recovery.</p>
           </div>
           <Gallery images={[
+            { src: realBanner.url, alt: "Midnapore Hope Society facility banner", label: "Our Centre" },
             { src: facRoom, alt: "Patient Room", label: "Patient Rooms" },
             { src: facCounsel, alt: "Counseling", label: "Counseling Rooms" },
             { src: facDining, alt: "Dining", label: "Dining Area" },
-            { src: facRec, alt: "Recreation", label: "Recreation Spaces" },
+            { src: realCelebration.url, alt: "Recovery celebration with residents", label: "Community Life" },
+            { src: realMedCamp.url, alt: "Medical camp session", label: "Medical Camps" },
             { src: facOut, alt: "Outdoor", label: "Outdoor Spaces" },
-            { src: aboutImg, alt: "Therapy", label: "Therapy Sessions" },
+            { src: facRec, alt: "Recreation", label: "Recreation Spaces" },
+            { src: realEvent.url, alt: "Awareness event", label: "Awareness Events" },
           ]} />
         </div>
       </section>
@@ -584,6 +628,32 @@ function Home() {
         </div>
       </section>
 
+      {/* FAQ ACCORDION */}
+      <section id="faq" className="py-20 md:py-28">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <Badge className="mb-4 bg-primary/10 text-primary border-0">Frequently Asked Questions</Badge>
+            <h2 className="font-display text-3xl md:text-5xl font-bold">Answers Families Ask Most</h2>
+            <p className="mt-3 text-muted-foreground text-lg">Clear, honest answers about admission, treatment and recovery at Midnapore Hope Society.</p>
+          </div>
+          <Card className="p-4 md:p-8 border-0 shadow-elegant bg-card">
+            <Accordion type="single" collapsible className="w-full">
+              {FAQS.map((f, i) => (
+                <AccordionItem key={f.q} value={`item-${i}`}>
+                  <AccordionTrigger className="text-left font-display font-semibold text-base md:text-lg py-5 hover:no-underline">{f.q}</AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground leading-relaxed text-sm md:text-base pb-5">{f.a}</AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </Card>
+          <div className="mt-8 text-center">
+            <Button asChild size="lg" className="gradient-primary text-primary-foreground border-0 shadow-soft">
+              <a href={PHONE_TEL}><Phone className="mr-2 h-4 w-4" /> Still have questions? Talk to a counselor</a>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* COMPARISON */}
       <section className="py-20 md:py-28">
         <div className="container mx-auto px-4 max-w-5xl">
@@ -624,16 +694,21 @@ function Home() {
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { i: Users, t: "Awareness Campaigns", d: "District-wide campaigns on de-addiction and mental wellness." },
-              { i: Heart, t: "Community Programs", d: "Free counseling camps in schools, colleges and neighborhoods." },
-              { i: FileText, t: "Educational Workshops", d: "Workshops for parents, teachers and youth on addiction prevention." },
-            ].map(({ i: I, t, d }) => (
-              <Card key={t} className="p-7 border-0 shadow-card bg-card hover:-translate-y-1 transition">
-                <div className="h-12 w-12 rounded-xl gradient-accent grid place-items-center mb-4">
-                  <I className="h-6 w-6 text-accent-foreground" />
+              { i: Users, t: "Awareness Campaigns", d: "District-wide campaigns on de-addiction and mental wellness.", img: realRally.url },
+              { i: Heart, t: "Community Programs", d: "Free counseling camps in schools, colleges and neighborhoods.", img: realAntiDrug.url },
+              { i: FileText, t: "Educational Workshops", d: "Workshops for parents, teachers and youth on addiction prevention.", img: realAwareness.url },
+            ].map(({ i: I, t, d, img }) => (
+              <Card key={t} className="overflow-hidden border-0 shadow-card bg-card hover:-translate-y-1 hover:shadow-elegant transition group">
+                <div className="aspect-[16/10] overflow-hidden">
+                  <img src={img} alt={t} loading="lazy" className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700" />
                 </div>
-                <h3 className="font-display font-bold text-lg mb-2">{t}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{d}</p>
+                <div className="p-6">
+                  <div className="h-11 w-11 rounded-xl gradient-accent grid place-items-center mb-3 -mt-10 relative shadow-elegant ring-4 ring-card">
+                    <I className="h-5 w-5 text-accent-foreground" />
+                  </div>
+                  <h3 className="font-display font-bold text-lg mb-2">{t}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{d}</p>
+                </div>
               </Card>
             ))}
           </div>
@@ -674,7 +749,7 @@ function Home() {
                 { i: MapPin, t: "Address", d: ADDRESS },
                 { i: Phone, t: "Phone", d: PHONE, href: PHONE_TEL },
                 { i: MessageCircle, t: "WhatsApp", d: "Chat with us anytime", href: WHATSAPP },
-                { i: Mail, t: "Email", d: "care@midnaporehope.org", href: "mailto:care@midnaporehope.org" },
+                { i: Mail, t: "Email", d: EMAIL, href: `mailto:${EMAIL}` },
                 { i: Clock, t: "Hours", d: "Open 24 hours · 7 days" },
               ].map(({ i: I, t, d, href }) => (
                 <div key={t} className="flex gap-4">
@@ -704,13 +779,30 @@ function Home() {
               </form>
             </Card>
           </div>
-          <div className="mt-8 overflow-hidden rounded-2xl shadow-card border bg-card">
-            <iframe
-              title="Midnapore Hope Society location"
-              src="https://www.google.com/maps?q=Midnapore+Hope+Society+Bidhan+Nagar+East+Saratpally+Midnapore&output=embed"
-              className="w-full h-[360px] border-0"
-              loading="lazy"
-            />
+          {/* FIND US */}
+          <div id="find-us" className="mt-10 grid lg:grid-cols-[1fr_1.2fr] gap-6">
+            <Card className="p-7 border-0 shadow-card bg-card flex flex-col">
+              <Badge className="mb-3 bg-primary/10 text-primary border-0 w-fit">Find Us</Badge>
+              <h3 className="font-display text-2xl font-bold mb-2">Visit Our Centre</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-5">{ADDRESS}</p>
+              <div className="space-y-3 text-sm mb-6">
+                <div className="flex items-center gap-2"><Clock className="h-4 w-4 text-primary" /> Open 24 hours · 7 days a week</div>
+                <div className="flex items-center gap-2"><Phone className="h-4 w-4 text-primary" /> {PHONE}</div>
+                <div className="flex items-center gap-2"><Mail className="h-4 w-4 text-primary" /> {EMAIL}</div>
+              </div>
+              <div className="mt-auto grid sm:grid-cols-2 gap-3">
+                <Button asChild className="gradient-primary text-primary-foreground border-0"><a href={PHONE_TEL}><Phone className="mr-2 h-4 w-4" /> Call Now</a></Button>
+                <Button asChild variant="outline"><a href={MAPS_DIRECTIONS} target="_blank" rel="noopener"><MapPin className="mr-2 h-4 w-4" /> Get Directions</a></Button>
+              </div>
+            </Card>
+            <div className="overflow-hidden rounded-2xl shadow-card border bg-card min-h-[320px]">
+              <iframe
+                title="Midnapore Hope Society location"
+                src="https://www.google.com/maps?q=Midnapore+Hope+Society+Bidhan+Nagar+East+Saratpally+Midnapore&output=embed"
+                className="w-full h-full min-h-[320px] border-0"
+                loading="lazy"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -763,7 +855,7 @@ function Home() {
       </footer>
 
       {/* FLOATING ACTIONS */}
-      <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-3">
+      <div className="fixed bottom-20 md:bottom-4 right-4 z-50 flex flex-col gap-3">
         <a href={PHONE_TEL} aria-label="Emergency call" className="h-14 w-14 rounded-full bg-emergency text-white grid place-items-center shadow-elegant animate-pulse-ring">
           <AlertCircle className="h-6 w-6" />
         </a>
@@ -772,6 +864,16 @@ function Home() {
         </a>
         <a href={PHONE_TEL} aria-label="Call now" className="h-14 w-14 rounded-full gradient-primary text-primary-foreground grid place-items-center shadow-elegant hover:scale-110 transition">
           <Phone className="h-6 w-6" />
+        </a>
+      </div>
+
+      {/* MOBILE STICKY CONTACT BAR */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 grid grid-cols-2 gap-0 border-t bg-background/95 backdrop-blur-xl shadow-elegant">
+        <a href={PHONE_TEL} className="flex items-center justify-center gap-2 py-3.5 gradient-primary text-primary-foreground font-semibold text-sm">
+          <Phone className="h-4 w-4" /> Call Now
+        </a>
+        <a href={WHATSAPP} target="_blank" rel="noopener" className="flex items-center justify-center gap-2 py-3.5 bg-whatsapp text-white font-semibold text-sm">
+          <MessageCircle className="h-4 w-4" /> WhatsApp
         </a>
       </div>
     </div>
