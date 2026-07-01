@@ -219,12 +219,7 @@ function Home() {
       <section className="py-16 md:py-20 bg-secondary/30">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { v: 500, s: "+", l: "Families Assisted" },
-              { v: 6, s: "+", l: "Recovery Programs" },
-              { v: 10, s: "+", l: "Years of Service" },
-              { v: 24, s: "/7", l: "Support Available" },
-            ].map((stat) => (
+            {HOPE_STATS.headline.map((stat) => (
               <Card key={stat.l} className="p-6 md:p-8 text-center border-0 shadow-card bg-card hover:shadow-elegant transition-all hover:-translate-y-1">
                 <p className="font-display text-4xl md:text-5xl font-extrabold text-gradient">
                   <Counter to={stat.v} suffix={stat.s} />
@@ -448,12 +443,7 @@ function Home() {
           </div>
           <Card className="p-8 md:p-12 border-0 shadow-elegant bg-card">
             <div className="grid md:grid-cols-2 gap-10">
-              {[
-                { l: "Recovery Programs Completed", v: 420, s: "+", c: "primary" },
-                { l: "Counseling Sessions Delivered", v: 5800, s: "+", c: "accent" },
-                { l: "Family Support Services", v: 950, s: "+", c: "primary" },
-                { l: "Ongoing Aftercare Members", v: 180, s: "+", c: "accent" },
-              ].map((m) => (
+              {HOPE_STATS.impact.map((m) => (
                 <div key={m.l}>
                   <div className="flex items-baseline justify-between mb-2">
                     <p className="text-sm font-semibold text-muted-foreground">{m.l}</p>
