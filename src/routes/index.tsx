@@ -616,6 +616,7 @@ function Home() {
 
       {/* COMPARISON */}
       <section className="py-20 md:py-28">
+        {/* placeholder anchor kept */}
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <Badge className="mb-4 bg-accent-soft text-accent border-0">Compare</Badge>
