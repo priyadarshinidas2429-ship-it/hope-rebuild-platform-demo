@@ -70,14 +70,14 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Midnapore Hope Society — Nasha Mukti Kendra & Rehabilitation Centre, Midnapore" },
-      { name: "description", content: "Premium addiction treatment, de-addiction & rehabilitation centre in Midnapore, West Bengal. 24/7 confidential support for alcohol, drug recovery, counseling & family therapy." },
+      { name: "description", content: "Midnapore Hope Society — trusted Rehabilitation Centre & De-Addiction Centre in Midnapore, West Bengal. Addiction recovery, counseling services, family support programs and 24/7 confidential care." },
       { property: "og:title", content: "Midnapore Hope Society — Rehabilitation Centre Midnapore" },
       { property: "og:description", content: "Trusted Nasha Mukti Kendra in Midnapore. Confidential, family-focused addiction recovery and counseling." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
       { property: "og:image", content: heroImg },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "keywords", content: "Nasha Mukti Kendra Midnapore, Addiction Treatment Centre Midnapore, Rehabilitation Centre West Bengal, Alcohol Recovery Centre Midnapore, Drug De Addiction Centre Midnapore" },
+      { name: "keywords", content: "Rehabilitation Centre Midnapore, De Addiction Centre Midnapore, Addiction Recovery, Counseling Services, Family Support Programs, Nasha Mukti Kendra Midnapore, Alcohol Recovery Centre, Drug De Addiction Centre West Bengal" },
     ],
     links: [{ rel: "canonical", href: "/" }],
     scripts: [{
@@ -89,6 +89,7 @@ export const Route = createFileRoute("/")({
         alternateName: "মেদিনীপুর হোপ সোসাইটি",
         description: "Addiction treatment and rehabilitation centre serving Midnapore and West Bengal.",
         telephone: "+91-7602995502",
+        email: "mdnhopesociety@gmail.com",
         address: {
           "@type": "PostalAddress",
           streetAddress: "Dakbanglow Road, opposite of DAV School, Bidhan Nagar East, Saratpally",
@@ -99,6 +100,19 @@ export const Route = createFileRoute("/")({
         },
         openingHours: "Mo-Su 00:00-23:59",
         aggregateRating: { "@type": "AggregateRating", ratingValue: "5.0", reviewCount: "18" },
+      }),
+    }, {
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [
+          { "@type": "Question", name: "How long does treatment usually take?", acceptedAnswer: { "@type": "Answer", text: "Programs typically range from 30 to 180 days depending on individual needs. Our counselors design a personalized plan after the initial confidential assessment." } },
+          { "@type": "Question", name: "Is treatment confidential?", acceptedAnswer: { "@type": "Answer", text: "Yes. Every interaction — from your first call to discharge and aftercare — is strictly confidential." } },
+          { "@type": "Question", name: "Are family visits allowed?", acceptedAnswer: { "@type": "Answer", text: "Yes. Scheduled visits, family counseling sessions and progress updates are part of every program." } },
+          { "@type": "Question", name: "Is medical supervision available?", acceptedAnswer: { "@type": "Answer", text: "Our facility offers 24/7 medical supervision, including doctor-led detox, medication management and on-call emergency support." } },
+          { "@type": "Question", name: "How do I begin admission?", acceptedAnswer: { "@type": "Answer", text: "Call or WhatsApp us anytime. We conduct a brief confidential assessment and in most cases offer same-day admission." } },
+        ],
       }),
     }],
   }),
