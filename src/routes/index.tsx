@@ -341,22 +341,22 @@ function Home() {
       <section className="py-20 md:py-28 bg-gradient-to-b from-secondary/40 to-background">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <Badge className="mb-4 bg-accent-soft text-accent border-0">Interactive Tools</Badge>
-            <h2 className="font-display text-3xl md:text-5xl font-bold">Addiction Self-Assessment</h2>
-            <p className="mt-3 text-muted-foreground text-lg">A 7-question confidential assessment to understand the level of concern and get a personalized recommendation.</p>
+            <Badge className="mb-4 bg-accent-soft text-accent border-0">{t("Interactive Tools", "ইন্টারঅ্যাক্টিভ সরঞ্জাম")}</Badge>
+            <h2 className="font-display text-3xl md:text-5xl font-bold">{t("Addiction Self-Assessment", "নেশা স্ব-মূল্যায়ন")}</h2>
+            <p className="mt-3 text-muted-foreground text-lg">{t("A 7-question confidential assessment to understand the level of concern and get a personalized recommendation.", "৭টি প্রশ্নের গোপনীয় মূল্যায়ন যা উদ্বেগের মাত্রা বুঝতে এবং ব্যক্তিগত পরামর্শ দিতে সাহায্য করে।")}</p>
           </div>
           <div className="grid lg:grid-cols-2 gap-8">
             <Assessment />
             <Card className="p-8 md:p-10 border-0 shadow-elegant gradient-accent text-accent-foreground">
-              <Badge className="bg-white/20 text-white border-0 mb-4">Recovery Readiness Checker</Badge>
-              <h3 className="font-display text-2xl md:text-3xl font-bold mb-4">Is Your Family Ready for Professional Treatment?</h3>
-              <p className="opacity-95 mb-6 leading-relaxed">Recovery starts when families decide to act. Use these readiness indicators to know if it's time.</p>
+              <Badge className="bg-white/20 text-white border-0 mb-4">{t("Recovery Readiness Checker", "পুনরুদ্ধারের প্রস্তুতি যাচাই")}</Badge>
+              <h3 className="font-display text-2xl md:text-3xl font-bold mb-4">{t("Is Your Family Ready for Professional Treatment?", "আপনার পরিবার কি পেশাদার চিকিৎসার জন্য প্রস্তুত?")}</h3>
+              <p className="opacity-95 mb-6 leading-relaxed">{t("Recovery starts when families decide to act. Use these readiness indicators to know if it's time.", "পরিবার সিদ্ধান্ত নিলে পুনরুদ্ধার শুরু হয়। সময় এসেছে কিনা জানতে এই সূচকগুলি দেখুন।")}</p>
               <ul className="space-y-3 mb-8">
                 {[
-                  "Past efforts to quit haven't lasted",
-                  "Daily life is being disrupted",
-                  "Health, work or relationships are at risk",
-                  "Family needs professional guidance",
+                  t("Past efforts to quit haven't lasted", "আগের ছাড়ার চেষ্টাগুলো টিকেনি"),
+                  t("Daily life is being disrupted", "দৈনন্দিন জীবন ব্যাহত হচ্ছে"),
+                  t("Health, work or relationships are at risk", "স্বাস্থ্য, কাজ বা সম্পর্ক ঝুঁকিতে"),
+                  t("Family needs professional guidance", "পরিবারের পেশাদার নির্দেশনা প্রয়োজন"),
                 ].map(s => (
                   <li key={s} className="flex items-start gap-3">
                     <Check className="h-5 w-5 shrink-0 mt-0.5" />
@@ -365,7 +365,7 @@ function Home() {
                 ))}
               </ul>
               <Button asChild size="lg" className="bg-white text-accent hover:bg-white/95 border-0">
-                <a href="#contact">Talk to a Counselor <ArrowRight className="ml-2 h-4 w-4" /></a>
+                <a href="#contact">{t("Talk to a Counselor", "একজন কাউন্সেলরের সাথে কথা বলুন")} <ArrowRight className="ml-2 h-4 w-4" /></a>
               </Button>
             </Card>
           </div>
