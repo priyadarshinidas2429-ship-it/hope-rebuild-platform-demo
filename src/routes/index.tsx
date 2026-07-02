@@ -449,25 +449,25 @@ function Home() {
       <section id="journey" className="py-20 md:py-28">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <Badge className="mb-4 bg-accent-soft text-accent border-0">Recovery Journey</Badge>
-            <h2 className="font-display text-3xl md:text-5xl font-bold">A Clear Path From Crisis to Confidence</h2>
-            <p className="mt-3 text-muted-foreground text-lg">Every individual follows a structured, supportive journey toward lasting recovery.</p>
+            <Badge className="mb-4 bg-accent-soft text-accent border-0">{t("Recovery Journey", "পুনরুদ্ধারের যাত্রা")}</Badge>
+            <h2 className="font-display text-3xl md:text-5xl font-bold">{t("A Clear Path From Crisis to Confidence", "সংকট থেকে আত্মবিশ্বাসের একটি স্পষ্ট পথ")}</h2>
+            <p className="mt-3 text-muted-foreground text-lg">{t("Every individual follows a structured, supportive journey toward lasting recovery.", "প্রতিটি ব্যক্তি স্থায়ী পুনরুদ্ধারের জন্য একটি সুসংগঠিত সহায়ক যাত্রা অনুসরণ করে।")}</p>
           </div>
           <div className="relative">
             <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px gradient-primary md:-translate-x-1/2" />
             {[
-              { t: "Assessment", d: "Confidential evaluation to understand medical, psychological and family context." },
-              { t: "Admission", d: "Same-day admission with a personalized care plan and a welcoming environment." },
-              { t: "Detox", d: "Medically supervised detoxification with comfort and safety as priorities." },
-              { t: "Counseling", d: "Daily individual and group therapy sessions led by experienced counselors." },
-              { t: "Recovery", d: "Skill building, wellness routines and emotional reconditioning." },
-              { t: "Family Reintegration", d: "Family therapy, aftercare and continued support beyond the program." },
+              { title: t("Assessment", "মূল্যায়ন"), d: t("Confidential evaluation to understand medical, psychological and family context.", "চিকিৎসা, মানসিক ও পারিবারিক প্রেক্ষাপট বুঝতে গোপনীয় মূল্যায়ন।") },
+              { title: t("Admission", "ভর্তি"), d: t("Same-day admission with a personalized care plan and a welcoming environment.", "একই দিনে ভর্তি, ব্যক্তিগত যত্ন পরিকল্পনা ও উষ্ণ পরিবেশ।") },
+              { title: t("Detox", "ডিটক্স"), d: t("Medically supervised detoxification with comfort and safety as priorities.", "চিকিৎসা তত্ত্বাবধানে ডিটক্সিফিকেশন — আরাম ও নিরাপত্তা অগ্রাধিকার।") },
+              { title: t("Counseling", "কাউন্সেলিং"), d: t("Daily individual and group therapy sessions led by experienced counselors.", "অভিজ্ঞ কাউন্সেলরদের পরিচালনায় দৈনিক ব্যক্তিগত ও গ্রুপ থেরাপি।") },
+              { title: t("Recovery", "পুনরুদ্ধার"), d: t("Skill building, wellness routines and emotional reconditioning.", "দক্ষতা গঠন, সুস্থতার অভ্যাস ও মানসিক পুনর্গঠন।") },
+              { title: t("Family Reintegration", "পরিবার পুনর্মিলন"), d: t("Family therapy, aftercare and continued support beyond the program.", "পরিবার থেরাপি, আফটারকেয়ার ও কর্মসূচির পরে চলমান সহায়তা।") },
             ].map((s, i) => (
-              <div key={s.t} className={`relative pl-16 md:pl-0 md:grid md:grid-cols-2 md:gap-12 mb-10 ${i % 2 ? "md:[&>*:first-child]:order-2" : ""}`}>
+              <div key={s.title} className={`relative pl-16 md:pl-0 md:grid md:grid-cols-2 md:gap-12 mb-10 ${i % 2 ? "md:[&>*:first-child]:order-2" : ""}`}>
                 <div className={`md:text-right ${i % 2 ? "md:text-left" : ""}`}>
                   <Card className="inline-block p-6 border-0 shadow-card bg-card text-left max-w-sm">
-                    <p className="text-xs font-bold text-primary mb-1">STEP {i + 1}</p>
-                    <h3 className="font-display font-bold text-xl mb-2">{s.t}</h3>
+                    <p className="text-xs font-bold text-primary mb-1">{t("STEP", "ধাপ")} {i + 1}</p>
+                    <h3 className="font-display font-bold text-xl mb-2">{s.title}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">{s.d}</p>
                   </Card>
                 </div>
