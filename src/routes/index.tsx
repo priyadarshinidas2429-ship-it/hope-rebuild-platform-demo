@@ -927,12 +927,15 @@ function Home() {
                 </div>
               </div>
               <p className="text-sm opacity-90 max-w-md leading-relaxed">
-                A trusted Nasha Mukti Kendra and addiction treatment centre serving Midnapore and West Bengal with confidential, compassionate, evidence-based recovery care.
+                {t(
+                  "A trusted Nasha Mukti Kendra and addiction treatment centre serving Midnapore and West Bengal with confidential, compassionate, evidence-based recovery care.",
+                  "মেদিনীপুর ও পশ্চিমবঙ্গের একটি বিশ্বস্ত নেশা মুক্তি কেন্দ্র — গোপনীয়, সহানুভূতিশীল ও প্রমাণভিত্তিক পুনরুদ্ধার সেবা।",
+                )}
               </p>
               <div className="mt-5 flex flex-wrap gap-2">
-                <Badge className="bg-white/15 text-white border-0">LGBTQ+ Friendly</Badge>
-                <Badge className="bg-white/15 text-white border-0">5.0 ★ Rated</Badge>
-                <Badge className="bg-white/15 text-white border-0">Open 24/7</Badge>
+                <Badge className="bg-white/15 text-white border-0">{t("LGBTQ+ Friendly", "LGBTQ+ বান্ধব")}</Badge>
+                <Badge className="bg-white/15 text-white border-0">{t("5.0 ★ Rated", "৫.০ ★ রেটেড")}</Badge>
+                <Badge className="bg-white/15 text-white border-0">{t("Open 24/7", "২৪/৭ খোলা")}</Badge>
               </div>
               <div className="mt-5 flex items-center gap-3">
                 <span className="text-xs uppercase tracking-widest opacity-80">{t("Follow", "অনুসরণ")}</span>
@@ -945,24 +948,31 @@ function Home() {
               </div>
             </div>
             <div>
-              <p className="font-semibold mb-4">Quick Links</p>
+              <p className="font-semibold mb-4">{t("Quick Links", "দ্রুত লিঙ্ক")}</p>
               <ul className="space-y-2 text-sm opacity-90">
-                {["About","Programs","Recovery","Facility","Resources","Contact"].map(s => (
-                  <li key={s}><a href={`#${s.toLowerCase()}`} className="hover:opacity-100 transition">{s}</a></li>
+                {[
+                  { en: "About", bn: "পরিচিতি", id: "about" },
+                  { en: "Programs", bn: "কর্মসূচি", id: "programs" },
+                  { en: "Recovery", bn: "পুনরুদ্ধার", id: "journey" },
+                  { en: "Facility", bn: "কেন্দ্র", id: "facility" },
+                  { en: "Resources", bn: "সম্পদ", id: "resources" },
+                  { en: "Contact", bn: "যোগাযোগ", id: "contact" },
+                ].map(s => (
+                  <li key={s.id}><a href={`#${s.id}`} className="hover:opacity-100 transition">{t(s.en, s.bn)}</a></li>
                 ))}
               </ul>
             </div>
             <div>
-              <p className="font-semibold mb-4">24/7 Emergency</p>
+              <p className="font-semibold mb-4">{t("24/7 Emergency", "২৪/৭ জরুরী")}</p>
               <ul className="space-y-3 text-sm">
                 <li><a href={PHONE_TEL} className="inline-flex items-center gap-2 hover:opacity-80"><Phone className="h-4 w-4" /> {PHONE}</a></li>
-                <li><a href={WHATSAPP} target="_blank" rel="noopener" className="inline-flex items-center gap-2 hover:opacity-80"><MessageCircle className="h-4 w-4" /> WhatsApp Chat</a></li>
+                <li><a href={WHATSAPP} target="_blank" rel="noopener" className="inline-flex items-center gap-2 hover:opacity-80"><MessageCircle className="h-4 w-4" /> {t("WhatsApp Chat", "হোয়াটসঅ্যাপ চ্যাট")}</a></li>
                 <li className="flex items-start gap-2 opacity-90"><MapPin className="h-4 w-4 shrink-0 mt-0.5" /> <span>Bidhan Nagar East, Midnapore 721101</span></li>
               </ul>
             </div>
           </div>
           <div className="pt-6 border-t border-white/15 flex flex-col sm:flex-row gap-3 justify-between text-xs opacity-80">
-            <p>© {new Date().getFullYear()} Midnapore Hope Society. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Midnapore Hope Society. {t("All rights reserved.", "সর্বস্বত্ব সংরক্ষিত।")}</p>
             <p>Nasha Mukti Kendra · Addiction Treatment · Rehabilitation Centre · West Bengal</p>
           </div>
         </div>
@@ -984,7 +994,7 @@ function Home() {
       {/* MOBILE STICKY CONTACT BAR */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 grid grid-cols-2 gap-0 border-t bg-background/95 backdrop-blur-xl shadow-elegant">
         <a href={PHONE_TEL} className="flex items-center justify-center gap-2 py-3.5 gradient-primary text-primary-foreground font-semibold text-sm">
-          <Phone className="h-4 w-4" /> Call Now
+          <Phone className="h-4 w-4" /> {t("Call Now", "কল করুন")}
         </a>
         <a href={WHATSAPP} target="_blank" rel="noopener" className="flex items-center justify-center gap-2 py-3.5 bg-whatsapp text-white font-semibold text-sm">
           <MessageCircle className="h-4 w-4" /> WhatsApp
