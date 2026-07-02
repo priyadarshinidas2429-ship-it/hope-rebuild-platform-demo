@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Phone, MessageCircle, Calendar, Shield, Users, Heart, Clock, Wine, Pill,
   Brain, Sparkles, RefreshCw, ChevronRight, MapPin, Mail, Check, X, Search,
   Download, Stethoscope, Lock, Eye, HandHeart, Activity, FileText, Award,
-  AlertCircle, Menu, ArrowRight, Star, Globe,
+  AlertCircle, Menu, ArrowRight, Star, Globe, Facebook, Youtube,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -20,11 +20,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 import heroImg from "@/assets/hero-hope.jpg";
 import aboutImg from "@/assets/about-team.jpg";
-import facRoom from "@/assets/facility-room.jpg";
-import facCounsel from "@/assets/facility-counseling.jpg";
-import facDining from "@/assets/facility-dining.jpg";
-import facRec from "@/assets/facility-recreation.jpg";
-import facOut from "@/assets/facility-outdoor.jpg";
 import realCelebration from "@/assets/real/community-celebration.jpg.asset.json";
 import realMedCamp from "@/assets/real/medical-camp.jpg.asset.json";
 import realAwareness from "@/assets/real/awareness-event.jpg.asset.json";
@@ -33,13 +28,24 @@ import realEvent from "@/assets/real/hope-society-event.jpg.asset.json";
 import realAntiDrug from "@/assets/real/antidrug-campaign.jpg.asset.json";
 import realBanner from "@/assets/real/hope-society-banner.jpg.asset.json";
 import realRally from "@/assets/real/antidrug-rally.jpg.asset.json";
+import facilityReal1 from "@/assets/real/facility-real-1.jpg.asset.json";
+import facilityReal2 from "@/assets/real/facility-real-2.jpg.asset.json";
+import facilityReal3 from "@/assets/real/facility-real-3.jpg.asset.json";
+import facilityReal4 from "@/assets/real/facility-real-4.jpg.asset.json";
+import facilityReal5 from "@/assets/real/facility-real-5.jpg.asset.json";
+import facilityReal6 from "@/assets/real/facility-real-6.jpg.asset.json";
+import facilityReal7 from "@/assets/real/facility-real-7.jpg.asset.json";
+import facilityReal8 from "@/assets/real/facility-real-8.jpg.asset.json";
 
 const PHONE = "07602995502";
 const PHONE_TEL = "tel:+917602995502";
 const WHATSAPP = "https://wa.me/917602995502";
 const ADDRESS = "Dakbanglow Road, opposite of DAV School, Bidhan Nagar East, Saratpally, Midnapore, West Bengal 721101";
 const EMAIL = "mdnhopesociety@gmail.com";
-const MAPS_DIRECTIONS = "https://www.google.com/maps/dir/?api=1&destination=Midnapore+Hope+Society+Bidhan+Nagar+East+Saratpally+Midnapore";
+const MAPS_DIRECTIONS = "https://share.google/Uj3sI0BkPua1kKwNF";
+const MAPS_EMBED = "https://www.google.com/maps?q=Midnapore+Hope+Society,+Dakbanglow+Road,+Bidhan+Nagar+East,+Saratpally,+Midnapore,+West+Bengal+721101&output=embed";
+const FACEBOOK = "https://www.facebook.com/share/1EACCh7nTh/";
+const YOUTUBE = "https://youtube.com/@sudiptobumba?si=-QVBnEuUtYbzNwvt";
 
 // Single source of truth for statistics — edit here to update site-wide.
 export const HOPE_STATS = {
