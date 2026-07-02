@@ -533,15 +533,18 @@ function Home() {
             <p className="mt-3 text-muted-foreground text-lg">Step inside our facility designed for comfort, dignity and recovery.</p>
           </div>
           <Gallery images={[
-            { src: realBanner.url, alt: "Midnapore Hope Society facility banner", label: "Our Centre" },
-            { src: facRoom, alt: "Patient Room", label: "Patient Rooms" },
-            { src: facCounsel, alt: "Counseling", label: "Counseling Rooms" },
-            { src: facDining, alt: "Dining", label: "Dining Area" },
-            { src: realCelebration.url, alt: "Recovery celebration with residents", label: "Community Life" },
-            { src: realMedCamp.url, alt: "Medical camp session", label: "Medical Camps" },
-            { src: facOut, alt: "Outdoor", label: "Outdoor Spaces" },
-            { src: facRec, alt: "Recreation", label: "Recreation Spaces" },
-            { src: realEvent.url, alt: "Awareness event", label: "Awareness Events" },
+            { src: realBanner.url, alt: "Midnapore Hope Society facility banner", label: t("Our Centre", "আমাদের কেন্দ্র") },
+            { src: facilityReal1.url, alt: "Patient rooms", label: t("Patient Rooms", "রোগীদের কক্ষ") },
+            { src: facilityReal2.url, alt: "Counseling session", label: t("Counseling Rooms", "কাউন্সেলিং কক্ষ") },
+            { src: facilityReal3.url, alt: "Dining area", label: t("Dining Area", "খাবার ঘর") },
+            { src: realCelebration.url, alt: "Community life", label: t("Community Life", "সম্প্রদায় জীবন") },
+            { src: realMedCamp.url, alt: "Medical camp", label: t("Medical Camps", "চিকিৎসা শিবির") },
+            { src: facilityReal4.url, alt: "Outdoor spaces", label: t("Outdoor Spaces", "খোলা পরিবেশ") },
+            { src: facilityReal5.url, alt: "Recreation spaces", label: t("Recreation Spaces", "বিনোদন এলাকা") },
+            { src: realEvent.url, alt: "Awareness events", label: t("Awareness Events", "সচেতনতা কর্মসূচি") },
+            { src: facilityReal6.url, alt: "Facility photo", label: t("Community Programs", "সম্প্রদায় কর্মসূচি") },
+            { src: facilityReal7.url, alt: "Facility photo", label: t("Public Outreach", "গণসচেতনতা") },
+            { src: facilityReal8.url, alt: "Facility photo", label: t("Rehabilitation Team", "পুনর্বাসন দল") },
           ]} />
         </div>
       </section>
