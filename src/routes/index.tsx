@@ -387,20 +387,23 @@ function Home() {
               </Card>
             </div>
             <div>
-              <Badge variant="outline" className="border-primary/30 text-primary mb-4">About Us</Badge>
-              <h2 className="font-display text-3xl md:text-5xl font-bold leading-tight">A Trusted Recovery Home in Midnapore</h2>
+              <Badge variant="outline" className="border-primary/30 text-primary mb-4">{t("About Us", "আমাদের সম্পর্কে")}</Badge>
+              <h2 className="font-display text-3xl md:text-5xl font-bold leading-tight">{t("A Trusted Recovery Home in Midnapore", "মেদিনীপুরের একটি বিশ্বস্ত পুনরুদ্ধার কেন্দ্র")}</h2>
               <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
-                Midnapore Hope Society is a compassionate addiction treatment centre committed to helping individuals and families overcome the challenges of substance dependence — with dignity, privacy, and proven care.
+                {t(
+                  "Midnapore Hope Society is a compassionate addiction treatment centre committed to helping individuals and families overcome the challenges of substance dependence — with dignity, privacy, and proven care.",
+                  "মেদিনীপুর হোপ সোসাইটি একটি সহানুভূতিশীল নেশা মুক্তি কেন্দ্র — মর্যাদা, গোপনীয়তা ও প্রমাণিত সেবার মাধ্যমে ব্যক্তি ও পরিবারকে নেশার সমস্যা কাটিয়ে উঠতে সহায়তা করে।",
+                )}
               </p>
               <div className="mt-8 grid sm:grid-cols-3 gap-4">
                 {[
-                  { i: Heart, t: "Mission", d: "Restore lives through holistic recovery." },
-                  { i: Eye, t: "Vision", d: "A society free from addiction's grip." },
-                  { i: Shield, t: "Values", d: "Compassion · Privacy · Excellence." },
-                ].map(({ i: I, t, d }) => (
-                  <div key={t} className="rounded-2xl border p-4 bg-card shadow-card">
+                  { i: Heart, title: t("Mission", "লক্ষ্য"), d: t("Restore lives through holistic recovery.", "সামগ্রিক পুনরুদ্ধারের মাধ্যমে জীবন ফিরিয়ে দেওয়া।") },
+                  { i: Eye, title: t("Vision", "দৃষ্টিভঙ্গি"), d: t("A society free from addiction's grip.", "নেশামুক্ত এক সমাজ গড়ে তোলা।") },
+                  { i: Shield, title: t("Values", "মূল্যবোধ"), d: t("Compassion · Privacy · Excellence.", "সহানুভূতি · গোপনীয়তা · উৎকর্ষ।") },
+                ].map(({ i: I, title, d }) => (
+                  <div key={title} className="rounded-2xl border p-4 bg-card shadow-card">
                     <I className="h-6 w-6 text-primary mb-2" />
-                    <p className="font-semibold">{t}</p>
+                    <p className="font-semibold">{title}</p>
                     <p className="text-sm text-muted-foreground mt-1">{d}</p>
                   </div>
                 ))}
