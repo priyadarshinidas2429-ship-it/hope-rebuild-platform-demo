@@ -227,31 +227,34 @@ function Home() {
         </div>
         <div className="relative container mx-auto px-4 py-20 md:py-32 max-w-6xl">
           <Badge className="mb-6 bg-white/20 hover:bg-white/30 text-white border-white/30 backdrop-blur">
-            <Award className="h-3.5 w-3.5 mr-1.5" /> Trusted Rehabilitation Centre · West Bengal
+            <Award className="h-3.5 w-3.5 mr-1.5" /> {t("Trusted Rehabilitation Centre · West Bengal", "বিশ্বস্ত পুনর্বাসন কেন্দ্র · পশ্চিমবঙ্গ")}
           </Badge>
           <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] max-w-4xl">
             {t("Helping People Rebuild Their Lives", "জীবন পুনর্গঠনে আপনার সঙ্গী")}
           </h1>
           <p className="mt-6 text-lg md:text-xl text-white/90 max-w-2xl leading-relaxed">
-            Professional addiction treatment, counseling, rehabilitation, and family support programs designed to guide individuals toward lasting recovery.
+            {t(
+              "Professional addiction treatment, counseling, rehabilitation, and family support programs designed to guide individuals toward lasting recovery.",
+              "পেশাদার নেশা মুক্তি চিকিৎসা, কাউন্সেলিং, পুনর্বাসন এবং পরিবার সহায়তা কর্মসূচি — স্থায়ী পুনরুদ্ধারের পথে আপনার সঙ্গী।",
+            )}
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild size="lg" className="bg-white text-primary hover:bg-white/95 shadow-elegant h-12 px-6">
-              <a href={PHONE_TEL}><Phone className="mr-2 h-5 w-5" /> Call Now</a>
+              <a href={PHONE_TEL}><Phone className="mr-2 h-5 w-5" /> {t("Call Now", "এখনই কল করুন")}</a>
             </Button>
             <Button asChild size="lg" className="bg-whatsapp text-white hover:opacity-90 border-0 shadow-elegant h-12 px-6">
               <a href={WHATSAPP} target="_blank" rel="noopener"><MessageCircle className="mr-2 h-5 w-5" /> WhatsApp</a>
             </Button>
             <Button asChild size="lg" variant="outline" className="bg-white/10 text-white border-white/40 hover:bg-white/20 backdrop-blur h-12 px-6">
-              <a href="#contact"><Calendar className="mr-2 h-5 w-5" /> Book Confidential Consultation</a>
+              <a href="#contact"><Calendar className="mr-2 h-5 w-5" /> {t("Book Confidential Consultation", "গোপনীয় পরামর্শ বুক করুন")}</a>
             </Button>
           </div>
           <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl">
             {[
-              { icon: Lock, label: "Confidential Care" },
-              { icon: Stethoscope, label: "Experienced Team" },
-              { icon: HandHeart, label: "Family Guidance" },
-              { icon: Activity, label: "Recovery Focused" },
+              { icon: Lock, label: t("Confidential Care", "গোপনীয় সেবা") },
+              { icon: Stethoscope, label: t("Experienced Team", "অভিজ্ঞ দল") },
+              { icon: HandHeart, label: t("Family Guidance", "পরিবার নির্দেশনা") },
+              { icon: Activity, label: t("Recovery Focused", "পুনরুদ্ধার কেন্দ্রিক") },
             ].map(({ icon: I, label }) => (
               <div key={label} className="flex items-center gap-2 rounded-xl bg-white/10 backdrop-blur border border-white/20 px-4 py-3 text-white text-sm font-medium">
                 <I className="h-4 w-4 shrink-0" /> <span>{label}</span>
