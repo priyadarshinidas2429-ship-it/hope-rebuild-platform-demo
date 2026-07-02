@@ -683,9 +683,9 @@ function Home() {
       <section className="py-20 md:py-28 bg-secondary/30">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <Badge className="mb-4 bg-primary/10 text-primary border-0">AI FAQ Assistant</Badge>
-            <h2 className="font-display text-3xl md:text-5xl font-bold">Instant Answers, Anytime</h2>
-            <p className="mt-3 text-muted-foreground text-lg">Ask common questions about admission, treatment and family involvement.</p>
+            <Badge className="mb-4 bg-primary/10 text-primary border-0">{t("AI FAQ Assistant", "AI প্রশ্নোত্তর সহায়ক")}</Badge>
+            <h2 className="font-display text-3xl md:text-5xl font-bold">{t("Instant Answers, Anytime", "যেকোনো সময় তাৎক্ষণিক উত্তর")}</h2>
+            <p className="mt-3 text-muted-foreground text-lg">{t("Ask common questions about admission, treatment and family involvement.", "ভর্তি, চিকিৎসা ও পারিবারিক অংশগ্রহণ সম্পর্কে সাধারণ প্রশ্ন করুন।")}</p>
           </div>
           <ChatFAQ />
         </div>
@@ -695,9 +695,9 @@ function Home() {
       <section id="faq" className="py-20 md:py-28">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <Badge className="mb-4 bg-primary/10 text-primary border-0">Frequently Asked Questions</Badge>
-            <h2 className="font-display text-3xl md:text-5xl font-bold">Answers Families Ask Most</h2>
-            <p className="mt-3 text-muted-foreground text-lg">Clear, honest answers about admission, treatment and recovery at Midnapore Hope Society.</p>
+            <Badge className="mb-4 bg-primary/10 text-primary border-0">{t("Frequently Asked Questions", "সচরাচর জিজ্ঞাসিত প্রশ্ন")}</Badge>
+            <h2 className="font-display text-3xl md:text-5xl font-bold">{t("Answers Families Ask Most", "পরিবারের সবচেয়ে বেশি জিজ্ঞাসিত প্রশ্নের উত্তর")}</h2>
+            <p className="mt-3 text-muted-foreground text-lg">{t("Clear, honest answers about admission, treatment and recovery at Midnapore Hope Society.", "মেদিনীপুর হোপ সোসাইটির ভর্তি, চিকিৎসা ও পুনরুদ্ধার সম্পর্কে স্পষ্ট, সৎ উত্তর।")}</p>
           </div>
           <Card className="p-4 md:p-8 border-0 shadow-elegant bg-card">
             <Accordion type="single" collapsible className="w-full">
@@ -711,7 +711,7 @@ function Home() {
           </Card>
           <div className="mt-8 text-center">
             <Button asChild size="lg" className="gradient-primary text-primary-foreground border-0 shadow-soft">
-              <a href={PHONE_TEL}><Phone className="mr-2 h-4 w-4" /> Still have questions? Talk to a counselor</a>
+              <a href={PHONE_TEL}><Phone className="mr-2 h-4 w-4" /> {t("Still have questions? Talk to a counselor", "এখনও প্রশ্ন আছে? কাউন্সেলরের সাথে কথা বলুন")}</a>
             </Button>
           </div>
         </div>
