@@ -134,6 +134,19 @@ function Home() {
   const [lang, setLang] = useState<"en" | "bn">("en");
   const [navOpen, setNavOpen] = useState(false);
 
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("mhs-lang");
+      if (saved === "en" || saved === "bn") setLang(saved);
+    } catch {}
+  }, []);
+  useEffect(() => {
+    try { localStorage.setItem("mhs-lang", lang); } catch {}
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = lang === "bn" ? "bn" : "en";
+    }
+  }, [lang]);
+
   const t = (en: string, bn: string) => (lang === "en" ? en : bn);
 
   return (
