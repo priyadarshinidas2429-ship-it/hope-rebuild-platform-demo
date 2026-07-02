@@ -833,11 +833,51 @@ function Home() {
             <div className="overflow-hidden rounded-2xl shadow-card border bg-card min-h-[320px]">
               <iframe
                 title="Midnapore Hope Society location"
-                src="https://www.google.com/maps?q=Midnapore+Hope+Society+Bidhan+Nagar+East+Saratpally+Midnapore&output=embed"
+                src={MAPS_EMBED}
                 className="w-full h-full min-h-[320px] border-0"
                 loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
+          </div>
+          {/* CONNECT WITH US */}
+          <div className="mt-10">
+            <Card className="p-8 md:p-10 border-0 shadow-elegant gradient-primary text-primary-foreground text-center relative overflow-hidden">
+              <div className="absolute -top-16 -left-16 h-56 w-56 rounded-full bg-white/10 blur-2xl" />
+              <div className="absolute -bottom-16 -right-16 h-56 w-56 rounded-full bg-white/10 blur-2xl" />
+              <div className="relative">
+                <Badge className="mb-3 bg-white/20 text-white border-0">{t("Follow Us", "আমাদের অনুসরণ করুন")}</Badge>
+                <h3 className="font-display text-2xl md:text-4xl font-bold">{t("Connect With Us", "আমাদের সাথে যুক্ত হোন")}</h3>
+                <p className="mt-2 opacity-90 max-w-xl mx-auto text-sm md:text-base">
+                  {t(
+                    "Follow our journey — awareness campaigns, recovery stories and community events from Midnapore Hope Society.",
+                    "আমাদের যাত্রা অনুসরণ করুন — সচেতনতা কর্মসূচি, পুনরুদ্ধারের গল্প এবং সম্প্রদায় কর্মসূচি।",
+                  )}
+                </p>
+                <div className="mt-6 flex items-center justify-center gap-4 flex-wrap">
+                  <a
+                    href={FACEBOOK}
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="Facebook"
+                    className="group inline-flex items-center gap-2 rounded-full bg-white text-primary px-5 py-2.5 font-semibold shadow-elegant hover:scale-105 hover:shadow-2xl transition-all"
+                  >
+                    <Facebook className="h-5 w-5 transition-transform group-hover:-rotate-6" />
+                    Facebook
+                  </a>
+                  <a
+                    href={YOUTUBE}
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="YouTube"
+                    className="group inline-flex items-center gap-2 rounded-full bg-white text-[#FF0000] px-5 py-2.5 font-semibold shadow-elegant hover:scale-105 hover:shadow-2xl transition-all"
+                  >
+                    <Youtube className="h-5 w-5 transition-transform group-hover:-rotate-6" />
+                    YouTube
+                  </a>
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
       </section>
