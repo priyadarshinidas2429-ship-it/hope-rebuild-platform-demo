@@ -486,22 +486,22 @@ function Home() {
         <div className="absolute inset-0 opacity-20 [background:radial-gradient(circle_at_20%_20%,white,transparent_40%),radial-gradient(circle_at_80%_80%,white,transparent_40%)]" />
         <div className="container mx-auto px-4 max-w-6xl relative">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <Badge className="mb-4 bg-white/20 text-white border-white/30">Why Choose Us</Badge>
-            <h2 className="font-display text-3xl md:text-5xl font-bold">Why Families Trust Midnapore Hope Society</h2>
-            <p className="mt-3 opacity-90 text-lg">Six reasons families across West Bengal choose us as their recovery partner.</p>
+            <Badge className="mb-4 bg-white/20 text-white border-white/30">{t("Why Choose Us", "কেন আমাদের বেছে নেবেন")}</Badge>
+            <h2 className="font-display text-3xl md:text-5xl font-bold">{t("Why Families Trust Midnapore Hope Society", "কেন পরিবারগুলি মেদিনীপুর হোপ সোসাইটিতে আস্থা রাখে")}</h2>
+            <p className="mt-3 opacity-90 text-lg">{t("Six reasons families across West Bengal choose us as their recovery partner.", "পশ্চিমবঙ্গের পরিবারগুলি আমাদের পুনরুদ্ধার সঙ্গী হিসেবে বেছে নেওয়ার ছয়টি কারণ।")}</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              { i: Shield, t: "Safe Environment", d: "Secure 24/7 monitored facility with hygienic, calming spaces." },
-              { i: Stethoscope, t: "Experienced Team", d: "Medical doctors, psychologists, and certified addiction counselors." },
-              { i: Lock, t: "Confidential Treatment", d: "Complete privacy from intake to discharge — your dignity protected." },
-              { i: Users, t: "Family Support", d: "Structured family programs that heal relationships." },
-              { i: HandHeart, t: "Personalized Plans", d: "Recovery plans tailored to each individual's needs and history." },
-              { i: Clock, t: "24/7 Assistance", d: "Always-available helpline and on-site care, day or night." },
-            ].map(({ i: I, t, d }) => (
-              <Card key={t} className="p-6 bg-white/10 border-white/20 backdrop-blur text-white hover:bg-white/15 transition">
+              { i: Shield, title: t("Safe Environment", "নিরাপদ পরিবেশ"), d: t("Secure 24/7 monitored facility with hygienic, calming spaces.", "২৪/৭ নজরদারিতে পরিষ্কার, শান্ত ও নিরাপদ কেন্দ্র।") },
+              { i: Stethoscope, title: t("Experienced Team", "অভিজ্ঞ দল"), d: t("Medical doctors, psychologists, and certified addiction counselors.", "চিকিৎসক, মনোবিদ ও প্রশিক্ষিত নেশা মুক্তি কাউন্সেলর।") },
+              { i: Lock, title: t("Confidential Treatment", "গোপনীয় চিকিৎসা"), d: t("Complete privacy from intake to discharge — your dignity protected.", "ভর্তি থেকে ছাড়া পর্যন্ত সম্পূর্ণ গোপনীয়তা — আপনার মর্যাদা সুরক্ষিত।") },
+              { i: Users, title: t("Family Support", "পরিবার সহায়তা"), d: t("Structured family programs that heal relationships.", "পারিবারিক সম্পর্ক আরোগ্যের জন্য কাঠামোবদ্ধ কর্মসূচি।") },
+              { i: HandHeart, title: t("Personalized Plans", "ব্যক্তিগতকৃত পরিকল্পনা"), d: t("Recovery plans tailored to each individual's needs and history.", "প্রত্যেকের প্রয়োজন অনুযায়ী পুনরুদ্ধার পরিকল্পনা।") },
+              { i: Clock, title: t("24/7 Assistance", "২৪/৭ সহায়তা"), d: t("Always-available helpline and on-site care, day or night.", "দিন-রাত হেল্পলাইন ও কেন্দ্রে সেবা সর্বদা উপলব্ধ।") },
+            ].map(({ i: I, title, d }) => (
+              <Card key={title} className="p-6 bg-white/10 border-white/20 backdrop-blur text-white hover:bg-white/15 transition">
                 <I className="h-8 w-8 mb-3" />
-                <h3 className="font-display font-bold text-lg mb-2">{t}</h3>
+                <h3 className="font-display font-bold text-lg mb-2">{title}</h3>
                 <p className="text-sm opacity-90 leading-relaxed">{d}</p>
               </Card>
             ))}
