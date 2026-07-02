@@ -417,27 +417,27 @@ function Home() {
       <section id="programs" className="py-20 md:py-28 bg-secondary/30">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <Badge className="mb-4 bg-primary/10 text-primary border-0">Our Programs</Badge>
-            <h2 className="font-display text-3xl md:text-5xl font-bold">Treatment Programs Tailored to Recovery</h2>
-            <p className="mt-3 text-muted-foreground text-lg">Evidence-based programs that blend medical care, therapy and family involvement.</p>
+            <Badge className="mb-4 bg-primary/10 text-primary border-0">{t("Our Programs", "আমাদের কর্মসূচি")}</Badge>
+            <h2 className="font-display text-3xl md:text-5xl font-bold">{t("Treatment Programs Tailored to Recovery", "পুনরুদ্ধারের জন্য বিশেষায়িত চিকিৎসা কর্মসূচি")}</h2>
+            <p className="mt-3 text-muted-foreground text-lg">{t("Evidence-based programs that blend medical care, therapy and family involvement.", "চিকিৎসা, থেরাপি এবং পারিবারিক অংশগ্রহণের সমন্বয়ে প্রমাণভিত্তিক কর্মসূচি।")}</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              { i: Wine, t: "Alcohol Addiction Recovery", d: "Medically supervised detox and structured behavioral therapy for lasting sobriety." },
-              { i: Pill, t: "Drug Addiction Recovery", d: "Personalized de-addiction programs for prescription, opioid and substance dependence." },
-              { i: Brain, t: "Counseling", d: "One-on-one CBT and motivational counseling led by experienced therapists." },
-              { i: Users, t: "Family Therapy", d: "Healing the family system, rebuilding trust, and creating supportive home environments." },
-              { i: RefreshCw, t: "Relapse Prevention", d: "Long-term strategies, coping skills and aftercare to prevent relapse." },
-              { i: Sparkles, t: "Emotional Wellness", d: "Mindfulness, yoga and stress-management practices for inner balance." },
-            ].map(({ i: I, t, d }) => (
-              <Card key={t} className="group p-6 border-0 shadow-card hover:shadow-elegant transition-all hover:-translate-y-1 bg-card">
+              { i: Wine, title: t("Alcohol Addiction Recovery", "মদ্যপান আসক্তি পুনরুদ্ধার"), d: t("Medically supervised detox and structured behavioral therapy for lasting sobriety.", "চিকিৎসা তত্ত্বাবধানে ডিটক্স এবং কাঠামোবদ্ধ থেরাপি — স্থায়ী মুক্তির জন্য।") },
+              { i: Pill, title: t("Drug Addiction Recovery", "মাদক আসক্তি পুনরুদ্ধার"), d: t("Personalized de-addiction programs for prescription, opioid and substance dependence.", "ব্যক্তিগতকৃত নেশা মুক্তি কর্মসূচি — ওষুধ, ওপিয়ড ও মাদক নির্ভরতার জন্য।") },
+              { i: Brain, title: t("Counseling", "কাউন্সেলিং"), d: t("One-on-one CBT and motivational counseling led by experienced therapists.", "অভিজ্ঞ থেরাপিস্টের নেতৃত্বে ব্যক্তিগত CBT ও প্রেরণামূলক কাউন্সেলিং।") },
+              { i: Users, title: t("Family Therapy", "পরিবার থেরাপি"), d: t("Healing the family system, rebuilding trust, and creating supportive home environments.", "পারিবারিক আরোগ্য, বিশ্বাস পুনর্গঠন ও সহায়ক পরিবেশ তৈরি।") },
+              { i: RefreshCw, title: t("Relapse Prevention", "পুনরায় নেশা প্রতিরোধ"), d: t("Long-term strategies, coping skills and aftercare to prevent relapse.", "দীর্ঘমেয়াদী কৌশল ও আফটারকেয়ার — পুনরায় নেশা প্রতিরোধে।") },
+              { i: Sparkles, title: t("Emotional Wellness", "মানসিক সুস্থতা"), d: t("Mindfulness, yoga and stress-management practices for inner balance.", "মেডিটেশন, যোগ ও চাপ ব্যবস্থাপনা — অন্তর্গত ভারসাম্যের জন্য।") },
+            ].map(({ i: I, title, d }) => (
+              <Card key={title} className="group p-6 border-0 shadow-card hover:shadow-elegant transition-all hover:-translate-y-1 bg-card">
                 <div className="h-12 w-12 rounded-xl gradient-primary grid place-items-center mb-4 shadow-soft group-hover:scale-110 transition-transform">
                   <I className="h-6 w-6 text-primary-foreground" />
                 </div>
-                <h3 className="font-display font-bold text-lg mb-2">{t}</h3>
+                <h3 className="font-display font-bold text-lg mb-2">{title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{d}</p>
                 <a href="#contact" className="mt-4 inline-flex items-center text-sm font-semibold text-primary group-hover:gap-2 transition-all gap-1">
-                  Learn more <ChevronRight className="h-4 w-4" />
+                  {t("Learn more", "আরও জানুন")} <ChevronRight className="h-4 w-4" />
                 </a>
               </Card>
             ))}
