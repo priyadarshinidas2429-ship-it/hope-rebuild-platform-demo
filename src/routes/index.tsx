@@ -287,7 +287,12 @@ function Home() {
                 <p className="font-display text-4xl md:text-5xl font-extrabold text-gradient">
                   <Counter to={stat.v} suffix={stat.s} />
                 </p>
-                <p className="mt-2 text-sm md:text-base text-muted-foreground font-medium">{stat.l}</p>
+                <p className="mt-2 text-sm md:text-base text-muted-foreground font-medium">{t(stat.l, {
+                  "Families Assisted": "পরিবার সহায়তা পেয়েছে",
+                  "Recovery Programs": "পুনরুদ্ধার কর্মসূচি",
+                  "Years of Service": "বছরের সেবা",
+                  "Support Available": "সহায়তা উপলব্ধ",
+                }[stat.l] ?? stat.l)}</p>
               </Card>
             ))}
           </div>
@@ -299,23 +304,26 @@ function Home() {
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <Badge variant="outline" className="border-emergency/30 text-emergency mb-4">Recognize the Signs</Badge>
-              <h2 className="font-display text-3xl md:text-5xl font-bold leading-tight">Is Addiction Affecting Someone You Love?</h2>
+              <Badge variant="outline" className="border-emergency/30 text-emergency mb-4">{t("Recognize the Signs", "লক্ষণগুলি চিনুন")}</Badge>
+              <h2 className="font-display text-3xl md:text-5xl font-bold leading-tight">{t("Is Addiction Affecting Someone You Love?", "নেশা কি আপনার প্রিয়জনকে প্রভাবিত করছে?")}</h2>
               <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
-                Addiction quietly changes the people we care about. Spotting the early warning signs is the first step toward helping them heal.
+                {t(
+                  "Addiction quietly changes the people we care about. Spotting the early warning signs is the first step toward helping them heal.",
+                  "নেশা নীরবে আমাদের প্রিয়জনদের বদলে দেয়। প্রথম সতর্ক লক্ষণগুলি চিহ্নিত করাই সুস্থতার প্রথম ধাপ।",
+                )}
               </p>
               <Button asChild size="lg" className="mt-6 gradient-primary text-primary-foreground border-0 shadow-soft">
-                <a href={PHONE_TEL}>Get Professional Guidance Today <ArrowRight className="ml-2 h-4 w-4" /></a>
+                <a href={PHONE_TEL}>{t("Get Professional Guidance Today", "আজই পেশাদার পরামর্শ নিন")} <ArrowRight className="ml-2 h-4 w-4" /></a>
               </Button>
             </div>
             <div className="grid sm:grid-cols-2 gap-3">
               {[
-                "Sudden behavior changes",
-                "Financial problems",
-                "Relationship conflicts",
-                "Loss of motivation",
-                "Alcohol or substance dependency",
-                "Withdrawal & mood swings",
+                t("Sudden behavior changes", "হঠাৎ আচরণ পরিবর্তন"),
+                t("Financial problems", "আর্থিক সমস্যা"),
+                t("Relationship conflicts", "সম্পর্কে দ্বন্দ্ব"),
+                t("Loss of motivation", "উৎসাহ হারানো"),
+                t("Alcohol or substance dependency", "মদ বা মাদক নির্ভরতা"),
+                t("Withdrawal & mood swings", "অসংযম ও মানসিক পরিবর্তন"),
               ].map((sign) => (
                 <Card key={sign} className="p-4 flex items-start gap-3 border-0 shadow-card hover:shadow-soft transition">
                   <div className="h-9 w-9 shrink-0 rounded-lg bg-emergency/10 grid place-items-center">
