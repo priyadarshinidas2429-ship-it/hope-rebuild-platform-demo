@@ -162,6 +162,12 @@ function Home() {
             <span className="truncate">{t("24/7 Support Available · Confidential Helpline", "২৪/৭ সহায়তা উপলব্ধ · গোপনীয় হেল্পলাইন")}</span>
           </div>
           <div className="flex items-center gap-2 shrink-0">
+            <a href={FACEBOOK} target="_blank" rel="noopener" aria-label="Facebook" className="hidden sm:inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/15 hover:bg-white/25 hover:scale-110 transition">
+              <Facebook className="h-3.5 w-3.5" />
+            </a>
+            <a href={YOUTUBE} target="_blank" rel="noopener" aria-label="YouTube" className="hidden sm:inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/15 hover:bg-white/25 hover:scale-110 transition">
+              <Youtube className="h-3.5 w-3.5" />
+            </a>
             <a href={PHONE_TEL} className="inline-flex items-center gap-1.5 rounded-full bg-white/15 hover:bg-white/25 px-3 py-1 transition">
               <Phone className="h-3.5 w-3.5" /> <span className="hidden sm:inline">Call</span>
             </a>
