@@ -721,22 +721,22 @@ function Home() {
       <section className="py-20 md:py-28">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <Badge className="mb-4 bg-accent-soft text-accent border-0">Compare</Badge>
-            <h2 className="font-display text-3xl md:text-5xl font-bold">Why Families Choose Midnapore Hope Society</h2>
+            <Badge className="mb-4 bg-accent-soft text-accent border-0">{t("Compare", "তুলনা")}</Badge>
+            <h2 className="font-display text-3xl md:text-5xl font-bold">{t("Why Families Choose Midnapore Hope Society", "কেন পরিবারগুলি মেদিনীপুর হোপ সোসাইটি বেছে নেয়")}</h2>
           </div>
           <Card className="overflow-hidden border-0 shadow-elegant">
             <div className="grid grid-cols-3 text-center">
-              <div className="p-5 bg-muted font-semibold text-sm md:text-base">Feature</div>
-              <div className="p-5 bg-muted font-semibold text-sm md:text-base text-muted-foreground">Typical Centre</div>
-              <div className="p-5 gradient-primary text-primary-foreground font-bold text-sm md:text-base">Midnapore Hope Society</div>
+              <div className="p-5 bg-muted font-semibold text-sm md:text-base">{t("Feature", "বৈশিষ্ট্য")}</div>
+              <div className="p-5 bg-muted font-semibold text-sm md:text-base text-muted-foreground">{t("Typical Centre", "সাধারণ কেন্দ্র")}</div>
+              <div className="p-5 gradient-primary text-primary-foreground font-bold text-sm md:text-base">{t("Midnapore Hope Society", "মেদিনীপুর হোপ সোসাইটি")}</div>
             </div>
             {[
-              "Family Support Programs",
-              "Confidential Care",
-              "Personalized Counseling",
-              "Long-term Recovery Planning",
-              "Ongoing Guidance",
-              "24/7 Helpline",
+              t("Family Support Programs", "পরিবার সহায়তা কর্মসূচি"),
+              t("Confidential Care", "গোপনীয় সেবা"),
+              t("Personalized Counseling", "ব্যক্তিগতকৃত কাউন্সেলিং"),
+              t("Long-term Recovery Planning", "দীর্ঘমেয়াদী পুনরুদ্ধার পরিকল্পনা"),
+              t("Ongoing Guidance", "চলমান নির্দেশনা"),
+              t("24/7 Helpline", "২৪/৭ হেল্পলাইন"),
             ].map((f, i) => (
               <div key={f} className={`grid grid-cols-3 text-center border-t ${i % 2 ? "bg-card" : "bg-secondary/20"}`}>
                 <div className="p-4 font-medium text-sm md:text-base text-left pl-6">{f}</div>
@@ -752,24 +752,24 @@ function Home() {
       <section className="py-20 md:py-28 bg-secondary/30">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <Badge className="mb-4 bg-primary/10 text-primary border-0">Community Outreach</Badge>
-            <h2 className="font-display text-3xl md:text-5xl font-bold">Building an Aware, Healthier Midnapore</h2>
+            <Badge className="mb-4 bg-primary/10 text-primary border-0">{t("Community Outreach", "সম্প্রদায় সেবা")}</Badge>
+            <h2 className="font-display text-3xl md:text-5xl font-bold">{t("Building an Aware, Healthier Midnapore", "একটি সচেতন, সুস্থ মেদিনীপুর গড়ে তোলা")}</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { i: Users, t: "Awareness Campaigns", d: "District-wide campaigns on de-addiction and mental wellness.", img: realRally.url },
-              { i: Heart, t: "Community Programs", d: "Free counseling camps in schools, colleges and neighborhoods.", img: realAntiDrug.url },
-              { i: FileText, t: "Educational Workshops", d: "Workshops for parents, teachers and youth on addiction prevention.", img: realAwareness.url },
-            ].map(({ i: I, t, d, img }) => (
-              <Card key={t} className="overflow-hidden border-0 shadow-card bg-card hover:-translate-y-1 hover:shadow-elegant transition group">
+              { i: Users, title: t("Awareness Campaigns", "সচেতনতা কর্মসূচি"), d: t("District-wide campaigns on de-addiction and mental wellness.", "নেশা মুক্তি ও মানসিক সুস্থতা নিয়ে জেলা-ব্যাপী কর্মসূচি।"), img: realRally.url },
+              { i: Heart, title: t("Community Programs", "সম্প্রদায় কর্মসূচি"), d: t("Free counseling camps in schools, colleges and neighborhoods.", "স্কুল, কলেজ ও এলাকায় বিনামূল্যে কাউন্সেলিং শিবির।"), img: realAntiDrug.url },
+              { i: FileText, title: t("Educational Workshops", "শিক্ষামূলক কর্মশালা"), d: t("Workshops for parents, teachers and youth on addiction prevention.", "অভিভাবক, শিক্ষক ও যুবকদের জন্য নেশা প্রতিরোধ কর্মশালা।"), img: realAwareness.url },
+            ].map(({ i: I, title, d, img }) => (
+              <Card key={title} className="overflow-hidden border-0 shadow-card bg-card hover:-translate-y-1 hover:shadow-elegant transition group">
                 <div className="aspect-[16/10] overflow-hidden">
-                  <img src={img} alt={t} loading="lazy" className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <img src={img} alt={title} loading="lazy" className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700" />
                 </div>
                 <div className="p-6">
                   <div className="h-11 w-11 rounded-xl gradient-accent grid place-items-center mb-3 -mt-10 relative shadow-elegant ring-4 ring-card">
                     <I className="h-5 w-5 text-accent-foreground" />
                   </div>
-                  <h3 className="font-display font-bold text-lg mb-2">{t}</h3>
+                  <h3 className="font-display font-bold text-lg mb-2">{title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{d}</p>
                 </div>
               </Card>
