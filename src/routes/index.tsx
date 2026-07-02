@@ -601,12 +601,12 @@ function Home() {
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="grid md:grid-cols-[1fr_auto] items-end gap-4 mb-10">
             <div>
-              <Badge className="mb-3 bg-primary/10 text-primary border-0">Family Guidance Resource Center</Badge>
-              <h2 className="font-display text-3xl md:text-5xl font-bold">Learn. Understand. Help.</h2>
+              <Badge className="mb-3 bg-primary/10 text-primary border-0">{t("Family Guidance Resource Center", "পারিবারিক নির্দেশনা কেন্দ্র")}</Badge>
+              <h2 className="font-display text-3xl md:text-5xl font-bold">{t("Learn. Understand. Help.", "শিখুন। বুঝুন। সাহায্য করুন।")}</h2>
             </div>
             <div className="relative max-w-sm w-full">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input placeholder="Search topics…" className="pl-9 bg-card" />
+              <Input placeholder={t("Search topics…", "বিষয় খুঁজুন…")} className="pl-9 bg-card" />
             </div>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -630,15 +630,15 @@ function Home() {
           {/* Download */}
           <Card className="mt-14 p-8 md:p-12 border-0 shadow-elegant gradient-primary text-primary-foreground grid md:grid-cols-[1fr_auto] gap-8 items-center">
             <div>
-              <Badge className="bg-white/20 text-white border-0 mb-3">Free Download</Badge>
-              <h3 className="font-display text-2xl md:text-3xl font-bold">Complete Family Guide to Addiction Recovery</h3>
-              <p className="mt-2 opacity-90 max-w-xl">A 40-page evidence-based PDF guide written by our counselors — for families ready to take the first step.</p>
+              <Badge className="bg-white/20 text-white border-0 mb-3">{t("Free Download", "বিনামূল্যে ডাউনলোড")}</Badge>
+              <h3 className="font-display text-2xl md:text-3xl font-bold">{t("Complete Family Guide to Addiction Recovery", "নেশা মুক্তির সম্পূর্ণ পারিবারিক নির্দেশিকা")}</h3>
+              <p className="mt-2 opacity-90 max-w-xl">{t("A 40-page evidence-based PDF guide written by our counselors — for families ready to take the first step.", "আমাদের কাউন্সেলরদের লেখা ৪০-পৃষ্ঠার প্রমাণভিত্তিক গাইড — প্রথম পদক্ষেপ নিতে প্রস্তুত পরিবারের জন্য।")}</p>
             </div>
             <form className="grid gap-3 w-full md:w-auto md:min-w-[300px]" onSubmit={(e) => { e.preventDefault(); toast.success("Guide sent! Check your email."); }}>
-              <Input required placeholder="Your name" className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
-              <Input required type="email" placeholder="Email address" className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
+              <Input required placeholder={t("Your name", "আপনার নাম")} className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
+              <Input required type="email" placeholder={t("Email address", "ইমেইল ঠিকানা")} className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
               <Button type="submit" size="lg" className="bg-white text-primary hover:bg-white/95">
-                <Download className="mr-2 h-4 w-4" /> Download Guide
+                <Download className="mr-2 h-4 w-4" /> {t("Download Guide", "গাইড ডাউনলোড করুন")}
               </Button>
             </form>
           </Card>
