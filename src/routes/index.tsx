@@ -906,6 +906,15 @@ function Home() {
                 <Badge className="bg-white/15 text-white border-0">5.0 ★ Rated</Badge>
                 <Badge className="bg-white/15 text-white border-0">Open 24/7</Badge>
               </div>
+              <div className="mt-5 flex items-center gap-3">
+                <span className="text-xs uppercase tracking-widest opacity-80">{t("Follow", "অনুসরণ")}</span>
+                <a href={FACEBOOK} target="_blank" rel="noopener" aria-label="Facebook" className="h-9 w-9 rounded-full bg-white/15 grid place-items-center hover:bg-white hover:text-primary hover:scale-110 transition-all">
+                  <Facebook className="h-4 w-4" />
+                </a>
+                <a href={YOUTUBE} target="_blank" rel="noopener" aria-label="YouTube" className="h-9 w-9 rounded-full bg-white/15 grid place-items-center hover:bg-white hover:text-[#FF0000] hover:scale-110 transition-all">
+                  <Youtube className="h-4 w-4" />
+                </a>
+              </div>
             </div>
             <div>
               <p className="font-semibold mb-4">Quick Links</p>
