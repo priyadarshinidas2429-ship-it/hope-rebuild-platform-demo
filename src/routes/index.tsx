@@ -784,15 +784,15 @@ function Home() {
           <Card className="p-8 md:p-12 border-0 shadow-elegant gradient-hero text-white grid md:grid-cols-[1fr_auto] gap-8 items-center overflow-hidden relative">
             <div className="absolute -top-10 -right-10 h-48 w-48 rounded-full bg-white/10 blur-2xl" />
             <div className="relative">
-              <Badge className="bg-white/20 text-white border-0 mb-3">Quick Inquiry</Badge>
-              <h2 className="font-display text-3xl md:text-4xl font-bold">Request a Callback in 10 Minutes</h2>
-              <p className="mt-2 opacity-90">A counselor will personally call you back — confidential and judgment-free.</p>
+              <Badge className="bg-white/20 text-white border-0 mb-3">{t("Quick Inquiry", "দ্রুত অনুসন্ধান")}</Badge>
+              <h2 className="font-display text-3xl md:text-4xl font-bold">{t("Request a Callback in 10 Minutes", "১০ মিনিটে কলব্যাকের অনুরোধ করুন")}</h2>
+              <p className="mt-2 opacity-90">{t("A counselor will personally call you back — confidential and judgment-free.", "একজন কাউন্সেলর ব্যক্তিগতভাবে আপনাকে কল করবেন — গোপনীয় ও বিচারহীন।")}</p>
             </div>
             <form className="relative grid gap-3 w-full md:w-auto md:min-w-[320px]" onSubmit={(e) => { e.preventDefault(); toast.success("Callback scheduled. We'll reach you within 10 minutes."); }}>
-              <Input required placeholder="Your name" className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
-              <Input required placeholder="Phone number" className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
+              <Input required placeholder={t("Your name", "আপনার নাম")} className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
+              <Input required placeholder={t("Phone number", "ফোন নম্বর")} className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
               <Button type="submit" size="lg" className="bg-white text-primary hover:bg-white/95 font-semibold">
-                Request Callback Now <ArrowRight className="ml-2 h-4 w-4" />
+                {t("Request Callback Now", "এখনই কলব্যাক অনুরোধ করুন")} <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </form>
           </Card>
@@ -803,24 +803,24 @@ function Home() {
       <section id="contact" className="py-20 md:py-28 bg-secondary/30">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <Badge className="mb-4 bg-primary/10 text-primary border-0">Contact</Badge>
-            <h2 className="font-display text-3xl md:text-5xl font-bold">We're Here. Reach Out.</h2>
+            <Badge className="mb-4 bg-primary/10 text-primary border-0">{t("Contact", "যোগাযোগ")}</Badge>
+            <h2 className="font-display text-3xl md:text-5xl font-bold">{t("We're Here. Reach Out.", "আমরা এখানে আছি। যোগাযোগ করুন।")}</h2>
           </div>
           <div className="grid lg:grid-cols-5 gap-6">
             <Card className="lg:col-span-2 p-7 border-0 shadow-card bg-card grid gap-5 content-start">
               {[
-                { i: MapPin, t: "Address", d: ADDRESS },
-                { i: Phone, t: "Phone", d: PHONE, href: PHONE_TEL },
-                { i: MessageCircle, t: "WhatsApp", d: "Chat with us anytime", href: WHATSAPP },
-                { i: Mail, t: "Email", d: EMAIL, href: `mailto:${EMAIL}` },
-                { i: Clock, t: "Hours", d: "Open 24 hours · 7 days" },
-              ].map(({ i: I, t, d, href }) => (
-                <div key={t} className="flex gap-4">
+                { i: MapPin, title: t("Address", "ঠিকানা"), d: ADDRESS },
+                { i: Phone, title: t("Phone", "ফোন"), d: PHONE, href: PHONE_TEL },
+                { i: MessageCircle, title: "WhatsApp", d: t("Chat with us anytime", "যেকোনো সময় চ্যাট করুন"), href: WHATSAPP },
+                { i: Mail, title: t("Email", "ইমেইল"), d: EMAIL, href: `mailto:${EMAIL}` },
+                { i: Clock, title: t("Hours", "সময়"), d: t("Open 24 hours · 7 days", "২৪ ঘন্টা · ৭ দিন খোলা") },
+              ].map(({ i: I, title, d, href }) => (
+                <div key={title} className="flex gap-4">
                   <div className="h-11 w-11 shrink-0 rounded-xl gradient-primary grid place-items-center">
                     <I className="h-5 w-5 text-primary-foreground" />
                   </div>
                   <div className="min-w-0">
-                    <p className="font-semibold text-sm">{t}</p>
+                    <p className="font-semibold text-sm">{title}</p>
                     {href ? (
                       <a href={href} className="text-sm text-muted-foreground hover:text-primary transition break-words">{d}</a>
                     ) : (
@@ -831,31 +831,31 @@ function Home() {
               ))}
             </Card>
             <Card className="lg:col-span-3 p-7 border-0 shadow-card bg-card">
-              <h3 className="font-display font-bold text-xl mb-1">Send us a message</h3>
-              <p className="text-sm text-muted-foreground mb-5">We respond within an hour, 24/7.</p>
+              <h3 className="font-display font-bold text-xl mb-1">{t("Send us a message", "আমাদের বার্তা পাঠান")}</h3>
+              <p className="text-sm text-muted-foreground mb-5">{t("We respond within an hour, 24/7.", "আমরা ২৪/৭ এক ঘন্টার মধ্যে সাড়া দিই।")}</p>
               <form className="grid sm:grid-cols-2 gap-3" onSubmit={(e) => { e.preventDefault(); toast.success("Message sent. We'll be in touch shortly."); }}>
-                <Input required placeholder="Full name" />
-                <Input required placeholder="Phone number" />
-                <Input className="sm:col-span-2" type="email" placeholder="Email" />
-                <Textarea className="sm:col-span-2" required placeholder="How can we help?" rows={4} />
-                <Button type="submit" className="sm:col-span-2 gradient-primary text-primary-foreground border-0 h-12">Send Message</Button>
+                <Input required placeholder={t("Full name", "পুরো নাম")} />
+                <Input required placeholder={t("Phone number", "ফোন নম্বর")} />
+                <Input className="sm:col-span-2" type="email" placeholder={t("Email", "ইমেইল")} />
+                <Textarea className="sm:col-span-2" required placeholder={t("How can we help?", "আমরা কীভাবে সাহায্য করতে পারি?")} rows={4} />
+                <Button type="submit" className="sm:col-span-2 gradient-primary text-primary-foreground border-0 h-12">{t("Send Message", "বার্তা পাঠান")}</Button>
               </form>
             </Card>
           </div>
           {/* FIND US */}
           <div id="find-us" className="mt-10 grid lg:grid-cols-[1fr_1.2fr] gap-6">
             <Card className="p-7 border-0 shadow-card bg-card flex flex-col">
-              <Badge className="mb-3 bg-primary/10 text-primary border-0 w-fit">Find Us</Badge>
-              <h3 className="font-display text-2xl font-bold mb-2">Visit Our Centre</h3>
+              <Badge className="mb-3 bg-primary/10 text-primary border-0 w-fit">{t("Find Us", "আমাদের খুঁজুন")}</Badge>
+              <h3 className="font-display text-2xl font-bold mb-2">{t("Visit Our Centre", "আমাদের কেন্দ্র পরিদর্শন করুন")}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed mb-5">{ADDRESS}</p>
               <div className="space-y-3 text-sm mb-6">
-                <div className="flex items-center gap-2"><Clock className="h-4 w-4 text-primary" /> Open 24 hours · 7 days a week</div>
+                <div className="flex items-center gap-2"><Clock className="h-4 w-4 text-primary" /> {t("Open 24 hours · 7 days a week", "২৪ ঘন্টা · সপ্তাহের ৭ দিন খোলা")}</div>
                 <div className="flex items-center gap-2"><Phone className="h-4 w-4 text-primary" /> {PHONE}</div>
                 <div className="flex items-center gap-2"><Mail className="h-4 w-4 text-primary" /> {EMAIL}</div>
               </div>
               <div className="mt-auto grid sm:grid-cols-2 gap-3">
-                <Button asChild className="gradient-primary text-primary-foreground border-0"><a href={PHONE_TEL}><Phone className="mr-2 h-4 w-4" /> Call Now</a></Button>
-                <Button asChild variant="outline"><a href={MAPS_DIRECTIONS} target="_blank" rel="noopener"><MapPin className="mr-2 h-4 w-4" /> Get Directions</a></Button>
+                <Button asChild className="gradient-primary text-primary-foreground border-0"><a href={PHONE_TEL}><Phone className="mr-2 h-4 w-4" /> {t("Call Now", "এখনই কল করুন")}</a></Button>
+                <Button asChild variant="outline"><a href={MAPS_DIRECTIONS} target="_blank" rel="noopener"><MapPin className="mr-2 h-4 w-4" /> {t("Get Directions", "দিকনির্দেশ পান")}</a></Button>
               </div>
             </Card>
             <div className="overflow-hidden rounded-2xl shadow-card border bg-card min-h-[320px]">
