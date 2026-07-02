@@ -513,8 +513,8 @@ function Home() {
       <section className="py-20 md:py-28">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <Badge className="mb-4 bg-accent-soft text-accent border-0">Impact</Badge>
-            <h2 className="font-display text-3xl md:text-5xl font-bold">Our Care, in Numbers</h2>
+            <Badge className="mb-4 bg-accent-soft text-accent border-0">{t("Impact", "প্রভাব")}</Badge>
+            <h2 className="font-display text-3xl md:text-5xl font-bold">{t("Our Care, in Numbers", "আমাদের সেবা, সংখ্যায়")}</h2>
           </div>
           <Card className="p-8 md:p-12 border-0 shadow-elegant bg-card">
             <div className="grid md:grid-cols-2 gap-10">
@@ -542,8 +542,8 @@ function Home() {
       <section className="py-20 md:py-28 bg-secondary/30">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <Badge className="mb-4 bg-primary/10 text-primary border-0">Success Stories</Badge>
-            <h2 className="font-display text-3xl md:text-5xl font-bold">Lives Renewed at Hope Society</h2>
+            <Badge className="mb-4 bg-primary/10 text-primary border-0">{t("Success Stories", "সাফল্যের গল্প")}</Badge>
+            <h2 className="font-display text-3xl md:text-5xl font-bold">{t("Lives Renewed at Hope Society", "হোপ সোসাইটিতে নতুন জীবন")}</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
@@ -575,9 +575,9 @@ function Home() {
       <section id="facility" className="py-20 md:py-28">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <Badge className="mb-4 bg-accent-soft text-accent border-0">Virtual Facility Tour</Badge>
-            <h2 className="font-display text-3xl md:text-5xl font-bold">A Calm, Healing Environment</h2>
-            <p className="mt-3 text-muted-foreground text-lg">Step inside our facility designed for comfort, dignity and recovery.</p>
+            <Badge className="mb-4 bg-accent-soft text-accent border-0">{t("Virtual Facility Tour", "ভার্চুয়াল কেন্দ্র পরিদর্শন")}</Badge>
+            <h2 className="font-display text-3xl md:text-5xl font-bold">{t("A Calm, Healing Environment", "একটি শান্ত, আরোগ্যদায়ক পরিবেশ")}</h2>
+            <p className="mt-3 text-muted-foreground text-lg">{t("Step inside our facility designed for comfort, dignity and recovery.", "আরাম, মর্যাদা ও পুনরুদ্ধারের জন্য নির্মিত আমাদের কেন্দ্রে প্রবেশ করুন।")}</p>
           </div>
           <Gallery images={[
             { src: realBanner.url, alt: "Midnapore Hope Society facility banner", label: t("Our Centre", "আমাদের কেন্দ্র") },
