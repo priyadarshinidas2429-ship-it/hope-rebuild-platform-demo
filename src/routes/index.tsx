@@ -193,28 +193,42 @@ function Home() {
             </div>
           </a>
           <nav className="hidden lg:flex items-center gap-6 text-sm font-medium">
-            <a href="#about" className="hover:text-primary transition">About</a>
-            <a href="#programs" className="hover:text-primary transition">Programs</a>
-            <a href="#journey" className="hover:text-primary transition">Recovery</a>
-            <a href="#facility" className="hover:text-primary transition">Facility</a>
-            <a href="#resources" className="hover:text-primary transition">Resources</a>
-            <a href="#contact" className="hover:text-primary transition">Contact</a>
+            <a href="#about" className="hover:text-primary transition">{t("About", "পরিচিতি")}</a>
+            <a href="#programs" className="hover:text-primary transition">{t("Programs", "কর্মসূচি")}</a>
+            <a href="#journey" className="hover:text-primary transition">{t("Recovery", "পুনরুদ্ধার")}</a>
+            <a href="#facility" className="hover:text-primary transition">{t("Facility", "কেন্দ্র")}</a>
+            <a href="#resources" className="hover:text-primary transition">{t("Resources", "সম্পদ")}</a>
+            <a href="#contact" className="hover:text-primary transition">{t("Contact", "যোগাযোগ")}</a>
           </nav>
           <div className="flex items-center gap-2">
             <button onClick={() => setLang(lang === "en" ? "bn" : "en")} className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold rounded-full border px-3 py-1.5 hover:bg-secondary transition">
               <Globe className="h-3.5 w-3.5" /> {lang === "en" ? "বাংলা" : "EN"}
             </button>
             <Button asChild className="gradient-primary text-primary-foreground border-0 shadow-soft hidden md:inline-flex">
-              <a href="#contact"><Calendar className="mr-2 h-4 w-4" />Book Consultation</a>
+              <a href="#contact"><Calendar className="mr-2 h-4 w-4" />{t("Book Consultation", "পরামর্শ বুক করুন")}</a>
             </Button>
             <button className="lg:hidden p-2" onClick={() => setNavOpen(!navOpen)} aria-label="Menu"><Menu /></button>
           </div>
         </div>
         {navOpen && (
           <div className="lg:hidden border-t bg-card px-4 py-3 grid gap-2 text-sm font-medium">
-            {["About","Programs","Recovery","Facility","Resources","Contact"].map(s => (
-              <a key={s} href={`#${s.toLowerCase()}`} onClick={() => setNavOpen(false)} className="py-2">{s}</a>
+            {[
+              { en: "About", bn: "পরিচিতি", id: "about" },
+              { en: "Programs", bn: "কর্মসূচি", id: "programs" },
+              { en: "Recovery", bn: "পুনরুদ্ধার", id: "journey" },
+              { en: "Facility", bn: "কেন্দ্র", id: "facility" },
+              { en: "Resources", bn: "সম্পদ", id: "resources" },
+              { en: "Contact", bn: "যোগাযোগ", id: "contact" },
+            ].map(s => (
+              <a key={s.id} href={`#${s.id}`} onClick={() => setNavOpen(false)} className="py-2">{t(s.en, s.bn)}</a>
             ))}
+            <div className="flex items-center gap-3 pt-3 border-t">
+              <button onClick={() => setLang(lang === "en" ? "bn" : "en")} className="inline-flex items-center gap-1.5 text-xs font-semibold rounded-full border px-3 py-1.5">
+                <Globe className="h-3.5 w-3.5" /> {lang === "en" ? "বাংলা" : "EN"}
+              </button>
+              <a href={FACEBOOK} target="_blank" rel="noopener" aria-label="Facebook" className="h-8 w-8 rounded-full bg-secondary grid place-items-center hover:bg-primary hover:text-primary-foreground transition"><Facebook className="h-4 w-4" /></a>
+              <a href={YOUTUBE} target="_blank" rel="noopener" aria-label="YouTube" className="h-8 w-8 rounded-full bg-secondary grid place-items-center hover:bg-primary hover:text-primary-foreground transition"><Youtube className="h-4 w-4" /></a>
+            </div>
           </div>
         )}
       </header>
