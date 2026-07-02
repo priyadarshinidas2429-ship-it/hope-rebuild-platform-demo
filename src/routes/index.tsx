@@ -650,29 +650,29 @@ function Home() {
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-10">
             <Card className="p-8 md:p-10 border-0 shadow-card bg-card">
-              <Badge className="mb-3 bg-primary/10 text-primary border-0">Referral Portal</Badge>
-              <h2 className="font-display text-2xl md:text-3xl font-bold mb-3">For Doctors, Hospitals, Counselors & NGOs</h2>
-              <p className="text-muted-foreground mb-6">Refer a patient confidentially. We coordinate intake within 24 hours.</p>
+              <Badge className="mb-3 bg-primary/10 text-primary border-0">{t("Referral Portal", "রেফারেল পোর্টাল")}</Badge>
+              <h2 className="font-display text-2xl md:text-3xl font-bold mb-3">{t("For Doctors, Hospitals, Counselors & NGOs", "চিকিৎসক, হাসপাতাল, কাউন্সেলর ও এনজিওদের জন্য")}</h2>
+              <p className="text-muted-foreground mb-6">{t("Refer a patient confidentially. We coordinate intake within 24 hours.", "গোপনীয়ভাবে রোগী রেফার করুন। আমরা ২৪ ঘন্টার মধ্যে ভর্তির ব্যবস্থা করি।")}</p>
               <form className="grid gap-3" onSubmit={(e) => { e.preventDefault(); toast.success("Referral received. Our team will respond shortly."); }}>
-                <Input required placeholder="Referring professional / organization" />
-                <Input required placeholder="Contact number" />
-                <Input placeholder="Patient name (optional)" />
-                <Textarea required placeholder="Brief case summary" rows={3} />
-                <Button type="submit" className="gradient-primary text-primary-foreground border-0">Refer a Patient Confidentially</Button>
+                <Input required placeholder={t("Referring professional / organization", "রেফার করা পেশাদার / সংস্থা")} />
+                <Input required placeholder={t("Contact number", "যোগাযোগ নম্বর")} />
+                <Input placeholder={t("Patient name (optional)", "রোগীর নাম (ঐচ্ছিক)")} />
+                <Textarea required placeholder={t("Brief case summary", "সংক্ষিপ্ত কেস সারাংশ")} rows={3} />
+                <Button type="submit" className="gradient-primary text-primary-foreground border-0">{t("Refer a Patient Confidentially", "গোপনীয়ভাবে রেফার করুন")}</Button>
               </form>
             </Card>
             <Card className="p-8 md:p-10 border-0 shadow-card bg-card">
-              <Badge className="mb-3 bg-accent-soft text-accent border-0">Anonymous Consultation</Badge>
-              <h2 className="font-display text-2xl md:text-3xl font-bold mb-3">100% Confidential Request</h2>
-              <p className="text-muted-foreground mb-6">Share only what you're comfortable with. We'll reach out discreetly.</p>
+              <Badge className="mb-3 bg-accent-soft text-accent border-0">{t("Anonymous Consultation", "নাম প্রকাশ না করে পরামর্শ")}</Badge>
+              <h2 className="font-display text-2xl md:text-3xl font-bold mb-3">{t("100% Confidential Request", "১০০% গোপনীয় অনুরোধ")}</h2>
+              <p className="text-muted-foreground mb-6">{t("Share only what you're comfortable with. We'll reach out discreetly.", "যা স্বাচ্ছন্দ্যে বলতে পারেন কেবল তা-ই জানান। আমরা নীরবে যোগাযোগ করব।")}</p>
               <form className="grid gap-3" onSubmit={(e) => { e.preventDefault(); toast.success("Request received confidentially. We'll call you back."); }}>
-                <Input placeholder="Name (optional)" />
-                <Input required placeholder="Phone number" />
-                <Textarea required placeholder="Describe your concern…" rows={4} />
+                <Input placeholder={t("Name (optional)", "নাম (ঐচ্ছিক)")} />
+                <Input required placeholder={t("Phone number", "ফোন নম্বর")} />
+                <Textarea required placeholder={t("Describe your concern…", "আপনার সমস্যা বর্ণনা করুন…")} rows={4} />
                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <Lock className="h-3.5 w-3.5 text-success" /> Encrypted & never shared. Read by trained counselors only.
+                  <Lock className="h-3.5 w-3.5 text-success" /> {t("Encrypted & never shared. Read by trained counselors only.", "এনক্রিপ্টেড ও কখনো ভাগ করা হবে না। শুধুমাত্র প্রশিক্ষিত কাউন্সেলর পড়বেন।")}
                 </div>
-                <Button type="submit" className="gradient-accent text-accent-foreground border-0">Request Confidential Consultation</Button>
+                <Button type="submit" className="gradient-accent text-accent-foreground border-0">{t("Request Confidential Consultation", "গোপনীয় পরামর্শের অনুরোধ করুন")}</Button>
               </form>
             </Card>
           </div>
