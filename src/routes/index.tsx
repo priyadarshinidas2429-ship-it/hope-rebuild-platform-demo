@@ -405,7 +405,7 @@ function Home() {
                   {[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 fill-current" />)}
                 </div>
                 <p className="font-bold text-2xl">5.0 / 5.0</p>
-                <p className="text-xs text-muted-foreground">Based on 18 verified reviews</p>
+                <p className="text-xs text-muted-foreground">{t("Based on 18 verified reviews", "১৮টি যাচাইকৃত রিভিউয়ের ভিত্তিতে")}</p>
               </Card>
             </div>
             <div>
