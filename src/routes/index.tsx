@@ -17,6 +17,8 @@ import { Assessment } from "@/components/site/Assessment";
 import { ChatFAQ } from "@/components/site/ChatFAQ";
 import { Gallery } from "@/components/site/Gallery";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { useLang } from "@/lib/i18n";
+import { Share2 } from "lucide-react";
 
 import heroImg from "@/assets/hero-hope.jpg";
 import aboutImg from "@/assets/about-team.jpg";
@@ -46,6 +48,8 @@ const MAPS_DIRECTIONS = "https://share.google/Uj3sI0BkPua1kKwNF";
 const MAPS_EMBED = "https://www.google.com/maps?q=Midnapore+Hope+Society,+Dakbanglow+Road,+Bidhan+Nagar+East,+Saratpally,+Midnapore,+West+Bengal+721101&output=embed";
 const FACEBOOK = "https://www.facebook.com/share/1EACCh7nTh/";
 const YOUTUBE = "https://youtube.com/@sudiptobumba?si=-QVBnEuUtYbzNwvt";
+const SITE_URL = "https://hope-rebuild-platform-demo.lovable.app";
+const SHARE_TEXT = "Midnapore Hope Society — Trusted Rehabilitation & Nasha Mukti Kendra in Midnapore, West Bengal. 24/7 confidential care.";
 
 // Single source of truth for statistics — edit here to update site-wide.
 export const HOPE_STATS = {
