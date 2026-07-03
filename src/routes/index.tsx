@@ -243,7 +243,40 @@ function Home() {
           <img src={heroImg} alt="Sunrise of hope" className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-primary/85 via-primary/60 to-primary/20" />
         </div>
+        {/* Floating mobile language toggle */}
+        <div className="md:hidden absolute top-3 right-3 z-20">
+          <div className="flex items-center gap-1 rounded-full bg-white/95 backdrop-blur shadow-elegant p-1 text-xs font-semibold">
+            <button
+              onClick={() => setLang("en")}
+              className={`px-3 py-1.5 rounded-full transition ${lang === "en" ? "bg-primary text-primary-foreground" : "text-primary"}`}
+              aria-pressed={lang === "en"}
+            >🇬🇧 EN</button>
+            <button
+              onClick={() => setLang("bn")}
+              className={`px-3 py-1.5 rounded-full transition ${lang === "bn" ? "bg-primary text-primary-foreground" : "text-primary"}`}
+              aria-pressed={lang === "bn"}
+            >🇧🇩 বাংলা</button>
+          </div>
+        </div>
         <div className="relative container mx-auto px-4 py-20 md:py-32 max-w-6xl">
+          {/* Prominent language switcher */}
+          <div className="mb-6 inline-flex flex-col sm:flex-row sm:items-center gap-3 rounded-2xl bg-white/10 backdrop-blur border border-white/25 px-4 py-3">
+            <span className="text-white/90 text-sm font-medium inline-flex items-center gap-2">
+              <Globe className="h-4 w-4" /> Choose Your Language / আপনার ভাষা নির্বাচন করুন
+            </span>
+            <div className="flex gap-2">
+              <button
+                onClick={() => setLang("en")}
+                aria-pressed={lang === "en"}
+                className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition shadow-soft ${lang === "en" ? "bg-white text-primary" : "bg-white/15 text-white hover:bg-white/25 border border-white/30"}`}
+              >🇬🇧 English</button>
+              <button
+                onClick={() => setLang("bn")}
+                aria-pressed={lang === "bn"}
+                className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition shadow-soft ${lang === "bn" ? "bg-white text-primary" : "bg-white/15 text-white hover:bg-white/25 border border-white/30"}`}
+              >🇧🇩 বাংলা</button>
+            </div>
+          </div>
           <Badge className="mb-6 bg-white/20 hover:bg-white/30 text-white border-white/30 backdrop-blur">
             <Award className="h-3.5 w-3.5 mr-1.5" /> {t("Trusted Rehabilitation Centre · West Bengal", "বিশ্বস্ত পুনর্বাসন কেন্দ্র · পশ্চিমবঙ্গ")}
           </Badge>
