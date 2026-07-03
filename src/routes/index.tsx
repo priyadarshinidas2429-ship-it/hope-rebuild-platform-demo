@@ -138,6 +138,10 @@ function Home() {
     try {
       const saved = localStorage.getItem("mhs-lang");
       if (saved === "en" || saved === "bn") setLang(saved);
+      else if (typeof navigator !== "undefined") {
+        const nav = (navigator.language || "").toLowerCase();
+        if (nav.startsWith("bn")) setLang("bn");
+      }
     } catch {}
   }, []);
   useEffect(() => {
