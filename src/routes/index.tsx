@@ -569,9 +569,9 @@ function Home() {
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { n: "Arijit Das", l: "Contai", r: "Good infrastructure, excellent treatment procedure. Awesome staff behavior and very supportive in every situation. ❤️" },
-              { n: "Ashish Bishal", l: "Family Member", r: "My brother was treated with so much love and care. The whole team went above and beyond." },
-              { n: "Purno", l: "Recovered Member", r: "The best de-addiction and rehabilitation centre I've experienced. Great service and a real second chance." },
+              { n: "Arijit Das", l: t("Contai", "কাঁথি"), r: t("Good infrastructure, excellent treatment procedure. Awesome staff behavior and very supportive in every situation. ❤️", "চমৎকার পরিকাঠামো, দুর্দান্ত চিকিৎসা পদ্ধতি। কর্মীদের ব্যবহার অসাধারণ ও প্রতিটি পরিস্থিতিতে সহায়ক। ❤️") },
+              { n: "Ashish Bishal", l: t("Family Member", "পরিবারের সদস্য"), r: t("My brother was treated with so much love and care. The whole team went above and beyond.", "আমার ভাইকে অসম্ভব ভালোবাসা ও যত্নে চিকিৎসা করা হয়েছে। পুরো দল প্রত্যাশার চেয়ে অনেক বেশি করেছে।") },
+              { n: "Purno", l: t("Recovered Member", "পুনরুদ্ধারপ্রাপ্ত সদস্য"), r: t("The best de-addiction and rehabilitation centre I've experienced. Great service and a real second chance.", "আমার অভিজ্ঞতায় সেরা নেশা মুক্তি ও পুনর্বাসন কেন্দ্র। চমৎকার সেবা ও সত্যিকারের একটি দ্বিতীয় সুযোগ।") },
             ].map((tst) => (
               <Card key={tst.n} className="p-7 border-0 shadow-card hover:shadow-elegant transition bg-card">
                 <div className="flex items-center gap-1 text-amber-400 mb-3">
