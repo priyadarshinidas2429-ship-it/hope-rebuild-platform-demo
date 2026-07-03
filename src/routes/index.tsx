@@ -67,14 +67,14 @@ export const HOPE_STATS = {
   ],
 };
 
-const FAQS = [
-  { q: "How long does treatment usually take?", a: "Programs typically range from 30 to 180 days depending on individual needs. Our counselors design a personalized plan after the initial confidential assessment." },
-  { q: "Is treatment confidential?", a: "Yes. Every interaction — from your first call to discharge and aftercare — is strictly confidential. Records are protected and never shared without written consent." },
-  { q: "Are family visits allowed?", a: "Absolutely. Family involvement is central to lasting recovery. Scheduled visits, family counseling sessions and progress updates are part of every program." },
-  { q: "Do you provide counseling?", a: "Yes — one-on-one CBT, motivational counseling, group therapy and family counseling are all delivered by experienced, qualified therapists." },
-  { q: "Is medical supervision available?", a: "Our facility offers 24/7 medical supervision, including doctor-led detox, medication management and on-call emergency support." },
-  { q: "What happens after recovery?", a: "Aftercare includes relapse-prevention groups, monthly follow-ups, family check-ins and 24/7 helpline access for at least 12 months post-discharge." },
-  { q: "How do I begin admission?", a: "Call or WhatsApp us anytime. We conduct a brief confidential assessment, share the program and — in most cases — offer same-day admission." },
+const FAQS: { q: [string, string]; a: [string, string] }[] = [
+  { q: ["How long does treatment usually take?", "চিকিৎসা সাধারণত কতদিন সময় নেয়?"], a: ["Programs typically range from 30 to 180 days depending on individual needs. Our counselors design a personalized plan after the initial confidential assessment.", "প্রয়োজন অনুযায়ী কর্মসূচি সাধারণত ৩০ থেকে ১৮০ দিন। প্রাথমিক গোপনীয় মূল্যায়নের পর আমাদের কাউন্সেলররা ব্যক্তিগত পরিকল্পনা তৈরি করেন।"] },
+  { q: ["Is treatment confidential?", "চিকিৎসা কি গোপনীয়?"], a: ["Yes. Every interaction — from your first call to discharge and aftercare — is strictly confidential. Records are protected and never shared without written consent.", "হ্যাঁ। প্রথম কল থেকে ছাড়া এবং আফটারকেয়ার পর্যন্ত প্রতিটি যোগাযোগ কঠোরভাবে গোপনীয়। লিখিত সম্মতি ছাড়া রেকর্ড কখনো ভাগ করা হয় না।"] },
+  { q: ["Are family visits allowed?", "পারিবারিক পরিদর্শন কি অনুমোদিত?"], a: ["Absolutely. Family involvement is central to lasting recovery. Scheduled visits, family counseling sessions and progress updates are part of every program.", "অবশ্যই। স্থায়ী পুনরুদ্ধারে পারিবারিক অংশগ্রহণ কেন্দ্রীয়। নির্ধারিত পরিদর্শন, পারিবারিক কাউন্সেলিং ও অগ্রগতির তথ্য প্রতিটি কর্মসূচির অংশ।"] },
+  { q: ["Do you provide counseling?", "আপনারা কি কাউন্সেলিং প্রদান করেন?"], a: ["Yes — one-on-one CBT, motivational counseling, group therapy and family counseling are all delivered by experienced, qualified therapists.", "হ্যাঁ — অভিজ্ঞ, যোগ্য থেরাপিস্টদের দ্বারা ব্যক্তিগত CBT, প্রেরণামূলক কাউন্সেলিং, গ্রুপ থেরাপি ও পারিবারিক কাউন্সেলিং প্রদান করা হয়।"] },
+  { q: ["Is medical supervision available?", "চিকিৎসা তত্ত্বাবধান কি উপলব্ধ?"], a: ["Our facility offers 24/7 medical supervision, including doctor-led detox, medication management and on-call emergency support.", "আমাদের কেন্দ্রে ২৪/৭ চিকিৎসা তত্ত্বাবধান রয়েছে — ডাক্তার-পরিচালিত ডিটক্স, ওষুধ ব্যবস্থাপনা ও অন-কল জরুরী সহায়তা।"] },
+  { q: ["What happens after recovery?", "পুনরুদ্ধারের পরে কী হয়?"], a: ["Aftercare includes relapse-prevention groups, monthly follow-ups, family check-ins and 24/7 helpline access for at least 12 months post-discharge.", "আফটারকেয়ারে রয়েছে রিল্যাপ্স-প্রতিরোধ গ্রুপ, মাসিক ফলো-আপ, পারিবারিক চেক-ইন এবং ছাড়ার পর কমপক্ষে ১২ মাস ২৪/৭ হেল্পলাইন।"] },
+  { q: ["How do I begin admission?", "আমি কীভাবে ভর্তি শুরু করব?"], a: ["Call or WhatsApp us anytime. We conduct a brief confidential assessment, share the program and — in most cases — offer same-day admission.", "যেকোনো সময় আমাদের কল বা হোয়াটসঅ্যাপ করুন। আমরা সংক্ষিপ্ত গোপনীয় মূল্যায়ন করি, কর্মসূচি ব্যাখ্যা করি এবং সাধারণত একই দিনে ভর্তির ব্যবস্থা করি।"] },
 ];
 
 export const Route = createFileRoute("/")({
