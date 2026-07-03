@@ -43,7 +43,7 @@ export function Assessment() {
         <>
           <div className="flex items-center justify-between mb-6">
             <span className="text-sm font-medium text-muted-foreground">{t(`Question ${step + 1} of ${QUESTIONS.length}`, `প্রশ্ন ${step + 1} / ${QUESTIONS.length}`)}</span>
-            <span className="text-sm font-semibold text-primary">{Math.round(((step) / questions.length) * 100)}%</span>
+            <span className="text-sm font-semibold text-primary">{Math.round(((step) / QUESTIONS.length) * 100)}%</span>
           </div>
           <div className="h-2 rounded-full bg-muted mb-8 overflow-hidden">
             <div className="h-full gradient-primary transition-all duration-500" style={{ width: `${((step) / QUESTIONS.length) * 100}%` }} />
