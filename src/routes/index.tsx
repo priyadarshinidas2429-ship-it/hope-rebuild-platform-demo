@@ -818,6 +818,33 @@ function Home() {
               </Button>
             </form>
           </Card>
+          {/* SHARE */}
+          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 text-center">
+            <span className="inline-flex items-center gap-2 text-sm text-muted-foreground">
+              <Share2 className="h-4 w-4" />
+              {t("Share this centre with a family who needs help", "প্রয়োজন এমন পরিবারের সাথে এই কেন্দ্রটি শেয়ার করুন")}
+            </span>
+            <div className="flex items-center gap-2">
+              <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SITE_URL)}`}
+                target="_blank"
+                rel="noopener"
+                aria-label={t("Share on Facebook", "ফেসবুকে শেয়ার করুন")}
+                className="inline-flex items-center gap-2 rounded-full bg-[#1877F2] text-white px-4 py-2 text-sm font-semibold shadow-soft hover:opacity-90 hover:scale-105 transition"
+              >
+                <Facebook className="h-4 w-4" /> {t("Share on Facebook", "ফেসবুক শেয়ার")}
+              </a>
+              <a
+                href={`https://wa.me/?text=${encodeURIComponent(`${SHARE_TEXT} ${SITE_URL}`)}`}
+                target="_blank"
+                rel="noopener"
+                aria-label={t("Share on WhatsApp", "হোয়াটসঅ্যাপে শেয়ার করুন")}
+                className="inline-flex items-center gap-2 rounded-full bg-whatsapp text-white px-4 py-2 text-sm font-semibold shadow-soft hover:opacity-90 hover:scale-105 transition"
+              >
+                <MessageCircle className="h-4 w-4" /> {t("Share on WhatsApp", "হোয়াটসঅ্যাপ শেয়ার")}
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
