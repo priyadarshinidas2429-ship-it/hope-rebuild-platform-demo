@@ -743,9 +743,9 @@ function Home() {
           <Card className="p-4 md:p-8 border-0 shadow-elegant bg-card">
             <Accordion type="single" collapsible className="w-full">
               {FAQS.map((f, i) => (
-                <AccordionItem key={f.q} value={`item-${i}`}>
-                  <AccordionTrigger className="text-left font-display font-semibold text-base md:text-lg py-5 hover:no-underline">{f.q}</AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground leading-relaxed text-sm md:text-base pb-5">{f.a}</AccordionContent>
+                <AccordionItem key={f.q[0]} value={`item-${i}`}>
+                  <AccordionTrigger className="text-left font-display font-semibold text-base md:text-lg py-5 hover:no-underline">{t(f.q[0], f.q[1])}</AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground leading-relaxed text-sm md:text-base pb-5">{t(f.a[0], f.a[1])}</AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
