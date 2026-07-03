@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Phone, MessageCircle, Calendar, Shield, Users, Heart, Clock, Wine, Pill,
   Brain, Sparkles, RefreshCw, ChevronRight, MapPin, Mail, Check, X, Search,
@@ -17,6 +17,8 @@ import { Assessment } from "@/components/site/Assessment";
 import { ChatFAQ } from "@/components/site/ChatFAQ";
 import { Gallery } from "@/components/site/Gallery";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { useLang } from "@/lib/i18n";
+import { Share2 } from "lucide-react";
 
 import heroImg from "@/assets/hero-hope.jpg";
 import aboutImg from "@/assets/about-team.jpg";
@@ -46,6 +48,8 @@ const MAPS_DIRECTIONS = "https://share.google/Uj3sI0BkPua1kKwNF";
 const MAPS_EMBED = "https://www.google.com/maps?q=Midnapore+Hope+Society,+Dakbanglow+Road,+Bidhan+Nagar+East,+Saratpally,+Midnapore,+West+Bengal+721101&output=embed";
 const FACEBOOK = "https://www.facebook.com/share/1EACCh7nTh/";
 const YOUTUBE = "https://youtube.com/@sudiptobumba?si=-QVBnEuUtYbzNwvt";
+const SITE_URL = "https://hope-rebuild-platform-demo.lovable.app";
+const SHARE_TEXT = "Midnapore Hope Society — Trusted Rehabilitation & Nasha Mukti Kendra in Midnapore, West Bengal. 24/7 confidential care.";
 
 // Single source of truth for statistics — edit here to update site-wide.
 export const HOPE_STATS = {
@@ -63,14 +67,14 @@ export const HOPE_STATS = {
   ],
 };
 
-const FAQS = [
-  { q: "How long does treatment usually take?", a: "Programs typically range from 30 to 180 days depending on individual needs. Our counselors design a personalized plan after the initial confidential assessment." },
-  { q: "Is treatment confidential?", a: "Yes. Every interaction — from your first call to discharge and aftercare — is strictly confidential. Records are protected and never shared without written consent." },
-  { q: "Are family visits allowed?", a: "Absolutely. Family involvement is central to lasting recovery. Scheduled visits, family counseling sessions and progress updates are part of every program." },
-  { q: "Do you provide counseling?", a: "Yes — one-on-one CBT, motivational counseling, group therapy and family counseling are all delivered by experienced, qualified therapists." },
-  { q: "Is medical supervision available?", a: "Our facility offers 24/7 medical supervision, including doctor-led detox, medication management and on-call emergency support." },
-  { q: "What happens after recovery?", a: "Aftercare includes relapse-prevention groups, monthly follow-ups, family check-ins and 24/7 helpline access for at least 12 months post-discharge." },
-  { q: "How do I begin admission?", a: "Call or WhatsApp us anytime. We conduct a brief confidential assessment, share the program and — in most cases — offer same-day admission." },
+const FAQS: { q: [string, string]; a: [string, string] }[] = [
+  { q: ["How long does treatment usually take?", "চিকিৎসা সাধারণত কতদিন সময় নেয়?"], a: ["Programs typically range from 30 to 180 days depending on individual needs. Our counselors design a personalized plan after the initial confidential assessment.", "প্রয়োজন অনুযায়ী কর্মসূচি সাধারণত ৩০ থেকে ১৮০ দিন। প্রাথমিক গোপনীয় মূল্যায়নের পর আমাদের কাউন্সেলররা ব্যক্তিগত পরিকল্পনা তৈরি করেন।"] },
+  { q: ["Is treatment confidential?", "চিকিৎসা কি গোপনীয়?"], a: ["Yes. Every interaction — from your first call to discharge and aftercare — is strictly confidential. Records are protected and never shared without written consent.", "হ্যাঁ। প্রথম কল থেকে ছাড়া এবং আফটারকেয়ার পর্যন্ত প্রতিটি যোগাযোগ কঠোরভাবে গোপনীয়। লিখিত সম্মতি ছাড়া রেকর্ড কখনো ভাগ করা হয় না।"] },
+  { q: ["Are family visits allowed?", "পারিবারিক পরিদর্শন কি অনুমোদিত?"], a: ["Absolutely. Family involvement is central to lasting recovery. Scheduled visits, family counseling sessions and progress updates are part of every program.", "অবশ্যই। স্থায়ী পুনরুদ্ধারে পারিবারিক অংশগ্রহণ কেন্দ্রীয়। নির্ধারিত পরিদর্শন, পারিবারিক কাউন্সেলিং ও অগ্রগতির তথ্য প্রতিটি কর্মসূচির অংশ।"] },
+  { q: ["Do you provide counseling?", "আপনারা কি কাউন্সেলিং প্রদান করেন?"], a: ["Yes — one-on-one CBT, motivational counseling, group therapy and family counseling are all delivered by experienced, qualified therapists.", "হ্যাঁ — অভিজ্ঞ, যোগ্য থেরাপিস্টদের দ্বারা ব্যক্তিগত CBT, প্রেরণামূলক কাউন্সেলিং, গ্রুপ থেরাপি ও পারিবারিক কাউন্সেলিং প্রদান করা হয়।"] },
+  { q: ["Is medical supervision available?", "চিকিৎসা তত্ত্বাবধান কি উপলব্ধ?"], a: ["Our facility offers 24/7 medical supervision, including doctor-led detox, medication management and on-call emergency support.", "আমাদের কেন্দ্রে ২৪/৭ চিকিৎসা তত্ত্বাবধান রয়েছে — ডাক্তার-পরিচালিত ডিটক্স, ওষুধ ব্যবস্থাপনা ও অন-কল জরুরী সহায়তা।"] },
+  { q: ["What happens after recovery?", "পুনরুদ্ধারের পরে কী হয়?"], a: ["Aftercare includes relapse-prevention groups, monthly follow-ups, family check-ins and 24/7 helpline access for at least 12 months post-discharge.", "আফটারকেয়ারে রয়েছে রিল্যাপ্স-প্রতিরোধ গ্রুপ, মাসিক ফলো-আপ, পারিবারিক চেক-ইন এবং ছাড়ার পর কমপক্ষে ১২ মাস ২৪/৭ হেল্পলাইন।"] },
+  { q: ["How do I begin admission?", "আমি কীভাবে ভর্তি শুরু করব?"], a: ["Call or WhatsApp us anytime. We conduct a brief confidential assessment, share the program and — in most cases — offer same-day admission.", "যেকোনো সময় আমাদের কল বা হোয়াটসঅ্যাপ করুন। আমরা সংক্ষিপ্ত গোপনীয় মূল্যায়ন করি, কর্মসূচি ব্যাখ্যা করি এবং সাধারণত একই দিনে ভর্তির ব্যবস্থা করি।"] },
 ];
 
 export const Route = createFileRoute("/")({
@@ -131,27 +135,8 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const [lang, setLang] = useState<"en" | "bn">("en");
+  const { lang, setLang, t } = useLang();
   const [navOpen, setNavOpen] = useState(false);
-
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem("mhs-lang");
-      if (saved === "en" || saved === "bn") setLang(saved);
-      else if (typeof navigator !== "undefined") {
-        const nav = (navigator.language || "").toLowerCase();
-        if (nav.startsWith("bn")) setLang("bn");
-      }
-    } catch {}
-  }, []);
-  useEffect(() => {
-    try { localStorage.setItem("mhs-lang", lang); } catch {}
-    if (typeof document !== "undefined") {
-      document.documentElement.lang = lang === "bn" ? "bn" : "en";
-    }
-  }, [lang]);
-
-  const t = (en: string, bn: string) => (lang === "en" ? en : bn);
 
   return (
     <div className="min-h-screen bg-background">
@@ -420,7 +405,7 @@ function Home() {
                   {[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 fill-current" />)}
                 </div>
                 <p className="font-bold text-2xl">5.0 / 5.0</p>
-                <p className="text-xs text-muted-foreground">Based on 18 verified reviews</p>
+                <p className="text-xs text-muted-foreground">{t("Based on 18 verified reviews", "১৮টি যাচাইকৃত রিভিউয়ের ভিত্তিতে")}</p>
               </Card>
             </div>
             <div>
@@ -584,9 +569,9 @@ function Home() {
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { n: "Arijit Das", l: "Contai", r: "Good infrastructure, excellent treatment procedure. Awesome staff behavior and very supportive in every situation. ❤️" },
-              { n: "Ashish Bishal", l: "Family Member", r: "My brother was treated with so much love and care. The whole team went above and beyond." },
-              { n: "Purno", l: "Recovered Member", r: "The best de-addiction and rehabilitation centre I've experienced. Great service and a real second chance." },
+              { n: "Arijit Das", l: t("Contai", "কাঁথি"), r: t("Good infrastructure, excellent treatment procedure. Awesome staff behavior and very supportive in every situation. ❤️", "চমৎকার পরিকাঠামো, দুর্দান্ত চিকিৎসা পদ্ধতি। কর্মীদের ব্যবহার অসাধারণ ও প্রতিটি পরিস্থিতিতে সহায়ক। ❤️") },
+              { n: "Ashish Bishal", l: t("Family Member", "পরিবারের সদস্য"), r: t("My brother was treated with so much love and care. The whole team went above and beyond.", "আমার ভাইকে অসম্ভব ভালোবাসা ও যত্নে চিকিৎসা করা হয়েছে। পুরো দল প্রত্যাশার চেয়ে অনেক বেশি করেছে।") },
+              { n: "Purno", l: t("Recovered Member", "পুনরুদ্ধারপ্রাপ্ত সদস্য"), r: t("The best de-addiction and rehabilitation centre I've experienced. Great service and a real second chance.", "আমার অভিজ্ঞতায় সেরা নেশা মুক্তি ও পুনর্বাসন কেন্দ্র। চমৎকার সেবা ও সত্যিকারের একটি দ্বিতীয় সুযোগ।") },
             ].map((tst) => (
               <Card key={tst.n} className="p-7 border-0 shadow-card hover:shadow-elegant transition bg-card">
                 <div className="flex items-center gap-1 text-amber-400 mb-3">
@@ -648,18 +633,18 @@ function Home() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              { t: "Signs of Addiction", d: "Spot the early behavioral, physical and emotional warning signs.", k: "Awareness" },
-              { t: "How Families Can Help", d: "Practical ways to support a loved one through recovery.", k: "Family" },
-              { t: "Recovery Support", d: "Long-term support strategies that prevent relapse.", k: "Recovery" },
-              { t: "Intervention Guidance", d: "How to plan a compassionate, effective intervention.", k: "Guidance" },
-              { t: "Understanding Treatment", d: "What detox, therapy and aftercare actually look like.", k: "Treatment" },
-              { t: "Mental Wellness", d: "Coping with depression, anxiety and emotional triggers.", k: "Wellness" },
+              { t: t("Signs of Addiction", "নেশার লক্ষণ"), d: t("Spot the early behavioral, physical and emotional warning signs.", "প্রাথমিক আচরণগত, শারীরিক ও মানসিক সতর্ক লক্ষণ চিনুন।"), k: t("Awareness", "সচেতনতা") },
+              { t: t("How Families Can Help", "পরিবার কীভাবে সাহায্য করতে পারে"), d: t("Practical ways to support a loved one through recovery.", "পুনরুদ্ধারের সময় প্রিয়জনকে সাহায্য করার বাস্তব উপায়।"), k: t("Family", "পরিবার") },
+              { t: t("Recovery Support", "পুনরুদ্ধার সহায়তা"), d: t("Long-term support strategies that prevent relapse.", "রিল্যাপ্স প্রতিরোধে দীর্ঘমেয়াদী সহায়তা কৌশল।"), k: t("Recovery", "পুনরুদ্ধার") },
+              { t: t("Intervention Guidance", "হস্তক্ষেপ নির্দেশনা"), d: t("How to plan a compassionate, effective intervention.", "সহানুভূতিশীল ও কার্যকর হস্তক্ষেপ পরিকল্পনা করার উপায়।"), k: t("Guidance", "নির্দেশনা") },
+              { t: t("Understanding Treatment", "চিকিৎসা বোঝা"), d: t("What detox, therapy and aftercare actually look like.", "ডিটক্স, থেরাপি ও আফটারকেয়ার আসলে কেমন হয়।"), k: t("Treatment", "চিকিৎসা") },
+              { t: t("Mental Wellness", "মানসিক সুস্থতা"), d: t("Coping with depression, anxiety and emotional triggers.", "বিষণ্ণতা, উদ্বেগ ও মানসিক ট্রিগার মোকাবেলা।"), k: t("Wellness", "সুস্থতা") },
             ].map((r) => (
               <Card key={r.t} className="p-6 border-0 shadow-card hover:shadow-elegant transition bg-card group cursor-pointer">
                 <Badge variant="outline" className="text-xs mb-3 border-primary/30 text-primary">{r.k}</Badge>
                 <h3 className="font-display font-bold text-lg mb-2 group-hover:text-primary transition">{r.t}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{r.d}</p>
-                <p className="mt-4 text-sm font-semibold text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all">Read article <ChevronRight className="h-4 w-4" /></p>
+                <p className="mt-4 text-sm font-semibold text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all">{t("Read article", "নিবন্ধ পড়ুন")} <ChevronRight className="h-4 w-4" /></p>
               </Card>
             ))}
           </div>
@@ -671,7 +656,7 @@ function Home() {
               <h3 className="font-display text-2xl md:text-3xl font-bold">{t("Complete Family Guide to Addiction Recovery", "নেশা মুক্তির সম্পূর্ণ পারিবারিক নির্দেশিকা")}</h3>
               <p className="mt-2 opacity-90 max-w-xl">{t("A 40-page evidence-based PDF guide written by our counselors — for families ready to take the first step.", "আমাদের কাউন্সেলরদের লেখা ৪০-পৃষ্ঠার প্রমাণভিত্তিক গাইড — প্রথম পদক্ষেপ নিতে প্রস্তুত পরিবারের জন্য।")}</p>
             </div>
-            <form className="grid gap-3 w-full md:w-auto md:min-w-[300px]" onSubmit={(e) => { e.preventDefault(); toast.success("Guide sent! Check your email."); }}>
+            <form className="grid gap-3 w-full md:w-auto md:min-w-[300px]" onSubmit={(e) => { e.preventDefault(); toast.success(t("Guide sent! Check your email.", "গাইড পাঠানো হয়েছে! আপনার ইমেইল দেখুন।")); }}>
               <Input required placeholder={t("Your name", "আপনার নাম")} className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
               <Input required type="email" placeholder={t("Email address", "ইমেইল ঠিকানা")} className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
               <Button type="submit" size="lg" className="bg-white text-primary hover:bg-white/95">
@@ -690,7 +675,7 @@ function Home() {
               <Badge className="mb-3 bg-primary/10 text-primary border-0">{t("Referral Portal", "রেফারেল পোর্টাল")}</Badge>
               <h2 className="font-display text-2xl md:text-3xl font-bold mb-3">{t("For Doctors, Hospitals, Counselors & NGOs", "চিকিৎসক, হাসপাতাল, কাউন্সেলর ও এনজিওদের জন্য")}</h2>
               <p className="text-muted-foreground mb-6">{t("Refer a patient confidentially. We coordinate intake within 24 hours.", "গোপনীয়ভাবে রোগী রেফার করুন। আমরা ২৪ ঘন্টার মধ্যে ভর্তির ব্যবস্থা করি।")}</p>
-              <form className="grid gap-3" onSubmit={(e) => { e.preventDefault(); toast.success("Referral received. Our team will respond shortly."); }}>
+              <form className="grid gap-3" onSubmit={(e) => { e.preventDefault(); toast.success(t("Referral received. Our team will respond shortly.", "রেফারেল গৃহীত হয়েছে। আমাদের দল শীঘ্রই সাড়া দেবে।")); }}>
                 <Input required placeholder={t("Referring professional / organization", "রেফার করা পেশাদার / সংস্থা")} />
                 <Input required placeholder={t("Contact number", "যোগাযোগ নম্বর")} />
                 <Input placeholder={t("Patient name (optional)", "রোগীর নাম (ঐচ্ছিক)")} />
@@ -702,7 +687,7 @@ function Home() {
               <Badge className="mb-3 bg-accent-soft text-accent border-0">{t("Anonymous Consultation", "নাম প্রকাশ না করে পরামর্শ")}</Badge>
               <h2 className="font-display text-2xl md:text-3xl font-bold mb-3">{t("100% Confidential Request", "১০০% গোপনীয় অনুরোধ")}</h2>
               <p className="text-muted-foreground mb-6">{t("Share only what you're comfortable with. We'll reach out discreetly.", "যা স্বাচ্ছন্দ্যে বলতে পারেন কেবল তা-ই জানান। আমরা নীরবে যোগাযোগ করব।")}</p>
-              <form className="grid gap-3" onSubmit={(e) => { e.preventDefault(); toast.success("Request received confidentially. We'll call you back."); }}>
+              <form className="grid gap-3" onSubmit={(e) => { e.preventDefault(); toast.success(t("Request received confidentially. We'll call you back.", "অনুরোধ গোপনীয়ভাবে গৃহীত। আমরা কল করব।")); }}>
                 <Input placeholder={t("Name (optional)", "নাম (ঐচ্ছিক)")} />
                 <Input required placeholder={t("Phone number", "ফোন নম্বর")} />
                 <Textarea required placeholder={t("Describe your concern…", "আপনার সমস্যা বর্ণনা করুন…")} rows={4} />
@@ -739,9 +724,9 @@ function Home() {
           <Card className="p-4 md:p-8 border-0 shadow-elegant bg-card">
             <Accordion type="single" collapsible className="w-full">
               {FAQS.map((f, i) => (
-                <AccordionItem key={f.q} value={`item-${i}`}>
-                  <AccordionTrigger className="text-left font-display font-semibold text-base md:text-lg py-5 hover:no-underline">{f.q}</AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground leading-relaxed text-sm md:text-base pb-5">{f.a}</AccordionContent>
+                <AccordionItem key={f.q[0]} value={`item-${i}`}>
+                  <AccordionTrigger className="text-left font-display font-semibold text-base md:text-lg py-5 hover:no-underline">{t(f.q[0], f.q[1])}</AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground leading-relaxed text-sm md:text-base pb-5">{t(f.a[0], f.a[1])}</AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
@@ -825,7 +810,7 @@ function Home() {
               <h2 className="font-display text-3xl md:text-4xl font-bold">{t("Request a Callback in 10 Minutes", "১০ মিনিটে কলব্যাকের অনুরোধ করুন")}</h2>
               <p className="mt-2 opacity-90">{t("A counselor will personally call you back — confidential and judgment-free.", "একজন কাউন্সেলর ব্যক্তিগতভাবে আপনাকে কল করবেন — গোপনীয় ও বিচারহীন।")}</p>
             </div>
-            <form className="relative grid gap-3 w-full md:w-auto md:min-w-[320px]" onSubmit={(e) => { e.preventDefault(); toast.success("Callback scheduled. We'll reach you within 10 minutes."); }}>
+            <form className="relative grid gap-3 w-full md:w-auto md:min-w-[320px]" onSubmit={(e) => { e.preventDefault(); toast.success(t("Callback scheduled. We'll reach you within 10 minutes.", "কলব্যাক নির্ধারিত। আমরা ১০ মিনিটের মধ্যে আপনাকে কল করব।")); }}>
               <Input required placeholder={t("Your name", "আপনার নাম")} className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
               <Input required placeholder={t("Phone number", "ফোন নম্বর")} className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
               <Button type="submit" size="lg" className="bg-white text-primary hover:bg-white/95 font-semibold">
@@ -833,6 +818,33 @@ function Home() {
               </Button>
             </form>
           </Card>
+          {/* SHARE */}
+          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 text-center">
+            <span className="inline-flex items-center gap-2 text-sm text-muted-foreground">
+              <Share2 className="h-4 w-4" />
+              {t("Share this centre with a family who needs help", "প্রয়োজন এমন পরিবারের সাথে এই কেন্দ্রটি শেয়ার করুন")}
+            </span>
+            <div className="flex items-center gap-2">
+              <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SITE_URL)}`}
+                target="_blank"
+                rel="noopener"
+                aria-label={t("Share on Facebook", "ফেসবুকে শেয়ার করুন")}
+                className="inline-flex items-center gap-2 rounded-full bg-[#1877F2] text-white px-4 py-2 text-sm font-semibold shadow-soft hover:opacity-90 hover:scale-105 transition"
+              >
+                <Facebook className="h-4 w-4" /> {t("Share on Facebook", "ফেসবুক শেয়ার")}
+              </a>
+              <a
+                href={`https://wa.me/?text=${encodeURIComponent(`${SHARE_TEXT} ${SITE_URL}`)}`}
+                target="_blank"
+                rel="noopener"
+                aria-label={t("Share on WhatsApp", "হোয়াটসঅ্যাপে শেয়ার করুন")}
+                className="inline-flex items-center gap-2 rounded-full bg-whatsapp text-white px-4 py-2 text-sm font-semibold shadow-soft hover:opacity-90 hover:scale-105 transition"
+              >
+                <MessageCircle className="h-4 w-4" /> {t("Share on WhatsApp", "হোয়াটসঅ্যাপ শেয়ার")}
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -870,7 +882,7 @@ function Home() {
             <Card className="lg:col-span-3 p-7 border-0 shadow-card bg-card">
               <h3 className="font-display font-bold text-xl mb-1">{t("Send us a message", "আমাদের বার্তা পাঠান")}</h3>
               <p className="text-sm text-muted-foreground mb-5">{t("We respond within an hour, 24/7.", "আমরা ২৪/৭ এক ঘন্টার মধ্যে সাড়া দিই।")}</p>
-              <form className="grid sm:grid-cols-2 gap-3" onSubmit={(e) => { e.preventDefault(); toast.success("Message sent. We'll be in touch shortly."); }}>
+              <form className="grid sm:grid-cols-2 gap-3" onSubmit={(e) => { e.preventDefault(); toast.success(t("Message sent. We'll be in touch shortly.", "বার্তা পাঠানো হয়েছে। আমরা শীঘ্রই যোগাযোগ করব।")); }}>
                 <Input required placeholder={t("Full name", "পুরো নাম")} />
                 <Input required placeholder={t("Phone number", "ফোন নম্বর")} />
                 <Input className="sm:col-span-2" type="email" placeholder={t("Email", "ইমেইল")} />
@@ -1004,13 +1016,13 @@ function Home() {
               <ul className="space-y-3 text-sm">
                 <li><a href={PHONE_TEL} className="inline-flex items-center gap-2 hover:opacity-80"><Phone className="h-4 w-4" /> {PHONE}</a></li>
                 <li><a href={WHATSAPP} target="_blank" rel="noopener" className="inline-flex items-center gap-2 hover:opacity-80"><MessageCircle className="h-4 w-4" /> {t("WhatsApp Chat", "হোয়াটসঅ্যাপ চ্যাট")}</a></li>
-                <li className="flex items-start gap-2 opacity-90"><MapPin className="h-4 w-4 shrink-0 mt-0.5" /> <span>Bidhan Nagar East, Midnapore 721101</span></li>
+                <li className="flex items-start gap-2 opacity-90"><MapPin className="h-4 w-4 shrink-0 mt-0.5" /> <span>{t("Bidhan Nagar East, Midnapore 721101", "বিধান নগর ইস্ট, মেদিনীপুর ৭২১১০১")}</span></li>
               </ul>
             </div>
           </div>
           <div className="pt-6 border-t border-white/15 flex flex-col sm:flex-row gap-3 justify-between text-xs opacity-80">
             <p>© {new Date().getFullYear()} Midnapore Hope Society. {t("All rights reserved.", "সর্বস্বত্ব সংরক্ষিত।")}</p>
-            <p>Nasha Mukti Kendra · Addiction Treatment · Rehabilitation Centre · West Bengal</p>
+            <p>{t("Nasha Mukti Kendra · Addiction Treatment · Rehabilitation Centre · West Bengal", "নেশা মুক্তি কেন্দ্র · নেশা চিকিৎসা · পুনর্বাসন কেন্দ্র · পশ্চিমবঙ্গ")}</p>
           </div>
         </div>
       </footer>
