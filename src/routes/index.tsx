@@ -656,7 +656,7 @@ function Home() {
               <h3 className="font-display text-2xl md:text-3xl font-bold">{t("Complete Family Guide to Addiction Recovery", "নেশা মুক্তির সম্পূর্ণ পারিবারিক নির্দেশিকা")}</h3>
               <p className="mt-2 opacity-90 max-w-xl">{t("A 40-page evidence-based PDF guide written by our counselors — for families ready to take the first step.", "আমাদের কাউন্সেলরদের লেখা ৪০-পৃষ্ঠার প্রমাণভিত্তিক গাইড — প্রথম পদক্ষেপ নিতে প্রস্তুত পরিবারের জন্য।")}</p>
             </div>
-            <form className="grid gap-3 w-full md:w-auto md:min-w-[300px]" onSubmit={(e) => { e.preventDefault(); toast.success("Guide sent! Check your email."); }}>
+            <form className="grid gap-3 w-full md:w-auto md:min-w-[300px]" onSubmit={(e) => { e.preventDefault(); toast.success(t("Guide sent! Check your email.", "গাইড পাঠানো হয়েছে! আপনার ইমেইল দেখুন।")); }}>
               <Input required placeholder={t("Your name", "আপনার নাম")} className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
               <Input required type="email" placeholder={t("Email address", "ইমেইল ঠিকানা")} className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
               <Button type="submit" size="lg" className="bg-white text-primary hover:bg-white/95">
@@ -675,7 +675,7 @@ function Home() {
               <Badge className="mb-3 bg-primary/10 text-primary border-0">{t("Referral Portal", "রেফারেল পোর্টাল")}</Badge>
               <h2 className="font-display text-2xl md:text-3xl font-bold mb-3">{t("For Doctors, Hospitals, Counselors & NGOs", "চিকিৎসক, হাসপাতাল, কাউন্সেলর ও এনজিওদের জন্য")}</h2>
               <p className="text-muted-foreground mb-6">{t("Refer a patient confidentially. We coordinate intake within 24 hours.", "গোপনীয়ভাবে রোগী রেফার করুন। আমরা ২৪ ঘন্টার মধ্যে ভর্তির ব্যবস্থা করি।")}</p>
-              <form className="grid gap-3" onSubmit={(e) => { e.preventDefault(); toast.success("Referral received. Our team will respond shortly."); }}>
+              <form className="grid gap-3" onSubmit={(e) => { e.preventDefault(); toast.success(t("Referral received. Our team will respond shortly.", "রেফারেল গৃহীত হয়েছে। আমাদের দল শীঘ্রই সাড়া দেবে।")); }}>
                 <Input required placeholder={t("Referring professional / organization", "রেফার করা পেশাদার / সংস্থা")} />
                 <Input required placeholder={t("Contact number", "যোগাযোগ নম্বর")} />
                 <Input placeholder={t("Patient name (optional)", "রোগীর নাম (ঐচ্ছিক)")} />
@@ -687,7 +687,7 @@ function Home() {
               <Badge className="mb-3 bg-accent-soft text-accent border-0">{t("Anonymous Consultation", "নাম প্রকাশ না করে পরামর্শ")}</Badge>
               <h2 className="font-display text-2xl md:text-3xl font-bold mb-3">{t("100% Confidential Request", "১০০% গোপনীয় অনুরোধ")}</h2>
               <p className="text-muted-foreground mb-6">{t("Share only what you're comfortable with. We'll reach out discreetly.", "যা স্বাচ্ছন্দ্যে বলতে পারেন কেবল তা-ই জানান। আমরা নীরবে যোগাযোগ করব।")}</p>
-              <form className="grid gap-3" onSubmit={(e) => { e.preventDefault(); toast.success("Request received confidentially. We'll call you back."); }}>
+              <form className="grid gap-3" onSubmit={(e) => { e.preventDefault(); toast.success(t("Request received confidentially. We'll call you back.", "অনুরোধ গোপনীয়ভাবে গৃহীত। আমরা কল করব।")); }}>
                 <Input placeholder={t("Name (optional)", "নাম (ঐচ্ছিক)")} />
                 <Input required placeholder={t("Phone number", "ফোন নম্বর")} />
                 <Textarea required placeholder={t("Describe your concern…", "আপনার সমস্যা বর্ণনা করুন…")} rows={4} />
@@ -810,7 +810,7 @@ function Home() {
               <h2 className="font-display text-3xl md:text-4xl font-bold">{t("Request a Callback in 10 Minutes", "১০ মিনিটে কলব্যাকের অনুরোধ করুন")}</h2>
               <p className="mt-2 opacity-90">{t("A counselor will personally call you back — confidential and judgment-free.", "একজন কাউন্সেলর ব্যক্তিগতভাবে আপনাকে কল করবেন — গোপনীয় ও বিচারহীন।")}</p>
             </div>
-            <form className="relative grid gap-3 w-full md:w-auto md:min-w-[320px]" onSubmit={(e) => { e.preventDefault(); toast.success("Callback scheduled. We'll reach you within 10 minutes."); }}>
+            <form className="relative grid gap-3 w-full md:w-auto md:min-w-[320px]" onSubmit={(e) => { e.preventDefault(); toast.success(t("Callback scheduled. We'll reach you within 10 minutes.", "কলব্যাক নির্ধারিত। আমরা ১০ মিনিটের মধ্যে আপনাকে কল করব।")); }}>
               <Input required placeholder={t("Your name", "আপনার নাম")} className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
               <Input required placeholder={t("Phone number", "ফোন নম্বর")} className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
               <Button type="submit" size="lg" className="bg-white text-primary hover:bg-white/95 font-semibold">
@@ -855,7 +855,7 @@ function Home() {
             <Card className="lg:col-span-3 p-7 border-0 shadow-card bg-card">
               <h3 className="font-display font-bold text-xl mb-1">{t("Send us a message", "আমাদের বার্তা পাঠান")}</h3>
               <p className="text-sm text-muted-foreground mb-5">{t("We respond within an hour, 24/7.", "আমরা ২৪/৭ এক ঘন্টার মধ্যে সাড়া দিই।")}</p>
-              <form className="grid sm:grid-cols-2 gap-3" onSubmit={(e) => { e.preventDefault(); toast.success("Message sent. We'll be in touch shortly."); }}>
+              <form className="grid sm:grid-cols-2 gap-3" onSubmit={(e) => { e.preventDefault(); toast.success(t("Message sent. We'll be in touch shortly.", "বার্তা পাঠানো হয়েছে। আমরা শীঘ্রই যোগাযোগ করব।")); }}>
                 <Input required placeholder={t("Full name", "পুরো নাম")} />
                 <Input required placeholder={t("Phone number", "ফোন নম্বর")} />
                 <Input className="sm:col-span-2" type="email" placeholder={t("Email", "ইমেইল")} />
@@ -989,13 +989,13 @@ function Home() {
               <ul className="space-y-3 text-sm">
                 <li><a href={PHONE_TEL} className="inline-flex items-center gap-2 hover:opacity-80"><Phone className="h-4 w-4" /> {PHONE}</a></li>
                 <li><a href={WHATSAPP} target="_blank" rel="noopener" className="inline-flex items-center gap-2 hover:opacity-80"><MessageCircle className="h-4 w-4" /> {t("WhatsApp Chat", "হোয়াটসঅ্যাপ চ্যাট")}</a></li>
-                <li className="flex items-start gap-2 opacity-90"><MapPin className="h-4 w-4 shrink-0 mt-0.5" /> <span>Bidhan Nagar East, Midnapore 721101</span></li>
+                <li className="flex items-start gap-2 opacity-90"><MapPin className="h-4 w-4 shrink-0 mt-0.5" /> <span>{t("Bidhan Nagar East, Midnapore 721101", "বিধান নগর ইস্ট, মেদিনীপুর ৭২১১০১")}</span></li>
               </ul>
             </div>
           </div>
           <div className="pt-6 border-t border-white/15 flex flex-col sm:flex-row gap-3 justify-between text-xs opacity-80">
             <p>© {new Date().getFullYear()} Midnapore Hope Society. {t("All rights reserved.", "সর্বস্বত্ব সংরক্ষিত।")}</p>
-            <p>Nasha Mukti Kendra · Addiction Treatment · Rehabilitation Centre · West Bengal</p>
+            <p>{t("Nasha Mukti Kendra · Addiction Treatment · Rehabilitation Centre · West Bengal", "নেশা মুক্তি কেন্দ্র · নেশা চিকিৎসা · পুনর্বাসন কেন্দ্র · পশ্চিমবঙ্গ")}</p>
           </div>
         </div>
       </footer>
