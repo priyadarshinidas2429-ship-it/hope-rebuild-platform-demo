@@ -633,18 +633,18 @@ function Home() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              { t: "Signs of Addiction", d: "Spot the early behavioral, physical and emotional warning signs.", k: "Awareness" },
-              { t: "How Families Can Help", d: "Practical ways to support a loved one through recovery.", k: "Family" },
-              { t: "Recovery Support", d: "Long-term support strategies that prevent relapse.", k: "Recovery" },
-              { t: "Intervention Guidance", d: "How to plan a compassionate, effective intervention.", k: "Guidance" },
-              { t: "Understanding Treatment", d: "What detox, therapy and aftercare actually look like.", k: "Treatment" },
-              { t: "Mental Wellness", d: "Coping with depression, anxiety and emotional triggers.", k: "Wellness" },
+              { t: t("Signs of Addiction", "নেশার লক্ষণ"), d: t("Spot the early behavioral, physical and emotional warning signs.", "প্রাথমিক আচরণগত, শারীরিক ও মানসিক সতর্ক লক্ষণ চিনুন।"), k: t("Awareness", "সচেতনতা") },
+              { t: t("How Families Can Help", "পরিবার কীভাবে সাহায্য করতে পারে"), d: t("Practical ways to support a loved one through recovery.", "পুনরুদ্ধারের সময় প্রিয়জনকে সাহায্য করার বাস্তব উপায়।"), k: t("Family", "পরিবার") },
+              { t: t("Recovery Support", "পুনরুদ্ধার সহায়তা"), d: t("Long-term support strategies that prevent relapse.", "রিল্যাপ্স প্রতিরোধে দীর্ঘমেয়াদী সহায়তা কৌশল।"), k: t("Recovery", "পুনরুদ্ধার") },
+              { t: t("Intervention Guidance", "হস্তক্ষেপ নির্দেশনা"), d: t("How to plan a compassionate, effective intervention.", "সহানুভূতিশীল ও কার্যকর হস্তক্ষেপ পরিকল্পনা করার উপায়।"), k: t("Guidance", "নির্দেশনা") },
+              { t: t("Understanding Treatment", "চিকিৎসা বোঝা"), d: t("What detox, therapy and aftercare actually look like.", "ডিটক্স, থেরাপি ও আফটারকেয়ার আসলে কেমন হয়।"), k: t("Treatment", "চিকিৎসা") },
+              { t: t("Mental Wellness", "মানসিক সুস্থতা"), d: t("Coping with depression, anxiety and emotional triggers.", "বিষণ্ণতা, উদ্বেগ ও মানসিক ট্রিগার মোকাবেলা।"), k: t("Wellness", "সুস্থতা") },
             ].map((r) => (
               <Card key={r.t} className="p-6 border-0 shadow-card hover:shadow-elegant transition bg-card group cursor-pointer">
                 <Badge variant="outline" className="text-xs mb-3 border-primary/30 text-primary">{r.k}</Badge>
                 <h3 className="font-display font-bold text-lg mb-2 group-hover:text-primary transition">{r.t}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{r.d}</p>
-                <p className="mt-4 text-sm font-semibold text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all">Read article <ChevronRight className="h-4 w-4" /></p>
+                <p className="mt-4 text-sm font-semibold text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all">{t("Read article", "নিবন্ধ পড়ুন")} <ChevronRight className="h-4 w-4" /></p>
               </Card>
             ))}
           </div>
