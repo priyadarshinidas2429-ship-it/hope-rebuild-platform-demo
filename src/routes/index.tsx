@@ -138,6 +138,10 @@ function Home() {
     try {
       const saved = localStorage.getItem("mhs-lang");
       if (saved === "en" || saved === "bn") setLang(saved);
+      else if (typeof navigator !== "undefined") {
+        const nav = (navigator.language || "").toLowerCase();
+        if (nav.startsWith("bn")) setLang("bn");
+      }
     } catch {}
   }, []);
   useEffect(() => {
@@ -239,7 +243,40 @@ function Home() {
           <img src={heroImg} alt="Sunrise of hope" className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-primary/85 via-primary/60 to-primary/20" />
         </div>
+        {/* Floating mobile language toggle */}
+        <div className="md:hidden absolute top-3 right-3 z-20">
+          <div className="flex items-center gap-1 rounded-full bg-white/95 backdrop-blur shadow-elegant p-1 text-xs font-semibold">
+            <button
+              onClick={() => setLang("en")}
+              className={`px-3 py-1.5 rounded-full transition ${lang === "en" ? "bg-primary text-primary-foreground" : "text-primary"}`}
+              aria-pressed={lang === "en"}
+            >🇬🇧 EN</button>
+            <button
+              onClick={() => setLang("bn")}
+              className={`px-3 py-1.5 rounded-full transition ${lang === "bn" ? "bg-primary text-primary-foreground" : "text-primary"}`}
+              aria-pressed={lang === "bn"}
+            >🇧🇩 বাংলা</button>
+          </div>
+        </div>
         <div className="relative container mx-auto px-4 py-20 md:py-32 max-w-6xl">
+          {/* Prominent language switcher */}
+          <div className="mb-6 inline-flex flex-col sm:flex-row sm:items-center gap-3 rounded-2xl bg-white/10 backdrop-blur border border-white/25 px-4 py-3">
+            <span className="text-white/90 text-sm font-medium inline-flex items-center gap-2">
+              <Globe className="h-4 w-4" /> Choose Your Language / আপনার ভাষা নির্বাচন করুন
+            </span>
+            <div className="flex gap-2">
+              <button
+                onClick={() => setLang("en")}
+                aria-pressed={lang === "en"}
+                className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition shadow-soft ${lang === "en" ? "bg-white text-primary" : "bg-white/15 text-white hover:bg-white/25 border border-white/30"}`}
+              >🇬🇧 English</button>
+              <button
+                onClick={() => setLang("bn")}
+                aria-pressed={lang === "bn"}
+                className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition shadow-soft ${lang === "bn" ? "bg-white text-primary" : "bg-white/15 text-white hover:bg-white/25 border border-white/30"}`}
+              >🇧🇩 বাংলা</button>
+            </div>
+          </div>
           <Badge className="mb-6 bg-white/20 hover:bg-white/30 text-white border-white/30 backdrop-blur">
             <Award className="h-3.5 w-3.5 mr-1.5" /> {t("Trusted Rehabilitation Centre · West Bengal", "বিশ্বস্ত পুনর্বাসন কেন্দ্র · পশ্চিমবঙ্গ")}
           </Badge>
@@ -580,18 +617,18 @@ function Home() {
             <p className="mt-3 text-muted-foreground text-lg">{t("Step inside our facility designed for comfort, dignity and recovery.", "আরাম, মর্যাদা ও পুনরুদ্ধারের জন্য নির্মিত আমাদের কেন্দ্রে প্রবেশ করুন।")}</p>
           </div>
           <Gallery images={[
-            { src: realBanner.url, alt: "Midnapore Hope Society facility banner", label: t("Our Centre", "আমাদের কেন্দ্র") },
-            { src: facilityReal1.url, alt: "Patient rooms", label: t("Patient Rooms", "রোগীদের কক্ষ") },
-            { src: facilityReal2.url, alt: "Counseling session", label: t("Counseling Rooms", "কাউন্সেলিং কক্ষ") },
-            { src: facilityReal3.url, alt: "Dining area", label: t("Dining Area", "খাবার ঘর") },
-            { src: realCelebration.url, alt: "Community life", label: t("Community Life", "সম্প্রদায় জীবন") },
-            { src: realMedCamp.url, alt: "Medical camp", label: t("Medical Camps", "চিকিৎসা শিবির") },
-            { src: facilityReal4.url, alt: "Outdoor spaces", label: t("Outdoor Spaces", "খোলা পরিবেশ") },
-            { src: facilityReal5.url, alt: "Recreation spaces", label: t("Recreation Spaces", "বিনোদন এলাকা") },
-            { src: realEvent.url, alt: "Awareness events", label: t("Awareness Events", "সচেতনতা কর্মসূচি") },
-            { src: facilityReal6.url, alt: "Facility photo", label: t("Community Programs", "সম্প্রদায় কর্মসূচি") },
-            { src: facilityReal7.url, alt: "Facility photo", label: t("Public Outreach", "গণসচেতনতা") },
-            { src: facilityReal8.url, alt: "Facility photo", label: t("Rehabilitation Team", "পুনর্বাসন দল") },
+            { src: realBanner.url, alt: "Midnapore Hope Society banner", label: t("Rehabilitation Centre Activities", "পুনর্বাসন কেন্দ্রের কার্যক্রম") },
+            { src: facilityReal1.url, alt: "Anti-drug awareness campaign", label: t("Anti-Drug Awareness Campaign", "মাদক বিরোধী সচেতনতা অভিযান") },
+            { src: facilityReal2.url, alt: "Counseling and guidance session", label: t("Counseling & Guidance Program", "কাউন্সেলিং ও পরামর্শ কর্মসূচি") },
+            { src: facilityReal3.url, alt: "Support group session", label: t("Support Group Session", "সহায়তা গোষ্ঠী সেশন") },
+            { src: realCelebration.url, alt: "Community engagement program", label: t("Community Engagement Program", "সম্প্রদায় সংযোগ কর্মসূচি") },
+            { src: realMedCamp.url, alt: "Medical health camp", label: t("Medical Health Camp", "চিকিৎসা স্বাস্থ্য শিবির") },
+            { src: facilityReal4.url, alt: "Recovery support activities", label: t("Recovery Support Activities", "পুনরুদ্ধার সহায়তা কার্যক্রম") },
+            { src: facilityReal5.url, alt: "Health and wellness initiative", label: t("Health & Wellness Initiative", "স্বাস্থ্য ও সুস্থতা উদ্যোগ") },
+            { src: realEvent.url, alt: "Public awareness event", label: t("Public Awareness Event", "গণসচেতনতা কর্মসূচি") },
+            { src: facilityReal6.url, alt: "Community outreach program", label: t("Community Outreach Program", "সম্প্রদায় সচেতনতা কর্মসূচি") },
+            { src: facilityReal7.url, alt: "Social reintegration activities", label: t("Social Reintegration Activities", "সামাজিক পুনঃএকীকরণ কার্যক্রম") },
+            { src: facilityReal8.url, alt: "Awareness rally", label: t("Awareness Rally", "সচেতনতা মিছিল") },
           ]} />
         </div>
       </section>
