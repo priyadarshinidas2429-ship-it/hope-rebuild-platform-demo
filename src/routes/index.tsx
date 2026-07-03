@@ -617,18 +617,18 @@ function Home() {
             <p className="mt-3 text-muted-foreground text-lg">{t("Step inside our facility designed for comfort, dignity and recovery.", "আরাম, মর্যাদা ও পুনরুদ্ধারের জন্য নির্মিত আমাদের কেন্দ্রে প্রবেশ করুন।")}</p>
           </div>
           <Gallery images={[
-            { src: realBanner.url, alt: "Midnapore Hope Society facility banner", label: t("Our Centre", "আমাদের কেন্দ্র") },
-            { src: facilityReal1.url, alt: "Patient rooms", label: t("Patient Rooms", "রোগীদের কক্ষ") },
-            { src: facilityReal2.url, alt: "Counseling session", label: t("Counseling Rooms", "কাউন্সেলিং কক্ষ") },
-            { src: facilityReal3.url, alt: "Dining area", label: t("Dining Area", "খাবার ঘর") },
-            { src: realCelebration.url, alt: "Community life", label: t("Community Life", "সম্প্রদায় জীবন") },
-            { src: realMedCamp.url, alt: "Medical camp", label: t("Medical Camps", "চিকিৎসা শিবির") },
-            { src: facilityReal4.url, alt: "Outdoor spaces", label: t("Outdoor Spaces", "খোলা পরিবেশ") },
-            { src: facilityReal5.url, alt: "Recreation spaces", label: t("Recreation Spaces", "বিনোদন এলাকা") },
-            { src: realEvent.url, alt: "Awareness events", label: t("Awareness Events", "সচেতনতা কর্মসূচি") },
-            { src: facilityReal6.url, alt: "Facility photo", label: t("Community Programs", "সম্প্রদায় কর্মসূচি") },
-            { src: facilityReal7.url, alt: "Facility photo", label: t("Public Outreach", "গণসচেতনতা") },
-            { src: facilityReal8.url, alt: "Facility photo", label: t("Rehabilitation Team", "পুনর্বাসন দল") },
+            { src: realBanner.url, alt: "Midnapore Hope Society banner", label: t("Rehabilitation Centre Activities", "পুনর্বাসন কেন্দ্রের কার্যক্রম") },
+            { src: facilityReal1.url, alt: "Anti-drug awareness campaign", label: t("Anti-Drug Awareness Campaign", "মাদক বিরোধী সচেতনতা অভিযান") },
+            { src: facilityReal2.url, alt: "Counseling and guidance session", label: t("Counseling & Guidance Program", "কাউন্সেলিং ও পরামর্শ কর্মসূচি") },
+            { src: facilityReal3.url, alt: "Support group session", label: t("Support Group Session", "সহায়তা গোষ্ঠী সেশন") },
+            { src: realCelebration.url, alt: "Community engagement program", label: t("Community Engagement Program", "সম্প্রদায় সংযোগ কর্মসূচি") },
+            { src: realMedCamp.url, alt: "Medical health camp", label: t("Medical Health Camp", "চিকিৎসা স্বাস্থ্য শিবির") },
+            { src: facilityReal4.url, alt: "Recovery support activities", label: t("Recovery Support Activities", "পুনরুদ্ধার সহায়তা কার্যক্রম") },
+            { src: facilityReal5.url, alt: "Health and wellness initiative", label: t("Health & Wellness Initiative", "স্বাস্থ্য ও সুস্থতা উদ্যোগ") },
+            { src: realEvent.url, alt: "Public awareness event", label: t("Public Awareness Event", "গণসচেতনতা কর্মসূচি") },
+            { src: facilityReal6.url, alt: "Community outreach program", label: t("Community Outreach Program", "সম্প্রদায় সচেতনতা কর্মসূচি") },
+            { src: facilityReal7.url, alt: "Social reintegration activities", label: t("Social Reintegration Activities", "সামাজিক পুনঃএকীকরণ কার্যক্রম") },
+            { src: facilityReal8.url, alt: "Awareness rally", label: t("Awareness Rally", "সচেতনতা মিছিল") },
           ]} />
         </div>
       </section>
