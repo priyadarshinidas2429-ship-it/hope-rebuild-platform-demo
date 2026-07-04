@@ -190,9 +190,10 @@ function Home() {
             <a href="#contact" className="hover:text-primary transition">{t("Contact", "যোগাযোগ")}</a>
           </nav>
           <div className="flex items-center gap-2">
-            <button onClick={() => setLang(lang === "en" ? "bn" : "en")} className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold rounded-full border px-3 py-1.5 hover:bg-secondary transition">
-              <Globe className="h-3.5 w-3.5" /> {lang === "en" ? "বাংলা" : "EN"}
-            </button>
+            <div className="hidden sm:inline-flex items-center rounded-full border bg-secondary/50 p-0.5 text-xs font-semibold" role="group" aria-label="Language">
+              <button onClick={() => setLang("en")} aria-pressed={lang === "en"} className={`px-3 py-1 rounded-full transition ${lang === "en" ? "bg-primary text-primary-foreground shadow-soft" : "text-foreground/70 hover:text-foreground"}`}>English</button>
+              <button onClick={() => setLang("bn")} aria-pressed={lang === "bn"} className={`px-3 py-1 rounded-full transition ${lang === "bn" ? "bg-primary text-primary-foreground shadow-soft" : "text-foreground/70 hover:text-foreground"}`}>বাংলা</button>
+            </div>
             <Button asChild className="gradient-primary text-primary-foreground border-0 shadow-soft hidden md:inline-flex">
               <a href="#contact"><Calendar className="mr-2 h-4 w-4" />{t("Book Consultation", "পরামর্শ বুক করুন")}</a>
             </Button>
@@ -212,9 +213,10 @@ function Home() {
               <a key={s.id} href={`#${s.id}`} onClick={() => setNavOpen(false)} className="py-2">{t(s.en, s.bn)}</a>
             ))}
             <div className="flex items-center gap-3 pt-3 border-t">
-              <button onClick={() => setLang(lang === "en" ? "bn" : "en")} className="inline-flex items-center gap-1.5 text-xs font-semibold rounded-full border px-3 py-1.5">
-                <Globe className="h-3.5 w-3.5" /> {lang === "en" ? "বাংলা" : "EN"}
-              </button>
+              <div className="inline-flex items-center rounded-full border bg-secondary/60 p-0.5 text-xs font-semibold" role="group" aria-label="Language">
+                <button onClick={() => setLang("en")} aria-pressed={lang === "en"} className={`px-3 py-1 rounded-full transition ${lang === "en" ? "bg-primary text-primary-foreground" : "text-foreground/70"}`}>English</button>
+                <button onClick={() => setLang("bn")} aria-pressed={lang === "bn"} className={`px-3 py-1 rounded-full transition ${lang === "bn" ? "bg-primary text-primary-foreground" : "text-foreground/70"}`}>বাংলা</button>
+              </div>
               <a href={FACEBOOK} target="_blank" rel="noopener" aria-label="Facebook" className="h-8 w-8 rounded-full bg-secondary grid place-items-center hover:bg-primary hover:text-primary-foreground transition"><Facebook className="h-4 w-4" /></a>
               <a href={YOUTUBE} target="_blank" rel="noopener" aria-label="YouTube" className="h-8 w-8 rounded-full bg-secondary grid place-items-center hover:bg-primary hover:text-primary-foreground transition"><Youtube className="h-4 w-4" /></a>
             </div>
@@ -230,36 +232,20 @@ function Home() {
         </div>
         {/* Floating mobile language toggle */}
         <div className="md:hidden absolute top-3 right-3 z-20">
-          <div className="flex items-center gap-1 rounded-full bg-white/95 backdrop-blur shadow-elegant p-1 text-xs font-semibold">
-            <button
-              onClick={() => setLang("en")}
-              className={`px-3 py-1.5 rounded-full transition ${lang === "en" ? "bg-primary text-primary-foreground" : "text-primary"}`}
-              aria-pressed={lang === "en"}
-            >🇬🇧 EN</button>
-            <button
-              onClick={() => setLang("bn")}
-              className={`px-3 py-1.5 rounded-full transition ${lang === "bn" ? "bg-primary text-primary-foreground" : "text-primary"}`}
-              aria-pressed={lang === "bn"}
-            >🇧🇩 বাংলা</button>
+          <div className="flex items-center gap-0.5 rounded-full bg-white/95 backdrop-blur shadow-elegant p-1 text-xs font-semibold">
+            <button onClick={() => setLang("en")} aria-pressed={lang === "en"} className={`px-3 py-1.5 rounded-full transition ${lang === "en" ? "bg-primary text-primary-foreground" : "text-primary"}`}>English</button>
+            <button onClick={() => setLang("bn")} aria-pressed={lang === "bn"} className={`px-3 py-1.5 rounded-full transition ${lang === "bn" ? "bg-primary text-primary-foreground" : "text-primary"}`}>বাংলা</button>
           </div>
         </div>
         <div className="relative container mx-auto px-4 py-20 md:py-32 max-w-6xl">
           {/* Prominent language switcher */}
-          <div className="mb-6 inline-flex flex-col sm:flex-row sm:items-center gap-3 rounded-2xl bg-white/10 backdrop-blur border border-white/25 px-4 py-3">
+          <div className="mb-6 hidden md:inline-flex flex-col sm:flex-row sm:items-center gap-3 rounded-2xl bg-white/10 backdrop-blur border border-white/25 px-4 py-3">
             <span className="text-white/90 text-sm font-medium inline-flex items-center gap-2">
               <Globe className="h-4 w-4" /> Choose Your Language / আপনার ভাষা নির্বাচন করুন
             </span>
-            <div className="flex gap-2">
-              <button
-                onClick={() => setLang("en")}
-                aria-pressed={lang === "en"}
-                className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition shadow-soft ${lang === "en" ? "bg-white text-primary" : "bg-white/15 text-white hover:bg-white/25 border border-white/30"}`}
-              >🇬🇧 English</button>
-              <button
-                onClick={() => setLang("bn")}
-                aria-pressed={lang === "bn"}
-                className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition shadow-soft ${lang === "bn" ? "bg-white text-primary" : "bg-white/15 text-white hover:bg-white/25 border border-white/30"}`}
-              >🇧🇩 বাংলা</button>
+            <div className="inline-flex items-center rounded-full bg-white/15 border border-white/30 p-1">
+              <button onClick={() => setLang("en")} aria-pressed={lang === "en"} className={`px-4 py-1.5 rounded-full text-sm font-semibold transition ${lang === "en" ? "bg-white text-primary shadow-soft" : "text-white hover:bg-white/10"}`}>English</button>
+              <button onClick={() => setLang("bn")} aria-pressed={lang === "bn"} className={`px-4 py-1.5 rounded-full text-sm font-semibold transition ${lang === "bn" ? "bg-white text-primary shadow-soft" : "text-white hover:bg-white/10"}`}>বাংলা</button>
             </div>
           </div>
           <Badge className="mb-6 bg-white/20 hover:bg-white/30 text-white border-white/30 backdrop-blur">
