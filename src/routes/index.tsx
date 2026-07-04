@@ -155,6 +155,16 @@ function Home() {
       existing.push(lead);
       localStorage.setItem("mhs-leads", JSON.stringify(existing));
     } catch {}
+    // Trigger the actual PDF download in the user's browser
+    try {
+      const a = document.createElement("a");
+      a.href = familyGuidePdf.url;
+      a.download = "Midnapore-Hope-Society-Family-Guide.pdf";
+      a.rel = "noopener";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    } catch {}
     setGuideSent(true);
     toast.success(t("Thank you. Your guide has been sent to your email.", "ধন্যবাদ। আপনার গাইড ইমেইলে পাঠানো হয়েছে।"));
   };
