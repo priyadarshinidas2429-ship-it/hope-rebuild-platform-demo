@@ -917,12 +917,13 @@ function Home() {
               <p className="text-sm text-muted-foreground leading-relaxed mb-5">{ADDRESS}</p>
               <div className="space-y-3 text-sm mb-6">
                 <div className="flex items-center gap-2"><Clock className="h-4 w-4 text-primary" /> {t("Open 24 hours · 7 days a week", "২৪ ঘন্টা · সপ্তাহের ৭ দিন খোলা")}</div>
-                <div className="flex items-center gap-2"><Phone className="h-4 w-4 text-primary" /> {PHONE}</div>
-                <div className="flex items-center gap-2"><Mail className="h-4 w-4 text-primary" /> {EMAIL}</div>
+                <a href={PHONE_TEL} className="flex items-center gap-2 hover:text-primary transition"><Phone className="h-4 w-4 text-primary" /> {PHONE}</a>
+                <a href={`mailto:${EMAIL}`} className="flex items-center gap-2 hover:text-primary transition break-all"><Mail className="h-4 w-4 text-primary" /> {EMAIL}</a>
               </div>
               <div className="mt-auto grid sm:grid-cols-2 gap-3">
-                <Button asChild className="gradient-primary text-primary-foreground border-0"><a href={PHONE_TEL}><Phone className="mr-2 h-4 w-4" /> {t("Call Now", "এখনই কল করুন")}</a></Button>
-                <Button asChild variant="outline"><a href={MAPS_DIRECTIONS} target="_blank" rel="noopener"><MapPin className="mr-2 h-4 w-4" /> {t("Get Directions", "দিকনির্দেশ পান")}</a></Button>
+                <Button asChild className="gradient-primary text-primary-foreground border-0 h-11"><a href={PHONE_TEL}><Phone className="mr-2 h-4 w-4" /> {t("Call Now", "এখনই কল করুন")}</a></Button>
+                <Button asChild className="bg-whatsapp text-white hover:opacity-90 border-0 h-11"><a href={WHATSAPP} target="_blank" rel="noopener"><MessageCircle className="mr-2 h-4 w-4" /> WhatsApp</a></Button>
+                <Button asChild variant="outline" className="sm:col-span-2 h-11"><a href={MAPS_DIRECTIONS} target="_blank" rel="noopener"><Navigation className="mr-2 h-4 w-4" /> {t("Open in Google Maps", "গুগল ম্যাপে খুলুন")}</a></Button>
               </div>
             </Card>
             <div className="overflow-hidden rounded-2xl shadow-card border bg-card min-h-[320px]">
