@@ -4,7 +4,7 @@ import {
   Phone, MessageCircle, Calendar, Shield, Users, Heart, Clock, Wine, Pill,
   Brain, Sparkles, RefreshCw, ChevronRight, MapPin, Mail, Check, X, Search,
   Download, Stethoscope, Lock, Eye, HandHeart, Activity, FileText, Award,
-  AlertCircle, Menu, ArrowRight, Star, Globe, Facebook, Youtube,
+  AlertCircle, Menu, ArrowRight, Star, Globe, Facebook, Youtube, Navigation,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
