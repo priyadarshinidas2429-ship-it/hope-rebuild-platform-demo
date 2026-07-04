@@ -4,7 +4,7 @@ import {
   Phone, MessageCircle, Calendar, Shield, Users, Heart, Clock, Wine, Pill,
   Brain, Sparkles, RefreshCw, ChevronRight, MapPin, Mail, Check, X, Search,
   Download, Stethoscope, Lock, Eye, HandHeart, Activity, FileText, Award,
-  AlertCircle, Menu, ArrowRight, Star, Globe, Facebook, Youtube,
+  AlertCircle, Menu, ArrowRight, Star, Globe, Facebook, Youtube, Navigation,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -137,6 +137,26 @@ export const Route = createFileRoute("/")({
 function Home() {
   const { lang, setLang, t } = useLang();
   const [navOpen, setNavOpen] = useState(false);
+  const [guideSent, setGuideSent] = useState(false);
+  const [guideName, setGuideName] = useState("");
+  const [guideEmail, setGuideEmail] = useState("");
+
+  const handleGuideSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const lead = {
+        name: guideName.trim(),
+        email: guideEmail.trim(),
+        date: new Date().toISOString(),
+        source: "PDF Download Form",
+      };
+      const existing = JSON.parse(localStorage.getItem("mhs-leads") || "[]");
+      existing.push(lead);
+      localStorage.setItem("mhs-leads", JSON.stringify(existing));
+    } catch {}
+    setGuideSent(true);
+    toast.success(t("Thank you. Your guide has been sent to your email.", "ধন্যবাদ। আপনার গাইড ইমেইলে পাঠানো হয়েছে।"));
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -190,9 +210,10 @@ function Home() {
             <a href="#contact" className="hover:text-primary transition">{t("Contact", "যোগাযোগ")}</a>
           </nav>
           <div className="flex items-center gap-2">
-            <button onClick={() => setLang(lang === "en" ? "bn" : "en")} className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold rounded-full border px-3 py-1.5 hover:bg-secondary transition">
-              <Globe className="h-3.5 w-3.5" /> {lang === "en" ? "বাংলা" : "EN"}
-            </button>
+            <div className="hidden sm:inline-flex items-center rounded-full border bg-secondary/50 p-0.5 text-xs font-semibold" role="group" aria-label="Language">
+              <button onClick={() => setLang("en")} aria-pressed={lang === "en"} className={`px-3 py-1 rounded-full transition ${lang === "en" ? "bg-primary text-primary-foreground shadow-soft" : "text-foreground/70 hover:text-foreground"}`}>English</button>
+              <button onClick={() => setLang("bn")} aria-pressed={lang === "bn"} className={`px-3 py-1 rounded-full transition ${lang === "bn" ? "bg-primary text-primary-foreground shadow-soft" : "text-foreground/70 hover:text-foreground"}`}>বাংলা</button>
+            </div>
             <Button asChild className="gradient-primary text-primary-foreground border-0 shadow-soft hidden md:inline-flex">
               <a href="#contact"><Calendar className="mr-2 h-4 w-4" />{t("Book Consultation", "পরামর্শ বুক করুন")}</a>
             </Button>
@@ -212,9 +233,10 @@ function Home() {
               <a key={s.id} href={`#${s.id}`} onClick={() => setNavOpen(false)} className="py-2">{t(s.en, s.bn)}</a>
             ))}
             <div className="flex items-center gap-3 pt-3 border-t">
-              <button onClick={() => setLang(lang === "en" ? "bn" : "en")} className="inline-flex items-center gap-1.5 text-xs font-semibold rounded-full border px-3 py-1.5">
-                <Globe className="h-3.5 w-3.5" /> {lang === "en" ? "বাংলা" : "EN"}
-              </button>
+              <div className="inline-flex items-center rounded-full border bg-secondary/60 p-0.5 text-xs font-semibold" role="group" aria-label="Language">
+                <button onClick={() => setLang("en")} aria-pressed={lang === "en"} className={`px-3 py-1 rounded-full transition ${lang === "en" ? "bg-primary text-primary-foreground" : "text-foreground/70"}`}>English</button>
+                <button onClick={() => setLang("bn")} aria-pressed={lang === "bn"} className={`px-3 py-1 rounded-full transition ${lang === "bn" ? "bg-primary text-primary-foreground" : "text-foreground/70"}`}>বাংলা</button>
+              </div>
               <a href={FACEBOOK} target="_blank" rel="noopener" aria-label="Facebook" className="h-8 w-8 rounded-full bg-secondary grid place-items-center hover:bg-primary hover:text-primary-foreground transition"><Facebook className="h-4 w-4" /></a>
               <a href={YOUTUBE} target="_blank" rel="noopener" aria-label="YouTube" className="h-8 w-8 rounded-full bg-secondary grid place-items-center hover:bg-primary hover:text-primary-foreground transition"><Youtube className="h-4 w-4" /></a>
             </div>
@@ -230,36 +252,20 @@ function Home() {
         </div>
         {/* Floating mobile language toggle */}
         <div className="md:hidden absolute top-3 right-3 z-20">
-          <div className="flex items-center gap-1 rounded-full bg-white/95 backdrop-blur shadow-elegant p-1 text-xs font-semibold">
-            <button
-              onClick={() => setLang("en")}
-              className={`px-3 py-1.5 rounded-full transition ${lang === "en" ? "bg-primary text-primary-foreground" : "text-primary"}`}
-              aria-pressed={lang === "en"}
-            >🇬🇧 EN</button>
-            <button
-              onClick={() => setLang("bn")}
-              className={`px-3 py-1.5 rounded-full transition ${lang === "bn" ? "bg-primary text-primary-foreground" : "text-primary"}`}
-              aria-pressed={lang === "bn"}
-            >🇧🇩 বাংলা</button>
+          <div className="flex items-center gap-0.5 rounded-full bg-white/95 backdrop-blur shadow-elegant p-1 text-xs font-semibold">
+            <button onClick={() => setLang("en")} aria-pressed={lang === "en"} className={`px-3 py-1.5 rounded-full transition ${lang === "en" ? "bg-primary text-primary-foreground" : "text-primary"}`}>English</button>
+            <button onClick={() => setLang("bn")} aria-pressed={lang === "bn"} className={`px-3 py-1.5 rounded-full transition ${lang === "bn" ? "bg-primary text-primary-foreground" : "text-primary"}`}>বাংলা</button>
           </div>
         </div>
         <div className="relative container mx-auto px-4 py-20 md:py-32 max-w-6xl">
           {/* Prominent language switcher */}
-          <div className="mb-6 inline-flex flex-col sm:flex-row sm:items-center gap-3 rounded-2xl bg-white/10 backdrop-blur border border-white/25 px-4 py-3">
+          <div className="mb-6 hidden md:inline-flex flex-col sm:flex-row sm:items-center gap-3 rounded-2xl bg-white/10 backdrop-blur border border-white/25 px-4 py-3">
             <span className="text-white/90 text-sm font-medium inline-flex items-center gap-2">
               <Globe className="h-4 w-4" /> Choose Your Language / আপনার ভাষা নির্বাচন করুন
             </span>
-            <div className="flex gap-2">
-              <button
-                onClick={() => setLang("en")}
-                aria-pressed={lang === "en"}
-                className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition shadow-soft ${lang === "en" ? "bg-white text-primary" : "bg-white/15 text-white hover:bg-white/25 border border-white/30"}`}
-              >🇬🇧 English</button>
-              <button
-                onClick={() => setLang("bn")}
-                aria-pressed={lang === "bn"}
-                className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition shadow-soft ${lang === "bn" ? "bg-white text-primary" : "bg-white/15 text-white hover:bg-white/25 border border-white/30"}`}
-              >🇧🇩 বাংলা</button>
+            <div className="inline-flex items-center rounded-full bg-white/15 border border-white/30 p-1">
+              <button onClick={() => setLang("en")} aria-pressed={lang === "en"} className={`px-4 py-1.5 rounded-full text-sm font-semibold transition ${lang === "en" ? "bg-white text-primary shadow-soft" : "text-white hover:bg-white/10"}`}>English</button>
+              <button onClick={() => setLang("bn")} aria-pressed={lang === "bn"} className={`px-4 py-1.5 rounded-full text-sm font-semibold transition ${lang === "bn" ? "bg-white text-primary shadow-soft" : "text-white hover:bg-white/10"}`}>বাংলা</button>
             </div>
           </div>
           <Badge className="mb-6 bg-white/20 hover:bg-white/30 text-white border-white/30 backdrop-blur">
@@ -650,19 +656,31 @@ function Home() {
           </div>
 
           {/* Download */}
-          <Card className="mt-14 p-8 md:p-12 border-0 shadow-elegant gradient-primary text-primary-foreground grid md:grid-cols-[1fr_auto] gap-8 items-center">
+          <Card className="mt-14 p-6 sm:p-8 md:p-12 border-0 shadow-elegant gradient-primary text-primary-foreground grid md:grid-cols-[1fr_auto] gap-6 md:gap-8 items-center">
             <div>
               <Badge className="bg-white/20 text-white border-0 mb-3">{t("Free Download", "বিনামূল্যে ডাউনলোড")}</Badge>
               <h3 className="font-display text-2xl md:text-3xl font-bold">{t("Complete Family Guide to Addiction Recovery", "নেশা মুক্তির সম্পূর্ণ পারিবারিক নির্দেশিকা")}</h3>
               <p className="mt-2 opacity-90 max-w-xl">{t("A 40-page evidence-based PDF guide written by our counselors — for families ready to take the first step.", "আমাদের কাউন্সেলরদের লেখা ৪০-পৃষ্ঠার প্রমাণভিত্তিক গাইড — প্রথম পদক্ষেপ নিতে প্রস্তুত পরিবারের জন্য।")}</p>
             </div>
-            <form className="grid gap-3 w-full md:w-auto md:min-w-[300px]" onSubmit={(e) => { e.preventDefault(); toast.success(t("Guide sent! Check your email.", "গাইড পাঠানো হয়েছে! আপনার ইমেইল দেখুন।")); }}>
-              <Input required placeholder={t("Your name", "আপনার নাম")} className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
-              <Input required type="email" placeholder={t("Email address", "ইমেইল ঠিকানা")} className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
-              <Button type="submit" size="lg" className="bg-white text-primary hover:bg-white/95">
-                <Download className="mr-2 h-4 w-4" /> {t("Download Guide", "গাইড ডাউনলোড করুন")}
-              </Button>
-            </form>
+            {guideSent ? (
+              <div className="w-full md:w-auto md:min-w-[300px] rounded-2xl bg-white/15 border border-white/25 p-6 text-center animate-fade-up">
+                <div className="mx-auto h-14 w-14 rounded-full bg-success grid place-items-center shadow-elegant animate-scale-in">
+                  <Check className="h-8 w-8 text-white" strokeWidth={3} />
+                </div>
+                <p className="mt-4 font-semibold">{t("Thank you. Your guide has been sent to your email.", "ধন্যবাদ। আপনার গাইড ইমেইলে পাঠানো হয়েছে।")}</p>
+                <button type="button" onClick={() => { setGuideSent(false); setGuideName(""); setGuideEmail(""); }} className="mt-3 text-xs underline opacity-90 hover:opacity-100">
+                  {t("Send to another email", "অন্য ইমেইলে পাঠান")}
+                </button>
+              </div>
+            ) : (
+              <form className="grid gap-3 w-full md:w-auto md:min-w-[320px]" onSubmit={handleGuideSubmit}>
+                <Input required value={guideName} onChange={(e) => setGuideName(e.target.value)} placeholder={t("Your name", "আপনার নাম")} className="h-11 bg-white/15 border-white/30 text-white placeholder:text-white/70" />
+                <Input required type="email" value={guideEmail} onChange={(e) => setGuideEmail(e.target.value)} placeholder={t("Email address", "ইমেইল ঠিকানা")} className="h-11 bg-white/15 border-white/30 text-white placeholder:text-white/70" />
+                <Button type="submit" size="lg" className="w-full bg-white text-primary hover:bg-white/95 h-12">
+                  <Download className="mr-2 h-4 w-4" /> {t("Download Guide", "গাইড ডাউনলোড করুন")}
+                </Button>
+              </form>
+            )}
           </Card>
         </div>
       </section>
@@ -899,12 +917,13 @@ function Home() {
               <p className="text-sm text-muted-foreground leading-relaxed mb-5">{ADDRESS}</p>
               <div className="space-y-3 text-sm mb-6">
                 <div className="flex items-center gap-2"><Clock className="h-4 w-4 text-primary" /> {t("Open 24 hours · 7 days a week", "২৪ ঘন্টা · সপ্তাহের ৭ দিন খোলা")}</div>
-                <div className="flex items-center gap-2"><Phone className="h-4 w-4 text-primary" /> {PHONE}</div>
-                <div className="flex items-center gap-2"><Mail className="h-4 w-4 text-primary" /> {EMAIL}</div>
+                <a href={PHONE_TEL} className="flex items-center gap-2 hover:text-primary transition"><Phone className="h-4 w-4 text-primary" /> {PHONE}</a>
+                <a href={`mailto:${EMAIL}`} className="flex items-center gap-2 hover:text-primary transition break-all"><Mail className="h-4 w-4 text-primary" /> {EMAIL}</a>
               </div>
               <div className="mt-auto grid sm:grid-cols-2 gap-3">
-                <Button asChild className="gradient-primary text-primary-foreground border-0"><a href={PHONE_TEL}><Phone className="mr-2 h-4 w-4" /> {t("Call Now", "এখনই কল করুন")}</a></Button>
-                <Button asChild variant="outline"><a href={MAPS_DIRECTIONS} target="_blank" rel="noopener"><MapPin className="mr-2 h-4 w-4" /> {t("Get Directions", "দিকনির্দেশ পান")}</a></Button>
+                <Button asChild className="gradient-primary text-primary-foreground border-0 h-11"><a href={PHONE_TEL}><Phone className="mr-2 h-4 w-4" /> {t("Call Now", "এখনই কল করুন")}</a></Button>
+                <Button asChild className="bg-whatsapp text-white hover:opacity-90 border-0 h-11"><a href={WHATSAPP} target="_blank" rel="noopener"><MessageCircle className="mr-2 h-4 w-4" /> WhatsApp</a></Button>
+                <Button asChild variant="outline" className="sm:col-span-2 h-11"><a href={MAPS_DIRECTIONS} target="_blank" rel="noopener"><Navigation className="mr-2 h-4 w-4" /> {t("Open in Google Maps", "গুগল ম্যাপে খুলুন")}</a></Button>
               </div>
             </Card>
             <div className="overflow-hidden rounded-2xl shadow-card border bg-card min-h-[320px]">
