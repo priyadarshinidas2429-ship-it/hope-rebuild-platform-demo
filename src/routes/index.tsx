@@ -38,6 +38,7 @@ import facilityReal5 from "@/assets/real/facility-real-5.jpg.asset.json";
 import facilityReal6 from "@/assets/real/facility-real-6.jpg.asset.json";
 import facilityReal7 from "@/assets/real/facility-real-7.jpg.asset.json";
 import facilityReal8 from "@/assets/real/facility-real-8.jpg.asset.json";
+import familyGuidePdf from "@/assets/family-guide.pdf.asset.json";
 
 const PHONE = "07602995502";
 const PHONE_TEL = "tel:+917602995502";
