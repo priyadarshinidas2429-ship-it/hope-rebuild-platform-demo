@@ -137,6 +137,26 @@ export const Route = createFileRoute("/")({
 function Home() {
   const { lang, setLang, t } = useLang();
   const [navOpen, setNavOpen] = useState(false);
+  const [guideSent, setGuideSent] = useState(false);
+  const [guideName, setGuideName] = useState("");
+  const [guideEmail, setGuideEmail] = useState("");
+
+  const handleGuideSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const lead = {
+        name: guideName.trim(),
+        email: guideEmail.trim(),
+        date: new Date().toISOString(),
+        source: "PDF Download Form",
+      };
+      const existing = JSON.parse(localStorage.getItem("mhs-leads") || "[]");
+      existing.push(lead);
+      localStorage.setItem("mhs-leads", JSON.stringify(existing));
+    } catch {}
+    setGuideSent(true);
+    toast.success(t("Thank you. Your guide has been sent to your email.", "ধন্যবাদ। আপনার গাইড ইমেইলে পাঠানো হয়েছে।"));
+  };
 
   return (
     <div className="min-h-screen bg-background">
