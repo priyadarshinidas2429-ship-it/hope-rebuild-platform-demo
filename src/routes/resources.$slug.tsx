@@ -43,10 +43,10 @@ export const Route = createFileRoute("/resources/$slug")({
 });
 
 function ArticlePage() {
-  const { article } = Route.useLoaderData();
+  const { article } = Route.useLoaderData() as { article: ResourceArticle };
   const { t, lang } = useLang();
   const related = article.related
-    .map((slug) => resources.find((r) => r.slug === slug))
+    .map((slug: string) => resources.find((r) => r.slug === slug))
     .filter((r): r is ResourceArticle => Boolean(r));
 
   const shareUrl = typeof window !== "undefined" ? window.location.href : "";
@@ -107,7 +107,7 @@ function ArticlePage() {
         <div className="mt-10 prose-invert max-w-none">
           <p className="text-base md:text-lg leading-relaxed text-foreground/90">{article.intro[lang]}</p>
 
-          {article.sections.map((s, i) => (
+          {article.sections.map((s, i: number) => (
             <section key={i} className="mt-8">
               <h2 className="font-display text-xl md:text-2xl font-bold text-foreground">{s.heading[lang]}</h2>
               {s.body[lang] && (
@@ -115,7 +115,7 @@ function ArticlePage() {
               )}
               {s.items && s.items.length > 0 && (
                 <ul className="mt-3 space-y-2">
-                  {s.items.map((it, j) => (
+                  {s.items.map((it, j: number) => (
                     <li key={j} className="flex gap-3 text-base leading-relaxed text-foreground/85">
                       <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
                       <span>{it[lang]}</span>
@@ -157,7 +157,7 @@ function ArticlePage() {
           <section className="mt-16 pt-10 border-t">
             <h2 className="font-display text-2xl font-bold mb-6">{t("Related articles", "সম্পর্কিত নিবন্ধ")}</h2>
             <div className="grid sm:grid-cols-2 gap-5">
-              {related.map((r) => (
+              {related.map((r: ResourceArticle) => (
                 <Link key={r.slug} to="/resources/$slug" params={{ slug: r.slug }} className="group">
                   <Card className="p-6 border-0 shadow-card hover:shadow-elegant transition h-full">
                     <Badge variant="outline" className="text-xs mb-3 border-primary/30 text-primary">{r.category[lang]}</Badge>
