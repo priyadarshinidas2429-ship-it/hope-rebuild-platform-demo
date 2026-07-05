@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   Phone, MessageCircle, Calendar, Shield, Users, Heart, Clock, Wine, Pill,
@@ -209,7 +209,7 @@ function Home() {
             />
             <div className="min-w-0">
               <p className="font-display font-bold text-base sm:text-lg leading-tight truncate">Midnapore Hope Society</p>
-              <p className="text-xs text-muted-foreground leading-tight truncate">মেদিনীপুর হোপ সোসাইটি · 5.0 ★ (18)</p>
+              <p className="text-xs text-muted-foreground leading-tight truncate">মেদিনীপুর হোপ সোসাইটি · 5.0 ★</p>
             </div>
           </a>
           <nav className="hidden lg:flex items-center gap-6 text-sm font-medium">
