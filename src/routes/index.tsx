@@ -142,6 +142,7 @@ function Home() {
   const [guideSent, setGuideSent] = useState(false);
   const [guideName, setGuideName] = useState("");
   const [guideEmail, setGuideEmail] = useState("");
+  const [resourceQuery, setResourceQuery] = useState("");
 
   const handleGuideSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
