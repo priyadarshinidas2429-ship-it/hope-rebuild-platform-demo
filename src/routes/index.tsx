@@ -19,7 +19,7 @@ import { Gallery } from "@/components/site/Gallery";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useLang } from "@/lib/i18n";
 import { Share2 } from "lucide-react";
-import { resources, searchResources } from "@/lib/resources";
+import { searchResources } from "@/lib/resources";
 
 import heroImg from "@/assets/hero-hope.jpg";
 import aboutImg from "@/assets/about-team.jpg";
