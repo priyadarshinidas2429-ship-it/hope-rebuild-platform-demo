@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   Phone, MessageCircle, Calendar, Shield, Users, Heart, Clock, Wine, Pill,
@@ -19,6 +19,7 @@ import { Gallery } from "@/components/site/Gallery";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useLang } from "@/lib/i18n";
 import { Share2 } from "lucide-react";
+import { searchResources } from "@/lib/resources";
 
 import heroImg from "@/assets/hero-hope.jpg";
 import aboutImg from "@/assets/about-team.jpg";
@@ -141,6 +142,7 @@ function Home() {
   const [guideSent, setGuideSent] = useState(false);
   const [guideName, setGuideName] = useState("");
   const [guideEmail, setGuideEmail] = useState("");
+  const [resourceQuery, setResourceQuery] = useState("");
 
   const handleGuideSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -209,7 +211,7 @@ function Home() {
             />
             <div className="min-w-0">
               <p className="font-display font-bold text-base sm:text-lg leading-tight truncate">Midnapore Hope Society</p>
-              <p className="text-xs text-muted-foreground leading-tight truncate">মেদিনীপুর হোপ সোসাইটি · 5.0 ★ (18)</p>
+              <p className="text-xs text-muted-foreground leading-tight truncate">মেদিনীপুর হোপ সোসাইটি · 5.0 ★</p>
             </div>
           </a>
           <nav className="hidden lg:flex items-center gap-6 text-sm font-medium">
@@ -645,26 +647,40 @@ function Home() {
             </div>
             <div className="relative max-w-sm w-full">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input placeholder={t("Search topics…", "বিষয় খুঁজুন…")} className="pl-9 bg-card" />
+              <Input
+                value={resourceQuery}
+                onChange={(e) => setResourceQuery(e.target.value)}
+                placeholder={t("Search topics…", "বিষয় খুঁজুন…")}
+                className="pl-9 bg-card"
+              />
             </div>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {[
-              { t: t("Signs of Addiction", "নেশার লক্ষণ"), d: t("Spot the early behavioral, physical and emotional warning signs.", "প্রাথমিক আচরণগত, শারীরিক ও মানসিক সতর্ক লক্ষণ চিনুন।"), k: t("Awareness", "সচেতনতা") },
-              { t: t("How Families Can Help", "পরিবার কীভাবে সাহায্য করতে পারে"), d: t("Practical ways to support a loved one through recovery.", "পুনরুদ্ধারের সময় প্রিয়জনকে সাহায্য করার বাস্তব উপায়।"), k: t("Family", "পরিবার") },
-              { t: t("Recovery Support", "পুনরুদ্ধার সহায়তা"), d: t("Long-term support strategies that prevent relapse.", "রিল্যাপ্স প্রতিরোধে দীর্ঘমেয়াদী সহায়তা কৌশল।"), k: t("Recovery", "পুনরুদ্ধার") },
-              { t: t("Intervention Guidance", "হস্তক্ষেপ নির্দেশনা"), d: t("How to plan a compassionate, effective intervention.", "সহানুভূতিশীল ও কার্যকর হস্তক্ষেপ পরিকল্পনা করার উপায়।"), k: t("Guidance", "নির্দেশনা") },
-              { t: t("Understanding Treatment", "চিকিৎসা বোঝা"), d: t("What detox, therapy and aftercare actually look like.", "ডিটক্স, থেরাপি ও আফটারকেয়ার আসলে কেমন হয়।"), k: t("Treatment", "চিকিৎসা") },
-              { t: t("Mental Wellness", "মানসিক সুস্থতা"), d: t("Coping with depression, anxiety and emotional triggers.", "বিষণ্ণতা, উদ্বেগ ও মানসিক ট্রিগার মোকাবেলা।"), k: t("Wellness", "সুস্থতা") },
-            ].map((r) => (
-              <Card key={r.t} className="p-6 border-0 shadow-card hover:shadow-elegant transition bg-card group cursor-pointer">
-                <Badge variant="outline" className="text-xs mb-3 border-primary/30 text-primary">{r.k}</Badge>
-                <h3 className="font-display font-bold text-lg mb-2 group-hover:text-primary transition">{r.t}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{r.d}</p>
-                <p className="mt-4 text-sm font-semibold text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all">{t("Read article", "নিবন্ধ পড়ুন")} <ChevronRight className="h-4 w-4" /></p>
-              </Card>
-            ))}
-          </div>
+          {(() => {
+            const results = searchResources(resourceQuery);
+            if (results.length === 0) {
+              return (
+                <p className="text-center text-muted-foreground py-10">
+                  {t("No articles matched your search.", "আপনার অনুসন্ধানের সাথে কোনো নিবন্ধ মেলেনি।")}
+                </p>
+              );
+            }
+            return (
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                {results.map((r) => (
+                  <Link key={r.slug} to="/resources/$slug" params={{ slug: r.slug }} className="group block">
+                    <Card className="p-6 border-0 shadow-card hover:shadow-elegant transition bg-card cursor-pointer h-full">
+                      <Badge variant="outline" className="text-xs mb-3 border-primary/30 text-primary">{r.category[lang]}</Badge>
+                      <h3 className="font-display font-bold text-lg mb-2 group-hover:text-primary transition">{r.title[lang]}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{r.description[lang]}</p>
+                      <p className="mt-4 text-sm font-semibold text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                        {t("Read article", "নিবন্ধ পড়ুন")} <ChevronRight className="h-4 w-4" />
+                      </p>
+                    </Card>
+                  </Link>
+                ))}
+              </div>
+            );
+          })()}
 
           {/* Download */}
           <Card className="mt-14 p-6 sm:p-8 md:p-12 border-0 shadow-elegant gradient-primary text-primary-foreground grid md:grid-cols-[1fr_auto] gap-6 md:gap-8 items-center">
