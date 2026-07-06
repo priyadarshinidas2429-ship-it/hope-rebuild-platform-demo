@@ -7,6 +7,8 @@ import { useLang } from "@/lib/i18n";
 import { getResource, resources, type ResourceArticle } from "@/lib/resources";
 import { toast } from "sonner";
 
+const SITE_URL = "https://hope-rebuild-platform-demo.lovable.app";
+
 export const Route = createFileRoute("/resources/$slug")({
   loader: ({ params }) => {
     const article = getResource(params.slug);
