@@ -139,36 +139,16 @@ export const Route = createFileRoute("/")({
 function Home() {
   const { lang, setLang, t } = useLang();
   const [navOpen, setNavOpen] = useState(false);
-  const [guideSent, setGuideSent] = useState(false);
-  const [guideName, setGuideName] = useState("");
-  const [guideEmail, setGuideEmail] = useState("");
   const [resourceQuery, setResourceQuery] = useState("");
 
-  const handleGuideSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      const lead = {
-        name: guideName.trim(),
-        email: guideEmail.trim(),
-        date: new Date().toISOString(),
-        source: "PDF Download Form",
-      };
-      const existing = JSON.parse(localStorage.getItem("mhs-leads") || "[]");
-      existing.push(lead);
-      localStorage.setItem("mhs-leads", JSON.stringify(existing));
-    } catch {}
-    // Trigger the actual PDF download in the user's browser
-    try {
-      const a = document.createElement("a");
-      a.href = familyGuidePdf.url;
-      a.download = "Midnapore-Hope-Society-Family-Guide.pdf";
-      a.rel = "noopener";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    } catch {}
-    setGuideSent(true);
-    toast.success(t("Thank you. Your guide has been sent to your email.", "ধন্যবাদ। আপনার গাইড ইমেইলে পাঠানো হয়েছে।"));
+  const handleGuideDownload = () => {
+    const a = document.createElement("a");
+    a.href = familyGuidePdf.url;
+    a.download = "Midnapore-Hope-Society-Family-Guide.pdf";
+    a.rel = "noopener";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
   };
 
   return (
@@ -686,28 +666,12 @@ function Home() {
           <Card className="mt-14 p-6 sm:p-8 md:p-12 border-0 shadow-elegant gradient-primary text-primary-foreground grid md:grid-cols-[1fr_auto] gap-6 md:gap-8 items-center">
             <div>
               <Badge className="bg-white/20 text-white border-0 mb-3">{t("Free Download", "বিনামূল্যে ডাউনলোড")}</Badge>
-              <h3 className="font-display text-2xl md:text-3xl font-bold">{t("Complete Family Guide to Addiction Recovery", "নেশা মুক্তির সম্পূর্ণ পারিবারিক নির্দেশিকা")}</h3>
-              <p className="mt-2 opacity-90 max-w-xl">{t("A 40-page evidence-based PDF guide written by our counselors — for families ready to take the first step.", "আমাদের কাউন্সেলরদের লেখা ৪০-পৃষ্ঠার প্রমাণভিত্তিক গাইড — প্রথম পদক্ষেপ নিতে প্রস্তুত পরিবারের জন্য।")}</p>
+              <h3 className="font-display text-2xl md:text-3xl font-bold">{t("Complete Family Guide to Recovery & Rehabilitation", "পুনরুদ্ধার ও পুনর্বাসনের সম্পূর্ণ পারিবারিক নির্দেশিকা")}</h3>
+              <p className="mt-2 opacity-90 max-w-xl">{t("A 10-page bilingual (English & Bengali) PDF guide created by Midnapore Hope Society to help individuals and families understand addiction recovery, rehabilitation services, admission procedures, treatment programs, and support available at our centre.", "মেদিনীপুর হোপ সোসাইটির তৈরি ১০-পৃষ্ঠার দ্বিভাষিক (ইংরেজি ও বাংলা) পিডিএফ নির্দেশিকা — ব্যক্তি ও পরিবারের জন্য নেশা মুক্তি, পুনর্বাসন সেবা, ভর্তি প্রক্রিয়া, চিকিৎসা কর্মসূচি এবং আমাদের কেন্দ্রে উপলব্ধ সহায়তা সম্পর্কে জানতে সাহায্য করে।")}</p>
             </div>
-            {guideSent ? (
-              <div className="w-full md:w-auto md:min-w-[300px] rounded-2xl bg-white/15 border border-white/25 p-6 text-center animate-fade-up">
-                <div className="mx-auto h-14 w-14 rounded-full bg-success grid place-items-center shadow-elegant animate-scale-in">
-                  <Check className="h-8 w-8 text-white" strokeWidth={3} />
-                </div>
-                <p className="mt-4 font-semibold">{t("Thank you. Your guide has been sent to your email.", "ধন্যবাদ। আপনার গাইড ইমেইলে পাঠানো হয়েছে।")}</p>
-                <button type="button" onClick={() => { setGuideSent(false); setGuideName(""); setGuideEmail(""); }} className="mt-3 text-xs underline opacity-90 hover:opacity-100">
-                  {t("Send to another email", "অন্য ইমেইলে পাঠান")}
-                </button>
-              </div>
-            ) : (
-              <form className="grid gap-3 w-full md:w-auto md:min-w-[320px]" onSubmit={handleGuideSubmit}>
-                <Input required value={guideName} onChange={(e) => setGuideName(e.target.value)} placeholder={t("Your name", "আপনার নাম")} className="h-11 bg-white/15 border-white/30 text-white placeholder:text-white/70" />
-                <Input required type="email" value={guideEmail} onChange={(e) => setGuideEmail(e.target.value)} placeholder={t("Email address", "ইমেইল ঠিকানা")} className="h-11 bg-white/15 border-white/30 text-white placeholder:text-white/70" />
-                <Button type="submit" size="lg" className="w-full bg-white text-primary hover:bg-white/95 h-12">
-                  <Download className="mr-2 h-4 w-4" /> {t("Download Guide", "গাইড ডাউনলোড করুন")}
-                </Button>
-              </form>
-            )}
+            <Button onClick={handleGuideDownload} size="lg" className="w-full md:w-auto md:min-w-[280px] bg-white text-primary hover:bg-white/95 h-12">
+              <Download className="mr-2 h-4 w-4" /> {t("Download Guide", "গাইড ডাউনলোড করুন")}
+            </Button>
           </Card>
         </div>
       </section>
