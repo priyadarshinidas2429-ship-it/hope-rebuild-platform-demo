@@ -139,36 +139,16 @@ export const Route = createFileRoute("/")({
 function Home() {
   const { lang, setLang, t } = useLang();
   const [navOpen, setNavOpen] = useState(false);
-  const [guideSent, setGuideSent] = useState(false);
-  const [guideName, setGuideName] = useState("");
-  const [guideEmail, setGuideEmail] = useState("");
   const [resourceQuery, setResourceQuery] = useState("");
 
-  const handleGuideSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      const lead = {
-        name: guideName.trim(),
-        email: guideEmail.trim(),
-        date: new Date().toISOString(),
-        source: "PDF Download Form",
-      };
-      const existing = JSON.parse(localStorage.getItem("mhs-leads") || "[]");
-      existing.push(lead);
-      localStorage.setItem("mhs-leads", JSON.stringify(existing));
-    } catch {}
-    // Trigger the actual PDF download in the user's browser
-    try {
-      const a = document.createElement("a");
-      a.href = familyGuidePdf.url;
-      a.download = "Midnapore-Hope-Society-Family-Guide.pdf";
-      a.rel = "noopener";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    } catch {}
-    setGuideSent(true);
-    toast.success(t("Thank you. Your guide has been sent to your email.", "ধন্যবাদ। আপনার গাইড ইমেইলে পাঠানো হয়েছে।"));
+  const handleGuideDownload = () => {
+    const a = document.createElement("a");
+    a.href = familyGuidePdf.url;
+    a.download = "Midnapore-Hope-Society-Family-Guide.pdf";
+    a.rel = "noopener";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
   };
 
   return (
