@@ -17,7 +17,10 @@ export const Route = createFileRoute("/resources/$slug")({
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
-      return { meta: [{ title: "Article not found — Midnapore Hope Society" }, { name: "robots", content: "noindex" }] };
+      return {
+        meta: [{ title: "Article not found — Midnapore Hope Society" }, { name: "robots", content: "noindex" }],
+        links: [{ rel: "canonical", href: `${SITE_URL}/resources` }],
+      };
     }
     const a = loaderData.article;
     return {
@@ -27,8 +30,12 @@ export const Route = createFileRoute("/resources/$slug")({
         { property: "og:title", content: `${a.title.en} — Midnapore Hope Society` },
         { property: "og:description", content: a.description.en },
         { property: "og:type", content: "article" },
+        { property: "og:url", content: `${SITE_URL}/resources/${a.slug}` },
         { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: `${a.title.en} — Midnapore Hope Society` },
+        { name: "twitter:description", content: a.description.en },
       ],
+      links: [{ rel: "canonical", href: `${SITE_URL}/resources/${a.slug}` }],
     };
   },
   component: ArticlePage,
