@@ -77,8 +77,14 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
+  head: () => {
+    // Indexing switch: set VITE_SITE_INDEXABLE="true" only on the production custom domain.
+    // Any other value (or absent) emits <meta name="robots" content="noindex, nofollow"> — safe for previews/staging.
+    const indexable = import.meta.env.VITE_SITE_INDEXABLE === "true";
+    // Google Search Console verification: paste the content value from GSC into VITE_GSC_VERIFICATION.
+    const gscToken = import.meta.env.VITE_GSC_VERIFICATION as string | undefined;
+
+    const meta: Array<Record<string, string>> = [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Midnapore Hope Society" },
@@ -87,13 +93,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "Midnapore Hope Society" },
       { property: "og:description", content: "Trusted rehabilitation and de-addiction centre in Midnapore, West Bengal. 24/7 confidential care." },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Midnapore Hope Society" },
+      { property: "og:locale", content: "en_IN" },
+      { property: "og:locale:alternate", content: "bn_IN" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@MidnaporeHope" },
       { name: "twitter:title", content: "Midnapore Hope Society" },
       { name: "twitter:description", content: "Trusted rehabilitation and de-addiction centre in Midnapore, West Bengal. 24/7 confidential care." },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/faf1430f-63a6-426b-8c44-19b0a101a120/id-preview-185afd75--b04fade1-0a77-4167-8ed5-eec515fd8e6a.lovable.app-1782803990496.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/faf1430f-63a6-426b-8c44-19b0a101a120/id-preview-185afd75--b04fade1-0a77-4167-8ed5-eec515fd8e6a.lovable.app-1782803990496.png" },
-    ],
+    ];
+    if (!indexable) meta.push({ name: "robots", content: "noindex, nofollow" });
+    if (gscToken) meta.push({ name: "google-site-verification", content: gscToken });
+
+    return {
+      meta,
     links: [
       {
         rel: "stylesheet",
@@ -107,7 +121,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap",
       },
     ],
-  }),
+    };
+  },
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
