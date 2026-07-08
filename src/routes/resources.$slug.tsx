@@ -36,6 +36,37 @@ export const Route = createFileRoute("/resources/$slug")({
         { name: "twitter:description", content: a.description.en },
       ],
       links: [{ rel: "canonical", href: `${SITE_URL}/resources/${a.slug}` }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: a.title.en,
+            description: a.description.en,
+            inLanguage: ["en", "bn"],
+            author: { "@type": "Organization", name: "Midnapore Hope Society" },
+            publisher: {
+              "@type": "Organization",
+              name: "Midnapore Hope Society",
+              url: SITE_URL,
+            },
+            mainEntityOfPage: `${SITE_URL}/resources/${a.slug}`,
+          }),
+        },
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+              { "@type": "ListItem", position: 2, name: "Resources", item: `${SITE_URL}/#resources` },
+              { "@type": "ListItem", position: 3, name: a.title.en, item: `${SITE_URL}/resources/${a.slug}` },
+            ],
+          }),
+        },
+      ],
     };
   },
   component: ArticlePage,
