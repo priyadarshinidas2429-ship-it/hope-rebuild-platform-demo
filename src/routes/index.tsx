@@ -244,7 +244,7 @@ function Home() {
           <img src={heroImg} alt="Sunrise of hope" className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-primary/85 via-primary/60 to-primary/20" />
         </div>
-        <HealingAmbience leaves={10} particles={32} />
+        <HealingAmbience leaves={0} particles={24} />
         {/* Floating mobile language toggle */}
         <div className="md:hidden absolute top-3 right-3 z-20">
           <div className="flex items-center gap-0.5 rounded-full bg-white/95 backdrop-blur shadow-elegant p-1 text-xs font-semibold">
@@ -266,7 +266,7 @@ function Home() {
           <Badge className="mb-6 bg-white/20 hover:bg-white/30 text-white border-white/30 backdrop-blur">
             <Award className="h-3.5 w-3.5 mr-1.5" /> {t("Trusted Rehabilitation Centre · West Bengal", "বিশ্বস্ত পুনর্বাসন কেন্দ্র · পশ্চিমবঙ্গ")}
           </Badge>
-          <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] max-w-4xl animate-headline-glow">
+          <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] max-w-4xl">
             {t("Helping People Rebuild Their Lives", "জীবন পুনর্গঠনে আপনার সঙ্গী")}
           </h1>
           <p className="mt-6 text-lg md:text-xl text-white/90 max-w-2xl leading-relaxed">
