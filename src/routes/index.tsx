@@ -16,6 +16,7 @@ import { Counter } from "@/components/site/Counter";
 import { Assessment } from "@/components/site/Assessment";
 import { ChatFAQ } from "@/components/site/ChatFAQ";
 import { Gallery } from "@/components/site/Gallery";
+import { HealingAmbience } from "@/components/site/HealingAmbience";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useLang } from "@/lib/i18n";
 import { Share2 } from "lucide-react";
@@ -243,6 +244,7 @@ function Home() {
           <img src={heroImg} alt="Sunrise of hope" className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-primary/85 via-primary/60 to-primary/20" />
         </div>
+        <HealingAmbience />
         {/* Floating mobile language toggle */}
         <div className="md:hidden absolute top-3 right-3 z-20">
           <div className="flex items-center gap-0.5 rounded-full bg-white/95 backdrop-blur shadow-elegant p-1 text-xs font-semibold">
@@ -277,7 +279,7 @@ function Home() {
             <Button asChild size="lg" className="bg-white text-primary hover:bg-white/95 shadow-elegant h-12 px-6">
               <a href={PHONE_TEL}><Phone className="mr-2 h-5 w-5" /> {t("Call Now", "এখনই কল করুন")}</a>
             </Button>
-            <Button asChild size="lg" className="bg-whatsapp text-white hover:opacity-90 border-0 shadow-elegant h-12 px-6">
+            <Button asChild size="lg" className="bg-whatsapp text-white hover:opacity-90 border-0 shadow-elegant h-12 px-6 animate-breathe">
               <a href={WHATSAPP} target="_blank" rel="noopener"><MessageCircle className="mr-2 h-5 w-5" /> WhatsApp</a>
             </Button>
             <Button asChild size="lg" variant="outline" className="bg-white/10 text-white border-white/40 hover:bg-white/20 backdrop-blur h-12 px-6">
