@@ -164,6 +164,10 @@
   50% { transform: translateX(8%); opacity: 0.9; }
   100% { transform: translateX(-8%); opacity: 0.55; }
 }
+@keyframes welcome-glow {
+  0%, 100% { transform: scale(0.92); opacity: 0.55; }
+  50% { transform: scale(1.08); opacity: 0.95; }
+}
 @utility animate-float { animation: float 4s ease-in-out infinite; }
 @utility animate-pulse-ring { animation: pulse-ring 2s infinite; }
 @utility animate-fade-up { animation: fade-up 0.6s ease-out backwards; }
@@ -175,8 +179,9 @@
 @utility animate-headline-glow { animation: headline-glow 5s ease-in-out infinite; }
 @utility animate-soft-float { animation: soft-float 5s ease-in-out infinite; will-change: transform; }
 @utility animate-trust-flow { animation: trust-flow 6s ease-in-out infinite; will-change: transform, opacity; }
+@utility animate-welcome-glow { animation: welcome-glow 7s ease-in-out infinite; will-change: transform, opacity; }
 
 @media (prefers-reduced-motion: reduce) {
   .animate-breathe, .animate-healing-rays, .animate-float, .animate-pulse-ring,
-  .animate-sunrise-in, .animate-rays-drift, .animate-headline-glow, .animate-soft-float, .animate-trust-flow { animation: none !important; }
+  .animate-sunrise-in, .animate-rays-drift, .animate-headline-glow, .animate-soft-float, .animate-trust-flow, .animate-welcome-glow { animation: none !important; }
 }
