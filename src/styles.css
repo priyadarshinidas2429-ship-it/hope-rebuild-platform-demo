@@ -142,13 +142,35 @@
   0%, 100% { transform: scale(1); box-shadow: 0 10px 30px -12px oklch(0.52 0.16 240 / 0.35); }
   50% { transform: scale(1.03); box-shadow: 0 18px 40px -12px oklch(0.52 0.16 240 / 0.5); }
 }
+@keyframes sunrise-in {
+  0% { opacity: 0; transform: translateY(6%); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes rays-drift {
+  0% { transform: translate3d(-3%, 0, 0); opacity: 0.55; }
+  50% { transform: translate3d(3%, 1%, 0); opacity: 0.9; }
+  100% { transform: translate3d(-3%, 0, 0); opacity: 0.55; }
+}
+@keyframes headline-glow {
+  0%, 100% { text-shadow: 0 0 30px oklch(1 0.08 85 / 0.35), 0 4px 24px oklch(0.5 0.15 240 / 0.4); }
+  50% { text-shadow: 0 0 60px oklch(1 0.12 82 / 0.6), 0 4px 32px oklch(0.5 0.15 240 / 0.55); }
+}
+@keyframes soft-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
 @utility animate-float { animation: float 4s ease-in-out infinite; }
 @utility animate-pulse-ring { animation: pulse-ring 2s infinite; }
 @utility animate-fade-up { animation: fade-up 0.6s ease-out backwards; }
 @utility animate-scale-in { animation: scale-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
 @utility animate-breathe { animation: breathe 3s ease-in-out infinite; will-change: transform; }
 @utility animate-healing-rays { animation: healing-rays 14s ease-in-out infinite; will-change: transform, opacity; }
+@utility animate-sunrise-in { animation: sunrise-in 4s ease-out both; will-change: transform, opacity; }
+@utility animate-rays-drift { animation: rays-drift 18s ease-in-out infinite; will-change: transform, opacity; }
+@utility animate-headline-glow { animation: headline-glow 5s ease-in-out infinite; }
+@utility animate-soft-float { animation: soft-float 5s ease-in-out infinite; will-change: transform; }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-breathe, .animate-healing-rays, .animate-float, .animate-pulse-ring { animation: none !important; }
+  .animate-breathe, .animate-healing-rays, .animate-float, .animate-pulse-ring,
+  .animate-sunrise-in, .animate-rays-drift, .animate-headline-glow, .animate-soft-float { animation: none !important; }
 }
