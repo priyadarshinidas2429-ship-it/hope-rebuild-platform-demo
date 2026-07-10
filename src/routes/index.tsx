@@ -273,9 +273,9 @@ function Home() {
       </header>
 
       {/* HERO */}
-      <section id="top" className="relative overflow-hidden">
-        <div className="absolute inset-0">
-          <img src={heroImg} alt="Sunrise of hope" className="h-full w-full object-cover" />
+      <section id="top" ref={heroRef} className="relative overflow-hidden [perspective:1200px]">
+        <div ref={parallaxBgRef} className="absolute inset-0 will-change-transform">
+          <img ref={parallaxImgRef} src={heroImg} alt="Sunrise of hope" className="h-full w-full object-cover will-change-transform transition-transform duration-[120ms] ease-out" />
           <div className="absolute inset-0 bg-gradient-to-r from-primary/85 via-primary/60 to-primary/20" />
         </div>
         <HealingAmbience leaves={0} particles={24} />
@@ -286,7 +286,7 @@ function Home() {
             <button onClick={() => setLang("bn")} aria-pressed={lang === "bn"} className={`px-3 py-1.5 rounded-full transition ${lang === "bn" ? "bg-primary text-primary-foreground" : "text-primary"}`}>বাংলা</button>
           </div>
         </div>
-        <div className="relative container mx-auto px-4 py-20 md:py-32 max-w-6xl">
+        <div ref={parallaxContentRef} className="relative container mx-auto px-4 py-20 md:py-32 max-w-6xl will-change-transform transition-transform duration-[120ms] ease-out">
           {/* Prominent language switcher */}
           <div className="mb-6 hidden md:inline-flex flex-col sm:flex-row sm:items-center gap-3 rounded-2xl bg-white/10 backdrop-blur border border-white/25 px-4 py-3">
             <span className="text-white/90 text-sm font-medium inline-flex items-center gap-2">
@@ -309,7 +309,18 @@ function Home() {
               "পেশাদার নেশা মুক্তি চিকিৎসা, কাউন্সেলিং, পুনর্বাসন এবং পরিবার সহায়তা কর্মসূচি — স্থায়ী পুনরুদ্ধারের পথে আপনার সঙ্গী।",
             )}
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          {/* Trust flow — soft light guiding toward CTAs */}
+          <div aria-hidden="true" className="relative mt-8">
+            <div
+              className="pointer-events-none absolute -inset-x-4 -inset-y-3 rounded-full animate-trust-flow"
+              style={{
+                background:
+                  "radial-gradient(ellipse at 20% 50%, oklch(0.95 0.1 82 / 0.28), transparent 55%)",
+                mixBlendMode: "screen",
+                filter: "blur(12px)",
+              }}
+            />
+          <div className="relative flex flex-wrap gap-3">
             <Button asChild size="lg" className="bg-white text-primary hover:bg-white/95 shadow-elegant h-12 px-6 animate-breathe">
               <a href={PHONE_TEL}><Phone className="mr-2 h-5 w-5" /> {t("Call Now", "এখনই কল করুন")}</a>
             </Button>
@@ -319,6 +330,7 @@ function Home() {
             <Button asChild size="lg" variant="outline" className="bg-white/10 text-white border-white/40 hover:bg-white/20 backdrop-blur h-12 px-6 animate-breathe">
               <a href="#contact"><Calendar className="mr-2 h-5 w-5" /> {t("Book Confidential Consultation", "গোপনীয় পরামর্শ বুক করুন")}</a>
             </Button>
+          </div>
           </div>
           <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl">
             {[
