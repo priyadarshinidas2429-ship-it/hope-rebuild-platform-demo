@@ -141,6 +141,40 @@ function Home() {
   const { lang, setLang, t } = useLang();
   const [navOpen, setNavOpen] = useState(false);
   const [resourceQuery, setResourceQuery] = useState("");
+  const heroRef = useRef<HTMLElement | null>(null);
+  const parallaxBgRef = useRef<HTMLDivElement | null>(null);
+  const parallaxImgRef = useRef<HTMLImageElement | null>(null);
+  const parallaxContentRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let raf = 0;
+    let mx = 0, my = 0, sy = 0;
+    const apply = () => {
+      raf = 0;
+      if (parallaxBgRef.current) parallaxBgRef.current.style.transform = `translate3d(${mx * -6}px, ${my * -6 + sy * -0.03}px, 0)`;
+      if (parallaxImgRef.current) parallaxImgRef.current.style.transform = `translate3d(${mx * -12}px, ${my * -12 + sy * -0.08}px, 0) scale(1.05)`;
+      if (parallaxContentRef.current) parallaxContentRef.current.style.transform = `translate3d(${mx * 4}px, ${my * 4 + sy * -0.02}px, 0)`;
+    };
+    const schedule = () => { if (!raf) raf = requestAnimationFrame(apply); };
+    const onMove = (e: MouseEvent) => {
+      const el = heroRef.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      mx = ((e.clientX - r.left) / r.width - 0.5);
+      my = ((e.clientY - r.top) / r.height - 0.5);
+      schedule();
+    };
+    const onScroll = () => { sy = window.scrollY; schedule(); };
+    window.addEventListener("mousemove", onMove, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
 
   const handleGuideDownload = () => {
     const a = document.createElement("a");
