@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Phone, MessageCircle, Calendar, Shield, Users, Heart, Clock, Wine, Pill,
   Brain, Sparkles, RefreshCw, ChevronRight, MapPin, Mail, Check, X, Search,
@@ -141,6 +141,40 @@ function Home() {
   const { lang, setLang, t } = useLang();
   const [navOpen, setNavOpen] = useState(false);
   const [resourceQuery, setResourceQuery] = useState("");
+  const heroRef = useRef<HTMLElement | null>(null);
+  const parallaxBgRef = useRef<HTMLDivElement | null>(null);
+  const parallaxImgRef = useRef<HTMLImageElement | null>(null);
+  const parallaxContentRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let raf = 0;
+    let mx = 0, my = 0, sy = 0;
+    const apply = () => {
+      raf = 0;
+      if (parallaxBgRef.current) parallaxBgRef.current.style.transform = `translate3d(${mx * -6}px, ${my * -6 + sy * -0.03}px, 0)`;
+      if (parallaxImgRef.current) parallaxImgRef.current.style.transform = `translate3d(${mx * -12}px, ${my * -12 + sy * -0.08}px, 0) scale(1.05)`;
+      if (parallaxContentRef.current) parallaxContentRef.current.style.transform = `translate3d(${mx * 4}px, ${my * 4 + sy * -0.02}px, 0)`;
+    };
+    const schedule = () => { if (!raf) raf = requestAnimationFrame(apply); };
+    const onMove = (e: MouseEvent) => {
+      const el = heroRef.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      mx = ((e.clientX - r.left) / r.width - 0.5);
+      my = ((e.clientY - r.top) / r.height - 0.5);
+      schedule();
+    };
+    const onScroll = () => { sy = window.scrollY; schedule(); };
+    window.addEventListener("mousemove", onMove, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
 
   const handleGuideDownload = () => {
     const a = document.createElement("a");
@@ -239,9 +273,9 @@ function Home() {
       </header>
 
       {/* HERO */}
-      <section id="top" className="relative overflow-hidden">
-        <div className="absolute inset-0">
-          <img src={heroImg} alt="Sunrise of hope" className="h-full w-full object-cover" />
+      <section id="top" ref={heroRef} className="relative overflow-hidden [perspective:1200px]">
+        <div ref={parallaxBgRef} className="absolute inset-0 will-change-transform">
+          <img ref={parallaxImgRef} src={heroImg} alt="Sunrise of hope" className="h-full w-full object-cover will-change-transform transition-transform duration-[120ms] ease-out" />
           <div className="absolute inset-0 bg-gradient-to-r from-primary/85 via-primary/60 to-primary/20" />
         </div>
         <HealingAmbience leaves={0} particles={24} />
@@ -252,7 +286,7 @@ function Home() {
             <button onClick={() => setLang("bn")} aria-pressed={lang === "bn"} className={`px-3 py-1.5 rounded-full transition ${lang === "bn" ? "bg-primary text-primary-foreground" : "text-primary"}`}>বাংলা</button>
           </div>
         </div>
-        <div className="relative container mx-auto px-4 py-20 md:py-32 max-w-6xl">
+        <div ref={parallaxContentRef} className="relative container mx-auto px-4 py-20 md:py-32 max-w-6xl will-change-transform transition-transform duration-[120ms] ease-out">
           {/* Prominent language switcher */}
           <div className="mb-6 hidden md:inline-flex flex-col sm:flex-row sm:items-center gap-3 rounded-2xl bg-white/10 backdrop-blur border border-white/25 px-4 py-3">
             <span className="text-white/90 text-sm font-medium inline-flex items-center gap-2">
@@ -275,7 +309,18 @@ function Home() {
               "পেশাদার নেশা মুক্তি চিকিৎসা, কাউন্সেলিং, পুনর্বাসন এবং পরিবার সহায়তা কর্মসূচি — স্থায়ী পুনরুদ্ধারের পথে আপনার সঙ্গী।",
             )}
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          {/* Trust flow — soft light guiding toward CTAs */}
+          <div aria-hidden="true" className="relative mt-8">
+            <div
+              className="pointer-events-none absolute -inset-x-4 -inset-y-3 rounded-full animate-trust-flow"
+              style={{
+                background:
+                  "radial-gradient(ellipse at 20% 50%, oklch(0.95 0.1 82 / 0.28), transparent 55%)",
+                mixBlendMode: "screen",
+                filter: "blur(12px)",
+              }}
+            />
+          <div className="relative flex flex-wrap gap-3">
             <Button asChild size="lg" className="bg-white text-primary hover:bg-white/95 shadow-elegant h-12 px-6 animate-breathe">
               <a href={PHONE_TEL}><Phone className="mr-2 h-5 w-5" /> {t("Call Now", "এখনই কল করুন")}</a>
             </Button>
@@ -285,6 +330,7 @@ function Home() {
             <Button asChild size="lg" variant="outline" className="bg-white/10 text-white border-white/40 hover:bg-white/20 backdrop-blur h-12 px-6 animate-breathe">
               <a href="#contact"><Calendar className="mr-2 h-5 w-5" /> {t("Book Confidential Consultation", "গোপনীয় পরামর্শ বুক করুন")}</a>
             </Button>
+          </div>
           </div>
           <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl">
             {[
