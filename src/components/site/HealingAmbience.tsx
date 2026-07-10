@@ -8,16 +8,16 @@ import { Leaf } from "lucide-react";
  * - Subtle drifting leaves
  * Pure CSS animations — GPU friendly, SSR safe, honors prefers-reduced-motion.
  */
-export function HealingAmbience({ leaves = 6, particles = 18 }: { leaves?: number; particles?: number }) {
+export function HealingAmbience({ leaves = 0, particles = 20 }: { leaves?: number; particles?: number }) {
   const parts = useMemo(
     () =>
       Array.from({ length: particles }).map((_, i) => ({
         left: (i * 97) % 100,
-        size: 6 + ((i * 13) % 14),
+        size: 3 + ((i * 13) % 6),
         delay: (i * 0.7) % 12,
-        duration: 10 + ((i * 5) % 9),
+        duration: 12 + ((i * 5) % 10),
         drift: ((i * 37) % 80) - 40,
-        opacity: 0.35 + ((i * 3) % 10) / 20,
+        opacity: 0.5 + ((i * 3) % 5) / 20,
       })),
     [particles],
   );
@@ -35,33 +35,34 @@ export function HealingAmbience({ leaves = 6, particles = 18 }: { leaves?: numbe
 
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-      {/* Sunrise wash — fades in on load */}
+      {/* Warm horizon sunrise — subtle, bottom only */}
       <div
-        className="absolute inset-0 animate-sunrise-in"
+        className="absolute inset-x-0 bottom-0 h-2/3 animate-sunrise-in"
         style={{
           background:
-            "linear-gradient(180deg, transparent 0%, oklch(0.9 0.14 75 / 0.25) 55%, oklch(0.82 0.18 60 / 0.45) 100%)",
-        }}
-      />
-      {/* Healing sun rays — warm golden */}
-      <div
-        className="absolute -top-1/3 -left-1/4 h-[160%] w-[160%] animate-healing-rays animate-sunrise-in"
-        style={{
-          background:
-            "radial-gradient(ellipse at 25% 18%, oklch(0.96 0.14 82 / 0.9), transparent 55%), radial-gradient(ellipse at 75% 25%, oklch(0.92 0.13 60 / 0.65), transparent 60%), radial-gradient(ellipse at 50% 100%, oklch(0.88 0.12 45 / 0.5), transparent 65%)",
-          filter: "blur(28px)",
+            "radial-gradient(ellipse at 50% 110%, oklch(0.88 0.15 65 / 0.35), transparent 60%)",
           mixBlendMode: "screen",
         }}
       />
-      {/* God rays — angled beams */}
+      {/* Soft moving sunlight rays from upper corner */}
       <div
-        className="absolute inset-0 animate-rays-drift"
+        className="absolute inset-0 animate-rays-drift opacity-40"
         style={{
           background:
-            "repeating-linear-gradient(115deg, transparent 0px, transparent 60px, oklch(1 0.05 85 / 0.10) 60px, oklch(1 0.05 85 / 0.10) 90px)",
+            "repeating-linear-gradient(115deg, transparent 0px, transparent 90px, oklch(1 0.08 82 / 0.07) 90px, oklch(1 0.08 82 / 0.07) 120px)",
           mixBlendMode: "screen",
-          maskImage: "radial-gradient(ellipse at 30% 20%, black, transparent 70%)",
-          WebkitMaskImage: "radial-gradient(ellipse at 30% 20%, black, transparent 70%)",
+          maskImage: "radial-gradient(ellipse at 20% 10%, black, transparent 55%)",
+          WebkitMaskImage: "radial-gradient(ellipse at 20% 10%, black, transparent 55%)",
+        }}
+      />
+      {/* Recovery path — glowing arc rising from bottom */}
+      <div
+        className="absolute inset-x-0 bottom-0 h-40 animate-sunrise-in"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 100%, oklch(0.95 0.12 85 / 0.5), oklch(0.9 0.14 75 / 0.15) 40%, transparent 70%)",
+          mixBlendMode: "screen",
+          filter: "blur(2px)",
         }}
       />
       {/* Floating hope particles — golden glow */}
@@ -74,9 +75,8 @@ export function HealingAmbience({ leaves = 6, particles = 18 }: { leaves?: numbe
             bottom: "-10%",
             width: p.size,
             height: p.size,
-            background: "radial-gradient(circle, oklch(1 0.08 85 / 0.95), oklch(0.95 0.14 78 / 0.6) 50%, transparent 75%)",
-            boxShadow: "0 0 12px oklch(0.95 0.14 78 / 0.8), 0 0 24px oklch(0.9 0.16 70 / 0.5)",
-            filter: "blur(0.4px)",
+            background: "radial-gradient(circle, oklch(1 0.06 85 / 0.9), transparent 70%)",
+            boxShadow: "0 0 8px oklch(0.95 0.12 78 / 0.6)",
             ["--drift-x" as string]: `${p.drift}px`,
             ["--particle-opacity" as string]: p.opacity,
             animation: `drift-up ${p.duration}s linear ${p.delay}s infinite`,
