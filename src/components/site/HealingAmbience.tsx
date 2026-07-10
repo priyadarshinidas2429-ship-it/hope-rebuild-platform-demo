@@ -35,6 +35,23 @@ export function HealingAmbience({ leaves = 0, particles = 20 }: { leaves?: numbe
 
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+      {/* Welcome glow — warm radial pulse from where the person stands.
+          Positioned on the right side of the hero (where the figure sits in
+          hero-hope.jpg) and kept behind content via mix-blend so it never
+          reduces text contrast. */}
+      <div
+        className="absolute animate-welcome-glow"
+        style={{
+          right: "-8%",
+          top: "18%",
+          width: "70%",
+          height: "80%",
+          background:
+            "radial-gradient(circle at 50% 50%, oklch(0.95 0.12 78 / 0.32), oklch(0.85 0.14 60 / 0.14) 40%, transparent 70%)",
+          mixBlendMode: "screen",
+          filter: "blur(6px)",
+        }}
+      />
       {/* Warm horizon sunrise — subtle, bottom only */}
       <div
         className="absolute inset-x-0 bottom-0 h-2/3 animate-sunrise-in"
