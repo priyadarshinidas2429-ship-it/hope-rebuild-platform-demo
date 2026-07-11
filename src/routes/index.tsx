@@ -321,13 +321,13 @@ function Home() {
               }}
             />
           <div className="relative flex flex-wrap gap-3">
-            <Button asChild size="lg" className="bg-white text-primary hover:bg-white/95 shadow-elegant h-12 px-6 animate-breathe">
+            <Button asChild size="lg" className="bg-white text-primary hover:bg-white/95 shadow-elegant min-h-12 py-3 px-6 animate-breathe">
               <a href={PHONE_TEL}><Phone className="mr-2 h-5 w-5" /> {t("Call Now", "এখনই কল করুন")}</a>
             </Button>
-            <Button asChild size="lg" className="bg-whatsapp text-white hover:opacity-90 border-0 shadow-elegant h-12 px-6 animate-breathe">
+            <Button asChild size="lg" className="bg-whatsapp text-white hover:opacity-90 border-0 shadow-elegant min-h-12 py-3 px-6 animate-breathe">
               <a href={WHATSAPP} target="_blank" rel="noopener"><MessageCircle className="mr-2 h-5 w-5" /> WhatsApp</a>
             </Button>
-            <Button asChild size="lg" variant="outline" className="bg-white/10 text-white border-white/40 hover:bg-white/20 backdrop-blur h-12 px-6 animate-breathe">
+            <Button asChild size="lg" variant="outline" className="bg-white/10 text-white border-white/40 hover:bg-white/20 backdrop-blur min-h-12 py-3 px-6 animate-breathe">
               <a href="#contact"><Calendar className="mr-2 h-5 w-5" /> {t("Book Confidential Consultation", "গোপনীয় পরামর্শ বুক করুন")}</a>
             </Button>
           </div>
@@ -944,7 +944,7 @@ function Home() {
                 <Input required placeholder={t("Phone number", "ফোন নম্বর")} />
                 <Input className="sm:col-span-2" type="email" placeholder={t("Email", "ইমেইল")} />
                 <Textarea className="sm:col-span-2" required placeholder={t("How can we help?", "আমরা কীভাবে সাহায্য করতে পারি?")} rows={4} />
-                <Button type="submit" className="sm:col-span-2 gradient-primary text-primary-foreground border-0 h-12">{t("Send Message", "বার্তা পাঠান")}</Button>
+                <Button type="submit" className="sm:col-span-2 gradient-primary text-primary-foreground border-0 min-h-12 py-3">{t("Send Message", "বার্তা পাঠান")}</Button>
               </form>
             </Card>
           </div>
