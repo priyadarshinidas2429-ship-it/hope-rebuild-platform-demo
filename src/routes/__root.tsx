@@ -78,9 +78,9 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => {
-    // Indexing switch: set VITE_SITE_INDEXABLE="true" only on the production custom domain.
-    // Any other value (or absent) emits <meta name="robots" content="noindex, nofollow"> — safe for previews/staging.
-    const indexable = import.meta.env.VITE_SITE_INDEXABLE === "true";
+    // Indexing switch: defaults to indexable for the production custom domain.
+    // Set VITE_SITE_INDEXABLE="false" to emit <meta name="robots" content="noindex, nofollow"> on previews/staging.
+    const indexable = import.meta.env.VITE_SITE_INDEXABLE !== "false";
     // Google Search Console verification: paste the content value from GSC into VITE_GSC_VERIFICATION.
     const gscToken = import.meta.env.VITE_GSC_VERIFICATION as string | undefined;
 
@@ -103,7 +103,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/faf1430f-63a6-426b-8c44-19b0a101a120/id-preview-185afd75--b04fade1-0a77-4167-8ed5-eec515fd8e6a.lovable.app-1782803990496.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/faf1430f-63a6-426b-8c44-19b0a101a120/id-preview-185afd75--b04fade1-0a77-4167-8ed5-eec515fd8e6a.lovable.app-1782803990496.png" },
     ];
-    if (!indexable) meta.push({ name: "robots", content: "noindex, nofollow" });
+    if (indexable) {
+      meta.push({ name: "robots", content: "index, follow" });
+    } else {
+      meta.push({ name: "robots", content: "noindex, nofollow" });
+    }
     if (gscToken) meta.push({ name: "google-site-verification", content: gscToken });
 
     return {
