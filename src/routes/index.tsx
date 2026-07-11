@@ -196,7 +196,7 @@ function Home() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75"></span>
               <span className="relative inline-flex h-2 w-2 rounded-full bg-white"></span>
             </span>
-            <span className="truncate">{t("24/7 Support Available · Confidential Helpline", "২৪/৭ সহায়তা উপলব্ধ · গোপনীয় হেল্পলাইন")}</span>
+            <span className="leading-snug">{t("24/7 Support Available · Confidential Helpline", "২৪/৭ সহায়তা উপলব্ধ · গোপনীয় হেল্পলাইন")}</span>
           </div>
           <div className="flex items-center gap-2 shrink-0">
             <a href={FACEBOOK} target="_blank" rel="noopener" aria-label="Facebook" className="hidden sm:inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/15 hover:bg-white/25 hover:scale-110 transition">
@@ -225,8 +225,8 @@ function Home() {
               className="h-11 w-11 shrink-0 rounded-xl object-cover shadow-soft ring-1 ring-border"
             />
             <div className="min-w-0">
-              <p className="font-display font-bold text-base sm:text-lg leading-tight truncate">Midnapore Hope Society</p>
-              <p className="text-xs text-muted-foreground leading-tight truncate">মেদিনীপুর হোপ সোসাইটি · 5.0 ★</p>
+              <p className="font-display font-bold text-base sm:text-lg leading-tight">Midnapore Hope Society</p>
+              <p className="text-xs text-muted-foreground leading-tight">মেদিনীপুর হোপ সোসাইটি · 5.0 ★</p>
             </div>
           </a>
           <nav className="hidden lg:flex items-center gap-6 text-sm font-medium">
@@ -321,13 +321,13 @@ function Home() {
               }}
             />
           <div className="relative flex flex-wrap gap-3">
-            <Button asChild size="lg" className="bg-white text-primary hover:bg-white/95 shadow-elegant h-12 px-6 animate-breathe">
+            <Button asChild size="lg" className="bg-white text-primary hover:bg-white/95 shadow-elegant min-h-12 py-3 px-6 animate-breathe">
               <a href={PHONE_TEL}><Phone className="mr-2 h-5 w-5" /> {t("Call Now", "এখনই কল করুন")}</a>
             </Button>
-            <Button asChild size="lg" className="bg-whatsapp text-white hover:opacity-90 border-0 shadow-elegant h-12 px-6 animate-breathe">
+            <Button asChild size="lg" className="bg-whatsapp text-white hover:opacity-90 border-0 shadow-elegant min-h-12 py-3 px-6 animate-breathe">
               <a href={WHATSAPP} target="_blank" rel="noopener"><MessageCircle className="mr-2 h-5 w-5" /> WhatsApp</a>
             </Button>
-            <Button asChild size="lg" variant="outline" className="bg-white/10 text-white border-white/40 hover:bg-white/20 backdrop-blur h-12 px-6 animate-breathe">
+            <Button asChild size="lg" variant="outline" className="bg-white/10 text-white border-white/40 hover:bg-white/20 backdrop-blur min-h-12 py-3 px-6 animate-breathe">
               <a href="#contact"><Calendar className="mr-2 h-5 w-5" /> {t("Book Confidential Consultation", "গোপনীয় পরামর্শ বুক করুন")}</a>
             </Button>
           </div>
@@ -717,7 +717,7 @@ function Home() {
               <h3 className="font-display text-2xl md:text-3xl font-bold">{t("Complete Family Guide to Recovery & Rehabilitation", "পুনরুদ্ধার ও পুনর্বাসনের সম্পূর্ণ পারিবারিক নির্দেশিকা")}</h3>
               <p className="mt-2 opacity-90 max-w-xl">{t("A 10-page bilingual (English & Bengali) PDF guide created by Midnapore Hope Society to help individuals and families understand addiction recovery, rehabilitation services, admission procedures, treatment programs, and support available at our centre.", "মেদিনীপুর হোপ সোসাইটির তৈরি ১০-পৃষ্ঠার দ্বিভাষিক (ইংরেজি ও বাংলা) পিডিএফ নির্দেশিকা — ব্যক্তি ও পরিবারের জন্য নেশা মুক্তি, পুনর্বাসন সেবা, ভর্তি প্রক্রিয়া, চিকিৎসা কর্মসূচি এবং আমাদের কেন্দ্রে উপলব্ধ সহায়তা সম্পর্কে জানতে সাহায্য করে।")}</p>
             </div>
-            <Button onClick={handleGuideDownload} size="lg" className="w-full md:w-auto md:min-w-[280px] bg-white text-primary hover:bg-white/95 h-12">
+            <Button onClick={handleGuideDownload} size="lg" className="w-full md:w-auto md:min-w-[280px] bg-white text-primary hover:bg-white/95 min-h-12 py-3">
               <Download className="mr-2 h-4 w-4" /> {t("Download Guide", "গাইড ডাউনলোড করুন")}
             </Button>
           </Card>
@@ -944,7 +944,7 @@ function Home() {
                 <Input required placeholder={t("Phone number", "ফোন নম্বর")} />
                 <Input className="sm:col-span-2" type="email" placeholder={t("Email", "ইমেইল")} />
                 <Textarea className="sm:col-span-2" required placeholder={t("How can we help?", "আমরা কীভাবে সাহায্য করতে পারি?")} rows={4} />
-                <Button type="submit" className="sm:col-span-2 gradient-primary text-primary-foreground border-0 h-12">{t("Send Message", "বার্তা পাঠান")}</Button>
+                <Button type="submit" className="sm:col-span-2 gradient-primary text-primary-foreground border-0 min-h-12 py-3">{t("Send Message", "বার্তা পাঠান")}</Button>
               </form>
             </Card>
           </div>
@@ -960,9 +960,9 @@ function Home() {
                 <a href={`mailto:${EMAIL}`} className="flex items-center gap-2 hover:text-primary transition break-all"><Mail className="h-4 w-4 text-primary" /> {EMAIL}</a>
               </div>
               <div className="mt-auto grid sm:grid-cols-2 gap-3">
-                <Button asChild className="gradient-primary text-primary-foreground border-0 h-11"><a href={PHONE_TEL}><Phone className="mr-2 h-4 w-4" /> {t("Call Now", "এখনই কল করুন")}</a></Button>
-                <Button asChild className="bg-whatsapp text-white hover:opacity-90 border-0 h-11"><a href={WHATSAPP} target="_blank" rel="noopener"><MessageCircle className="mr-2 h-4 w-4" /> WhatsApp</a></Button>
-                <Button asChild variant="outline" className="sm:col-span-2 h-11"><a href={MAPS_DIRECTIONS} target="_blank" rel="noopener"><Navigation className="mr-2 h-4 w-4" /> {t("Open in Google Maps", "গুগল ম্যাপে খুলুন")}</a></Button>
+                <Button asChild className="gradient-primary text-primary-foreground border-0 min-h-11 py-2.5"><a href={PHONE_TEL}><Phone className="mr-2 h-4 w-4" /> {t("Call Now", "এখনই কল করুন")}</a></Button>
+                <Button asChild className="bg-whatsapp text-white hover:opacity-90 border-0 min-h-11 py-2.5"><a href={WHATSAPP} target="_blank" rel="noopener"><MessageCircle className="mr-2 h-4 w-4" /> WhatsApp</a></Button>
+                <Button asChild variant="outline" className="sm:col-span-2 min-h-11 py-2.5"><a href={MAPS_DIRECTIONS} target="_blank" rel="noopener"><Navigation className="mr-2 h-4 w-4" /> {t("Open in Google Maps", "গুগল ম্যাপে খুলুন")}</a></Button>
               </div>
             </Card>
             <div className="overflow-hidden rounded-2xl shadow-card border bg-card min-h-[320px]">

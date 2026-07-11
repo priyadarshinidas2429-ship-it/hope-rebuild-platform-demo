@@ -48,11 +48,11 @@ export function Assessment() {
           <div className="h-2 rounded-full bg-muted mb-8 overflow-hidden">
             <div className="h-full gradient-primary transition-all duration-500" style={{ width: `${((step) / QUESTIONS.length) * 100}%` }} />
           </div>
-          <h3 className="text-xl md:text-2xl font-semibold mb-8 min-h-20">{t(QUESTIONS[step].en, QUESTIONS[step].bn)}</h3>
+          <h3 className="text-xl md:text-2xl font-semibold mb-8 min-h-20 leading-snug">{t(QUESTIONS[step].en, QUESTIONS[step].bn)}</h3>
           <div className="grid sm:grid-cols-3 gap-3">
-            <Button variant="outline" size="lg" onClick={() => answer(0)} className="h-14">{t("No / Rarely", "না / খুব কম")}</Button>
-            <Button variant="outline" size="lg" onClick={() => answer(1)} className="h-14">{t("Sometimes", "কখনো কখনো")}</Button>
-            <Button size="lg" onClick={() => answer(2)} className="h-14 gradient-primary text-primary-foreground border-0">{t("Yes / Often", "হ্যাঁ / প্রায়শই")}</Button>
+            <Button variant="outline" size="lg" onClick={() => answer(0)} className="min-h-14 py-3">{t("No / Rarely", "না / খুব কম")}</Button>
+            <Button variant="outline" size="lg" onClick={() => answer(1)} className="min-h-14 py-3">{t("Sometimes", "কখনো কখনো")}</Button>
+            <Button size="lg" onClick={() => answer(2)} className="min-h-14 py-3 gradient-primary text-primary-foreground border-0">{t("Yes / Often", "হ্যাঁ / প্রায়শই")}</Button>
           </div>
         </>
       ) : (
