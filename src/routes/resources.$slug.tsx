@@ -89,7 +89,7 @@ function ArticlePage() {
     .map((slug: string) => resources.find((r) => r.slug === slug))
     .filter((r): r is ResourceArticle => Boolean(r));
 
-  const shareUrl = typeof window !== "undefined" ? window.location.href : "";
+  const shareUrl = `${SITE_URL}/resources/${article.slug}`;
   const shareTitle = article.title[lang];
 
   const onShare = async () => {
