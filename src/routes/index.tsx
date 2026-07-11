@@ -196,7 +196,7 @@ function Home() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75"></span>
               <span className="relative inline-flex h-2 w-2 rounded-full bg-white"></span>
             </span>
-            <span className="truncate">{t("24/7 Support Available · Confidential Helpline", "২৪/৭ সহায়তা উপলব্ধ · গোপনীয় হেল্পলাইন")}</span>
+            <span className="leading-snug">{t("24/7 Support Available · Confidential Helpline", "২৪/৭ সহায়তা উপলব্ধ · গোপনীয় হেল্পলাইন")}</span>
           </div>
           <div className="flex items-center gap-2 shrink-0">
             <a href={FACEBOOK} target="_blank" rel="noopener" aria-label="Facebook" className="hidden sm:inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/15 hover:bg-white/25 hover:scale-110 transition">
@@ -225,8 +225,8 @@ function Home() {
               className="h-11 w-11 shrink-0 rounded-xl object-cover shadow-soft ring-1 ring-border"
             />
             <div className="min-w-0">
-              <p className="font-display font-bold text-base sm:text-lg leading-tight truncate">Midnapore Hope Society</p>
-              <p className="text-xs text-muted-foreground leading-tight truncate">মেদিনীপুর হোপ সোসাইটি · 5.0 ★</p>
+              <p className="font-display font-bold text-base sm:text-lg leading-tight">Midnapore Hope Society</p>
+              <p className="text-xs text-muted-foreground leading-tight">মেদিনীপুর হোপ সোসাইটি · 5.0 ★</p>
             </div>
           </a>
           <nav className="hidden lg:flex items-center gap-6 text-sm font-medium">
