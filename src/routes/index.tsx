@@ -960,9 +960,9 @@ function Home() {
                 <a href={`mailto:${EMAIL}`} className="flex items-center gap-2 hover:text-primary transition break-all"><Mail className="h-4 w-4 text-primary" /> {EMAIL}</a>
               </div>
               <div className="mt-auto grid sm:grid-cols-2 gap-3">
-                <Button asChild className="gradient-primary text-primary-foreground border-0 h-11"><a href={PHONE_TEL}><Phone className="mr-2 h-4 w-4" /> {t("Call Now", "এখনই কল করুন")}</a></Button>
-                <Button asChild className="bg-whatsapp text-white hover:opacity-90 border-0 h-11"><a href={WHATSAPP} target="_blank" rel="noopener"><MessageCircle className="mr-2 h-4 w-4" /> WhatsApp</a></Button>
-                <Button asChild variant="outline" className="sm:col-span-2 h-11"><a href={MAPS_DIRECTIONS} target="_blank" rel="noopener"><Navigation className="mr-2 h-4 w-4" /> {t("Open in Google Maps", "গুগল ম্যাপে খুলুন")}</a></Button>
+                <Button asChild className="gradient-primary text-primary-foreground border-0 min-h-11 py-2.5"><a href={PHONE_TEL}><Phone className="mr-2 h-4 w-4" /> {t("Call Now", "এখনই কল করুন")}</a></Button>
+                <Button asChild className="bg-whatsapp text-white hover:opacity-90 border-0 min-h-11 py-2.5"><a href={WHATSAPP} target="_blank" rel="noopener"><MessageCircle className="mr-2 h-4 w-4" /> WhatsApp</a></Button>
+                <Button asChild variant="outline" className="sm:col-span-2 min-h-11 py-2.5"><a href={MAPS_DIRECTIONS} target="_blank" rel="noopener"><Navigation className="mr-2 h-4 w-4" /> {t("Open in Google Maps", "গুগল ম্যাপে খুলুন")}</a></Button>
               </div>
             </Card>
             <div className="overflow-hidden rounded-2xl shadow-card border bg-card min-h-[320px]">
