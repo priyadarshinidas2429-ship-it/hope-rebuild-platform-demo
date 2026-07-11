@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { resources } from "@/lib/resources";
 
-const BASE_URL = "https://hope-rebuild-platform-demo.lovable.app";
+const BASE_URL = "https://www.hopesociety.co.in";
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {

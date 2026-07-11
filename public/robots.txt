@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://hope-rebuild-platform-demo.lovable.app/sitemap.xml
+Sitemap: https://www.hopesociety.co.in/sitemap.xml
