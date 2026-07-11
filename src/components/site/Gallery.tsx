@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { X } from "lucide-react";
+import { useLang } from "@/lib/i18n";
 
 export function Gallery({ images }: { images: { src: string; alt: string; label: string }[] }) {
   const [open, setOpen] = useState<number | null>(null);

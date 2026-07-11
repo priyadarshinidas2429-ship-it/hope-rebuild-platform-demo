@@ -506,7 +506,7 @@ function Home() {
                 <h3 className="font-display font-bold text-lg mb-2">{title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{d}</p>
                 <a href="#contact" className="mt-4 inline-flex items-center text-sm font-semibold text-primary group-hover:gap-2 transition-all gap-1">
-                  {t("Learn more", "আরও জানুন")} <ChevronRight className="h-4 w-4" />
+                  {t("View program details", "কর্মসূচির বিবরণ দেখুন")} <ChevronRight className="h-4 w-4" />
                 </a>
               </Card>
             ))}
