@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { X } from "lucide-react";
+import { useLang } from "@/lib/i18n";
 
 export function Gallery({ images }: { images: { src: string; alt: string; label: string }[] }) {
   const [open, setOpen] = useState<number | null>(null);
+  const { t } = useLang();
   return (
     <>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -22,7 +24,7 @@ export function Gallery({ images }: { images: { src: string; alt: string; label:
       </div>
       {open !== null && (
         <div className="fixed inset-0 z-50 bg-black/90 grid place-items-center p-4 animate-fade-up" onClick={() => setOpen(null)}>
-          <button className="absolute top-4 right-4 h-10 w-10 rounded-full bg-white/10 text-white grid place-items-center" onClick={() => setOpen(null)}>
+          <button className="absolute top-4 right-4 h-10 w-10 rounded-full bg-white/10 text-white grid place-items-center" onClick={() => setOpen(null)} aria-label={t("Close", "বন্ধ করুন")}>
             <X />
           </button>
           <img src={images[open].src} alt={images[open].alt} className="max-h-[85vh] max-w-full rounded-xl shadow-elegant" />
