@@ -717,7 +717,7 @@ function Home() {
               <h3 className="font-display text-2xl md:text-3xl font-bold">{t("Complete Family Guide to Recovery & Rehabilitation", "পুনরুদ্ধার ও পুনর্বাসনের সম্পূর্ণ পারিবারিক নির্দেশিকা")}</h3>
               <p className="mt-2 opacity-90 max-w-xl">{t("A 10-page bilingual (English & Bengali) PDF guide created by Midnapore Hope Society to help individuals and families understand addiction recovery, rehabilitation services, admission procedures, treatment programs, and support available at our centre.", "মেদিনীপুর হোপ সোসাইটির তৈরি ১০-পৃষ্ঠার দ্বিভাষিক (ইংরেজি ও বাংলা) পিডিএফ নির্দেশিকা — ব্যক্তি ও পরিবারের জন্য নেশা মুক্তি, পুনর্বাসন সেবা, ভর্তি প্রক্রিয়া, চিকিৎসা কর্মসূচি এবং আমাদের কেন্দ্রে উপলব্ধ সহায়তা সম্পর্কে জানতে সাহায্য করে।")}</p>
             </div>
-            <Button onClick={handleGuideDownload} size="lg" className="w-full md:w-auto md:min-w-[280px] bg-white text-primary hover:bg-white/95 h-12">
+            <Button onClick={handleGuideDownload} size="lg" className="w-full md:w-auto md:min-w-[280px] bg-white text-primary hover:bg-white/95 min-h-12 py-3">
               <Download className="mr-2 h-4 w-4" /> {t("Download Guide", "গাইড ডাউনলোড করুন")}
             </Button>
           </Card>
