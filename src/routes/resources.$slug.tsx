@@ -7,7 +7,7 @@ import { useLang } from "@/lib/i18n";
 import { getResource, resources, type ResourceArticle } from "@/lib/resources";
 import { toast } from "sonner";
 
-const SITE_URL = "https://hope-rebuild-platform-demo.lovable.app";
+const SITE_URL = "https://www.hopesociety.co.in";
 
 export const Route = createFileRoute("/resources/$slug")({
   loader: ({ params }) => {
@@ -89,7 +89,7 @@ function ArticlePage() {
     .map((slug: string) => resources.find((r) => r.slug === slug))
     .filter((r): r is ResourceArticle => Boolean(r));
 
-  const shareUrl = typeof window !== "undefined" ? window.location.href : "";
+  const shareUrl = `${SITE_URL}/resources/${article.slug}`;
   const shareTitle = article.title[lang];
 
   const onShare = async () => {
