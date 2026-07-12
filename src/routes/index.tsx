@@ -735,13 +735,7 @@ function Home() {
               <Badge className="mb-3 bg-primary/10 text-primary border-0">{t("Referral Portal", "রেফারেল পোর্টাল")}</Badge>
               <h2 className="font-display text-2xl md:text-3xl font-bold mb-3">{t("For Doctors, Hospitals, Counselors & NGOs", "চিকিৎসক, হাসপাতাল, কাউন্সেলর ও এনজিওদের জন্য")}</h2>
               <p className="text-muted-foreground mb-6">{t("Refer a patient confidentially. We coordinate intake within 24 hours.", "গোপনীয়ভাবে রোগী রেফার করুন। আমরা ২৪ ঘন্টার মধ্যে ভর্তির ব্যবস্থা করি।")}</p>
-              <form className="grid gap-3" onSubmit={(e) => { e.preventDefault(); toast.success(t("Referral received. Our team will respond shortly.", "রেফারেল গৃহীত হয়েছে। আমাদের দল শীঘ্রই সাড়া দেবে।")); }}>
-                <Input required placeholder={t("Referring professional / organization", "রেফার করা পেশাদার / সংস্থা")} />
-                <Input required placeholder={t("Contact number", "যোগাযোগ নম্বর")} />
-                <Input placeholder={t("Patient name (optional)", "রোগীর নাম (ঐচ্ছিক)")} />
-                <Textarea required placeholder={t("Brief case summary", "সংক্ষিপ্ত কেস সারাংশ")} rows={3} />
-                <Button type="submit" className="gradient-primary text-primary-foreground border-0">{t("Refer a Patient Confidentially", "গোপনীয়ভাবে রেফার করুন")}</Button>
-              </form>
+              <ReferralFormBlock />
             </Card>
             <Card className="p-8 md:p-10 border-0 shadow-card bg-card">
               <Badge className="mb-3 bg-accent-soft text-accent border-0">{t("Anonymous Consultation", "নাম প্রকাশ না করে পরামর্শ")}</Badge>
