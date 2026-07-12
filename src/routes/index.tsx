@@ -44,7 +44,9 @@ import familyGuidePdf from "@/assets/family-guide.pdf.asset.json";
 
 const PHONE = "07602995502";
 const PHONE_TEL = "tel:+917602995502";
-const WHATSAPP = "https://wa.me/917602995502";
+const WHATSAPP_NUMBER = "917602995502";
+const WHATSAPP_MESSAGE = "Hello Hope Society, I would like to know more about your treatment and rehabilitation services.";
+const WHATSAPP = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 const ADDRESS = "Dakbanglow Road, opposite of DAV School, Bidhan Nagar East, Saratpally, Midnapore, West Bengal 721101";
 const EMAIL = "mdnhopesociety@gmail.com";
 const MAPS_DIRECTIONS = "https://share.google/Uj3sI0BkPua1kKwNF";
