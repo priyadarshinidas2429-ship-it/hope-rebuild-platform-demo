@@ -922,13 +922,7 @@ function Home() {
             <Card className="lg:col-span-3 p-7 border-0 shadow-card bg-card">
               <h3 className="font-display font-bold text-xl mb-1">{t("Send us a message", "আমাদের বার্তা পাঠান")}</h3>
               <p className="text-sm text-muted-foreground mb-5">{t("We respond within an hour, 24/7.", "আমরা ২৪/৭ এক ঘন্টার মধ্যে সাড়া দিই।")}</p>
-              <form className="grid sm:grid-cols-2 gap-3" onSubmit={(e) => { e.preventDefault(); toast.success(t("Message sent. We'll be in touch shortly.", "বার্তা পাঠানো হয়েছে। আমরা শীঘ্রই যোগাযোগ করব।")); }}>
-                <Input required placeholder={t("Full name", "পুরো নাম")} />
-                <Input required placeholder={t("Phone number", "ফোন নম্বর")} />
-                <Input className="sm:col-span-2" type="email" placeholder={t("Email", "ইমেইল")} />
-                <Textarea className="sm:col-span-2" required placeholder={t("How can we help?", "আমরা কীভাবে সাহায্য করতে পারি?")} rows={4} />
-                <Button type="submit" className="sm:col-span-2 gradient-primary text-primary-foreground border-0 min-h-12 py-3">{t("Send Message", "বার্তা পাঠান")}</Button>
-              </form>
+              <ContactForm />
             </Card>
           </div>
           {/* FIND US */}
