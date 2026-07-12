@@ -21,6 +21,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { useLang } from "@/lib/i18n";
 import { Share2 } from "lucide-react";
 import { searchResources } from "@/lib/resources";
+import { LeadForm, type LeadFormValues } from "@/components/site/LeadForm";
 
 import heroImg from "@/assets/hero-hope.jpg";
 import aboutImg from "@/assets/about-team.jpg";
@@ -44,7 +45,9 @@ import familyGuidePdf from "@/assets/family-guide.pdf.asset.json";
 
 const PHONE = "07602995502";
 const PHONE_TEL = "tel:+917602995502";
-const WHATSAPP = "https://wa.me/917602995502";
+const WHATSAPP_NUMBER = "917602995502";
+const WHATSAPP_MESSAGE = "Hello Hope Society, I would like to know more about your treatment and rehabilitation services.";
+const WHATSAPP = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 const ADDRESS = "Dakbanglow Road, opposite of DAV School, Bidhan Nagar East, Saratpally, Midnapore, West Bengal 721101";
 const EMAIL = "mdnhopesociety@gmail.com";
 const MAPS_DIRECTIONS = "https://share.google/Uj3sI0BkPua1kKwNF";
@@ -732,27 +735,13 @@ function Home() {
               <Badge className="mb-3 bg-primary/10 text-primary border-0">{t("Referral Portal", "রেফারেল পোর্টাল")}</Badge>
               <h2 className="font-display text-2xl md:text-3xl font-bold mb-3">{t("For Doctors, Hospitals, Counselors & NGOs", "চিকিৎসক, হাসপাতাল, কাউন্সেলর ও এনজিওদের জন্য")}</h2>
               <p className="text-muted-foreground mb-6">{t("Refer a patient confidentially. We coordinate intake within 24 hours.", "গোপনীয়ভাবে রোগী রেফার করুন। আমরা ২৪ ঘন্টার মধ্যে ভর্তির ব্যবস্থা করি।")}</p>
-              <form className="grid gap-3" onSubmit={(e) => { e.preventDefault(); toast.success(t("Referral received. Our team will respond shortly.", "রেফারেল গৃহীত হয়েছে। আমাদের দল শীঘ্রই সাড়া দেবে।")); }}>
-                <Input required placeholder={t("Referring professional / organization", "রেফার করা পেশাদার / সংস্থা")} />
-                <Input required placeholder={t("Contact number", "যোগাযোগ নম্বর")} />
-                <Input placeholder={t("Patient name (optional)", "রোগীর নাম (ঐচ্ছিক)")} />
-                <Textarea required placeholder={t("Brief case summary", "সংক্ষিপ্ত কেস সারাংশ")} rows={3} />
-                <Button type="submit" className="gradient-primary text-primary-foreground border-0">{t("Refer a Patient Confidentially", "গোপনীয়ভাবে রেফার করুন")}</Button>
-              </form>
+              <ReferralForm />
             </Card>
             <Card className="p-8 md:p-10 border-0 shadow-card bg-card">
               <Badge className="mb-3 bg-accent-soft text-accent border-0">{t("Anonymous Consultation", "নাম প্রকাশ না করে পরামর্শ")}</Badge>
               <h2 className="font-display text-2xl md:text-3xl font-bold mb-3">{t("100% Confidential Request", "১০০% গোপনীয় অনুরোধ")}</h2>
               <p className="text-muted-foreground mb-6">{t("Share only what you're comfortable with. We'll reach out discreetly.", "যা স্বাচ্ছন্দ্যে বলতে পারেন কেবল তা-ই জানান। আমরা নীরবে যোগাযোগ করব।")}</p>
-              <form className="grid gap-3" onSubmit={(e) => { e.preventDefault(); toast.success(t("Request received confidentially. We'll call you back.", "অনুরোধ গোপনীয়ভাবে গৃহীত। আমরা কল করব।")); }}>
-                <Input placeholder={t("Name (optional)", "নাম (ঐচ্ছিক)")} />
-                <Input required placeholder={t("Phone number", "ফোন নম্বর")} />
-                <Textarea required placeholder={t("Describe your concern…", "আপনার সমস্যা বর্ণনা করুন…")} rows={4} />
-                <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <Lock className="h-3.5 w-3.5 text-success" /> {t("Encrypted & never shared. Read by trained counselors only.", "এনক্রিপ্টেড ও কখনো ভাগ করা হবে না। শুধুমাত্র প্রশিক্ষিত কাউন্সেলর পড়বেন।")}
-                </div>
-                <Button type="submit" className="gradient-accent text-accent-foreground border-0">{t("Request Confidential Consultation", "গোপনীয় পরামর্শের অনুরোধ করুন")}</Button>
-              </form>
+              <ConsultationForm />
             </Card>
           </div>
         </div>
@@ -867,13 +856,7 @@ function Home() {
               <h2 className="font-display text-3xl md:text-4xl font-bold">{t("Request a Callback in 10 Minutes", "১০ মিনিটে কলব্যাকের অনুরোধ করুন")}</h2>
               <p className="mt-2 opacity-90">{t("A counselor will personally call you back — confidential and judgment-free.", "একজন কাউন্সেলর ব্যক্তিগতভাবে আপনাকে কল করবেন — গোপনীয় ও বিচারহীন।")}</p>
             </div>
-            <form className="relative grid gap-3 w-full md:w-auto md:min-w-[320px]" onSubmit={(e) => { e.preventDefault(); toast.success(t("Callback scheduled. We'll reach you within 10 minutes.", "কলব্যাক নির্ধারিত। আমরা ১০ মিনিটের মধ্যে আপনাকে কল করব।")); }}>
-              <Input required placeholder={t("Your name", "আপনার নাম")} className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
-              <Input required placeholder={t("Phone number", "ফোন নম্বর")} className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
-              <Button type="submit" size="lg" className="bg-white text-primary hover:bg-white/95 font-semibold">
-                {t("Request Callback Now", "এখনই কলব্যাক অনুরোধ করুন")} <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </form>
+            <CallbackForm />
           </Card>
           {/* SHARE */}
           <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 text-center">
@@ -939,13 +922,7 @@ function Home() {
             <Card className="lg:col-span-3 p-7 border-0 shadow-card bg-card">
               <h3 className="font-display font-bold text-xl mb-1">{t("Send us a message", "আমাদের বার্তা পাঠান")}</h3>
               <p className="text-sm text-muted-foreground mb-5">{t("We respond within an hour, 24/7.", "আমরা ২৪/৭ এক ঘন্টার মধ্যে সাড়া দিই।")}</p>
-              <form className="grid sm:grid-cols-2 gap-3" onSubmit={(e) => { e.preventDefault(); toast.success(t("Message sent. We'll be in touch shortly.", "বার্তা পাঠানো হয়েছে। আমরা শীঘ্রই যোগাযোগ করব।")); }}>
-                <Input required placeholder={t("Full name", "পুরো নাম")} />
-                <Input required placeholder={t("Phone number", "ফোন নম্বর")} />
-                <Input className="sm:col-span-2" type="email" placeholder={t("Email", "ইমেইল")} />
-                <Textarea className="sm:col-span-2" required placeholder={t("How can we help?", "আমরা কীভাবে সাহায্য করতে পারি?")} rows={4} />
-                <Button type="submit" className="sm:col-span-2 gradient-primary text-primary-foreground border-0 min-h-12 py-3">{t("Send Message", "বার্তা পাঠান")}</Button>
-              </form>
+              <ContactForm />
             </Card>
           </div>
           {/* FIND US */}
@@ -1108,5 +1085,144 @@ function Home() {
         </a>
       </div>
     </div>
+  );
+}
+
+function ReferralForm() {
+  const { t } = useLang();
+  const [org, setOrg] = useState("");
+  const [phone, setPhone] = useState("");
+  const [patient, setPatient] = useState("");
+  const [summary, setSummary] = useState("");
+  return (
+    <LeadForm
+      formType="refer_patient"
+      className="grid gap-3"
+      successMessage={t("Referral received. Our team will respond shortly.", "রেফারেল গৃহীত হয়েছে। আমাদের দল শীঘ্রই সাড়া দেবে।")}
+      buildValues={(): LeadFormValues | null => {
+        if (!org.trim() || !phone.trim() || !summary.trim()) return null;
+        return {
+          name: org.trim(),
+          phone: phone.trim(),
+          message: summary.trim(),
+          extra: patient.trim() ? { patient_name: patient.trim() } : undefined,
+        };
+      }}
+      onSuccess={() => { setOrg(""); setPhone(""); setPatient(""); setSummary(""); }}
+    >
+      {({ submitting }) => (
+        <>
+          <Input required placeholder={t("Referring professional / organization", "রেফার করা পেশাদার / সংস্থা")} value={org} onChange={(e) => setOrg(e.target.value)} maxLength={200} />
+          <Input required placeholder={t("Contact number", "যোগাযোগ নম্বর")} value={phone} onChange={(e) => setPhone(e.target.value)} maxLength={40} inputMode="tel" />
+          <Input placeholder={t("Patient name (optional)", "রোগীর নাম (ঐচ্ছিক)")} value={patient} onChange={(e) => setPatient(e.target.value)} maxLength={200} />
+          <Textarea required placeholder={t("Brief case summary", "সংক্ষিপ্ত কেস সারাংশ")} rows={3} value={summary} onChange={(e) => setSummary(e.target.value)} maxLength={5000} />
+          <Button type="submit" disabled={submitting} className="gradient-primary text-primary-foreground border-0">
+            {submitting ? t("Sending…", "পাঠানো হচ্ছে…") : t("Refer a Patient Confidentially", "গোপনীয়ভাবে রেফার করুন")}
+          </Button>
+        </>
+      )}
+    </LeadForm>
+  );
+}
+
+function ConsultationForm() {
+  const { t } = useLang();
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [concern, setConcern] = useState("");
+  return (
+    <LeadForm
+      formType="consultation"
+      className="grid gap-3"
+      successMessage={t("Request received confidentially. We'll call you back.", "অনুরোধ গোপনীয়ভাবে গৃহীত। আমরা কল করব।")}
+      buildValues={(): LeadFormValues | null => {
+        if (!phone.trim() || !concern.trim()) return null;
+        return {
+          name: name.trim() || "Anonymous",
+          phone: phone.trim(),
+          message: concern.trim(),
+        };
+      }}
+      onSuccess={() => { setName(""); setPhone(""); setConcern(""); }}
+    >
+      {({ submitting }) => (
+        <>
+          <Input placeholder={t("Name (optional)", "নাম (ঐচ্ছিক)")} value={name} onChange={(e) => setName(e.target.value)} maxLength={200} />
+          <Input required placeholder={t("Phone number", "ফোন নম্বর")} value={phone} onChange={(e) => setPhone(e.target.value)} maxLength={40} inputMode="tel" />
+          <Textarea required placeholder={t("Describe your concern…", "আপনার সমস্যা বর্ণনা করুন…")} rows={4} value={concern} onChange={(e) => setConcern(e.target.value)} maxLength={5000} />
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+            <Lock className="h-3.5 w-3.5 text-success" /> {t("Encrypted & never shared. Read by trained counselors only.", "এনক্রিপ্টেড ও কখনো ভাগ করা হবে না। শুধুমাত্র প্রশিক্ষিত কাউন্সেলর পড়বেন।")}
+          </div>
+          <Button type="submit" disabled={submitting} className="gradient-accent text-accent-foreground border-0">
+            {submitting ? t("Sending…", "পাঠানো হচ্ছে…") : t("Request Confidential Consultation", "গোপনীয় পরামর্শের অনুরোধ করুন")}
+          </Button>
+        </>
+      )}
+    </LeadForm>
+  );
+}
+
+function CallbackForm() {
+  const { t } = useLang();
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  return (
+    <LeadForm
+      formType="callback"
+      className="relative grid gap-3 w-full md:w-auto md:min-w-[320px]"
+      successMessage={t("Callback scheduled. We'll reach you within 10 minutes.", "কলব্যাক নির্ধারিত। আমরা ১০ মিনিটের মধ্যে আপনাকে কল করব।")}
+      buildValues={(): LeadFormValues | null => {
+        if (!name.trim() || !phone.trim()) return null;
+        return { name: name.trim(), phone: phone.trim() };
+      }}
+      onSuccess={() => { setName(""); setPhone(""); }}
+    >
+      {({ submitting }) => (
+        <>
+          <Input required placeholder={t("Your name", "আপনার নাম")} value={name} onChange={(e) => setName(e.target.value)} maxLength={200} className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
+          <Input required placeholder={t("Phone number", "ফোন নম্বর")} value={phone} onChange={(e) => setPhone(e.target.value)} maxLength={40} inputMode="tel" className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
+          <Button type="submit" size="lg" disabled={submitting} className="bg-white text-primary hover:bg-white/95 font-semibold">
+            {submitting ? t("Sending…", "পাঠানো হচ্ছে…") : t("Request Callback Now", "এখনই কলব্যাক অনুরোধ করুন")} <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        </>
+      )}
+    </LeadForm>
+  );
+}
+
+function ContactForm() {
+  const { t } = useLang();
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  return (
+    <LeadForm
+      formType="contact"
+      className="grid sm:grid-cols-2 gap-3"
+      successMessage={t("Message sent. We'll be in touch shortly.", "বার্তা পাঠানো হয়েছে। আমরা শীঘ্রই যোগাযোগ করব।")}
+      buildValues={(): LeadFormValues | null => {
+        if (!name.trim() || !phone.trim() || !message.trim()) return null;
+        return {
+          name: name.trim(),
+          phone: phone.trim(),
+          email: email.trim() || undefined,
+          message: message.trim(),
+        };
+      }}
+      onSuccess={() => { setName(""); setPhone(""); setEmail(""); setMessage(""); }}
+    >
+      {({ submitting }) => (
+        <>
+          <Input required placeholder={t("Full name", "পুরো নাম")} value={name} onChange={(e) => setName(e.target.value)} maxLength={200} />
+          <Input required placeholder={t("Phone number", "ফোন নম্বর")} value={phone} onChange={(e) => setPhone(e.target.value)} maxLength={40} inputMode="tel" />
+          <Input className="sm:col-span-2" type="email" placeholder={t("Email", "ইমেইল")} value={email} onChange={(e) => setEmail(e.target.value)} maxLength={320} />
+          <Textarea className="sm:col-span-2" required placeholder={t("How can we help?", "আমরা কীভাবে সাহায্য করতে পারি?")} rows={4} value={message} onChange={(e) => setMessage(e.target.value)} maxLength={5000} />
+          <Button type="submit" disabled={submitting} className="sm:col-span-2 gradient-primary text-primary-foreground border-0 min-h-12 py-3">
+            {submitting ? t("Sending…", "পাঠানো হচ্ছে…") : t("Send Message", "বার্তা পাঠান")}
+          </Button>
+        </>
+      )}
+    </LeadForm>
   );
 }
