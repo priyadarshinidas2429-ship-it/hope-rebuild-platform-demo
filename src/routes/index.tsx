@@ -83,17 +83,17 @@ const FAQS: { q: [string, string]; a: [string, string] }[] = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Midnapore Hope Society — Nasha Mukti Kendra" },
-      { name: "description", content: "Trusted rehabilitation centre in Midnapore, West Bengal. 24/7 confidential de-addiction care, counseling and family support." },
-      { property: "og:title", content: "Midnapore Hope Society — Nasha Mukti Kendra" },
-      { property: "og:description", content: "Trusted rehabilitation centre in Midnapore, West Bengal. 24/7 confidential de-addiction care, counseling and family support." },
+      { title: "Midnapore Hope Society | De-Addiction, Rehabilitation & Mental Wellness Centre" },
+      { name: "description", content: "Midnapore Hope Society is a professional de-addiction and rehabilitation centre in Midnapore, West Bengal, providing addiction recovery programs, mental wellness support, counseling, family guidance, and rehabilitation services." },
+      { property: "og:title", content: "Midnapore Hope Society" },
+      { property: "og:description", content: "Professional de-addiction, rehabilitation, counseling, and mental wellness support in Midnapore, West Bengal." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: `${SITE_URL}/` },
+      { property: "og:url", content: SITE_URL },
       { property: "og:image", content: heroImg },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "keywords", content: "Rehabilitation Centre Midnapore, De Addiction Centre Midnapore, Addiction Recovery, Counseling Services, Family Support Programs, Nasha Mukti Kendra Midnapore, Alcohol Recovery Centre, Drug De Addiction Centre West Bengal" },
     ],
-    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
+      links: [{ rel: "canonical", href: SITE_URL }],
     scripts: [{
       type: "application/ld+json",
       children: JSON.stringify({
