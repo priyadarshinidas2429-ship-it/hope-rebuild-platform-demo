@@ -93,7 +93,7 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
       { name: "keywords", content: "Rehabilitation Centre Midnapore, De Addiction Centre Midnapore, Addiction Recovery, Counseling Services, Family Support Programs, Nasha Mukti Kendra Midnapore, Alcohol Recovery Centre, Drug De Addiction Centre West Bengal" },
     ],
-    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
+      links: [{ rel: "canonical", href: SITE_URL }],
     scripts: [{
       type: "application/ld+json",
       children: JSON.stringify({
