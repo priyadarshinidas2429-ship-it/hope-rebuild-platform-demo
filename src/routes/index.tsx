@@ -856,13 +856,7 @@ function Home() {
               <h2 className="font-display text-3xl md:text-4xl font-bold">{t("Request a Callback in 10 Minutes", "১০ মিনিটে কলব্যাকের অনুরোধ করুন")}</h2>
               <p className="mt-2 opacity-90">{t("A counselor will personally call you back — confidential and judgment-free.", "একজন কাউন্সেলর ব্যক্তিগতভাবে আপনাকে কল করবেন — গোপনীয় ও বিচারহীন।")}</p>
             </div>
-            <form className="relative grid gap-3 w-full md:w-auto md:min-w-[320px]" onSubmit={(e) => { e.preventDefault(); toast.success(t("Callback scheduled. We'll reach you within 10 minutes.", "কলব্যাক নির্ধারিত। আমরা ১০ মিনিটের মধ্যে আপনাকে কল করব।")); }}>
-              <Input required placeholder={t("Your name", "আপনার নাম")} className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
-              <Input required placeholder={t("Phone number", "ফোন নম্বর")} className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
-              <Button type="submit" size="lg" className="bg-white text-primary hover:bg-white/95 font-semibold">
-                {t("Request Callback Now", "এখনই কলব্যাক অনুরোধ করুন")} <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </form>
+            <CallbackForm />
           </Card>
           {/* SHARE */}
           <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 text-center">
