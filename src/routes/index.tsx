@@ -21,6 +21,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { useLang } from "@/lib/i18n";
 import { Share2 } from "lucide-react";
 import { searchResources } from "@/lib/resources";
+import { submitLead } from "@/lib/leads.functions";
+import { Turnstile } from "@/components/site/Turnstile";
 
 import heroImg from "@/assets/hero-hope.jpg";
 import aboutImg from "@/assets/about-team.jpg";
