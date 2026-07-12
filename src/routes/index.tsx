@@ -741,15 +741,7 @@ function Home() {
               <Badge className="mb-3 bg-accent-soft text-accent border-0">{t("Anonymous Consultation", "নাম প্রকাশ না করে পরামর্শ")}</Badge>
               <h2 className="font-display text-2xl md:text-3xl font-bold mb-3">{t("100% Confidential Request", "১০০% গোপনীয় অনুরোধ")}</h2>
               <p className="text-muted-foreground mb-6">{t("Share only what you're comfortable with. We'll reach out discreetly.", "যা স্বাচ্ছন্দ্যে বলতে পারেন কেবল তা-ই জানান। আমরা নীরবে যোগাযোগ করব।")}</p>
-              <form className="grid gap-3" onSubmit={(e) => { e.preventDefault(); toast.success(t("Request received confidentially. We'll call you back.", "অনুরোধ গোপনীয়ভাবে গৃহীত। আমরা কল করব।")); }}>
-                <Input placeholder={t("Name (optional)", "নাম (ঐচ্ছিক)")} />
-                <Input required placeholder={t("Phone number", "ফোন নম্বর")} />
-                <Textarea required placeholder={t("Describe your concern…", "আপনার সমস্যা বর্ণনা করুন…")} rows={4} />
-                <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <Lock className="h-3.5 w-3.5 text-success" /> {t("Encrypted & never shared. Read by trained counselors only.", "এনক্রিপ্টেড ও কখনো ভাগ করা হবে না। শুধুমাত্র প্রশিক্ষিত কাউন্সেলর পড়বেন।")}
-                </div>
-                <Button type="submit" className="gradient-accent text-accent-foreground border-0">{t("Request Confidential Consultation", "গোপনীয় পরামর্শের অনুরোধ করুন")}</Button>
-              </form>
+              <ConsultationForm />
             </Card>
           </div>
         </div>
