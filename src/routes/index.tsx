@@ -735,7 +735,38 @@ function Home() {
               <Badge className="mb-3 bg-primary/10 text-primary border-0">{t("Referral Portal", "রেফারেল পোর্টাল")}</Badge>
               <h2 className="font-display text-2xl md:text-3xl font-bold mb-3">{t("For Doctors, Hospitals, Counselors & NGOs", "চিকিৎসক, হাসপাতাল, কাউন্সেলর ও এনজিওদের জন্য")}</h2>
               <p className="text-muted-foreground mb-6">{t("Refer a patient confidentially. We coordinate intake within 24 hours.", "গোপনীয়ভাবে রোগী রেফার করুন। আমরা ২৪ ঘন্টার মধ্যে ভর্তির ব্যবস্থা করি।")}</p>
-              <ReferralFormBlock />
+              {(() => {
+                const [refOrg, setRefOrg] = useState("");
+                const [refPhone, setRefPhone] = useState("");
+                const [refPatient, setRefPatient] = useState("");
+                const [refSummary, setRefSummary] = useState("");
+                const build = (): LeadFormValues | null => {
+                  if (!refOrg.trim() || !refPhone.trim() || !refSummary.trim()) return null;
+                  return {
+                    name: refOrg.trim(),
+                    phone: refPhone.trim(),
+                    message: refSummary.trim(),
+                    extra: refPatient.trim() ? { patient_name: refPatient.trim() } : undefined,
+                  };
+                };
+                return (
+                  <LeadForm
+                    formType="refer_patient"
+                    className="grid gap-3"
+                    successMessage={t("Referral received. Our team will respond shortly.", "রেফারেল গৃহীত হয়েছে। আমাদের দল শীঘ্রই সাড়া দেবে।")}
+                    buildValues={build}
+                    onSuccess={() => { setRefOrg(""); setRefPhone(""); setRefPatient(""); setRefSummary(""); }}
+                  >
+                    {({ submitting }) => (<>
+                      <Input required placeholder={t("Referring professional / organization", "রেফার করা পেশাদার / সংস্থা")} value={refOrg} onChange={(e) => setRefOrg(e.target.value)} maxLength={200} />
+                      <Input required placeholder={t("Contact number", "যোগাযোগ নম্বর")} value={refPhone} onChange={(e) => setRefPhone(e.target.value)} maxLength={40} inputMode="tel" />
+                      <Input placeholder={t("Patient name (optional)", "রোগীর নাম (ঐচ্ছিক)")} value={refPatient} onChange={(e) => setRefPatient(e.target.value)} maxLength={200} />
+                      <Textarea required placeholder={t("Brief case summary", "সংক্ষিপ্ত কেস সারাংশ")} rows={3} value={refSummary} onChange={(e) => setRefSummary(e.target.value)} maxLength={5000} />
+                      <Button type="submit" disabled={submitting} className="gradient-primary text-primary-foreground border-0">{submitting ? t("Sending…", "পাঠানো হচ্ছে…") : t("Refer a Patient Confidentially", "গোপনীয়ভাবে রেফার করুন")}</Button>
+                    </>)}
+                  </LeadForm>
+                );
+              })()}
             </Card>
             <Card className="p-8 md:p-10 border-0 shadow-card bg-card">
               <Badge className="mb-3 bg-accent-soft text-accent border-0">{t("Anonymous Consultation", "নাম প্রকাশ না করে পরামর্শ")}</Badge>
