@@ -21,8 +21,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { useLang } from "@/lib/i18n";
 import { Share2 } from "lucide-react";
 import { searchResources } from "@/lib/resources";
-import { toast } from "sonner";
-
 const WA_LEAD_NUMBER = "917602995502";
 const WA_REDIRECT_NOTICE_EN = "You will now be redirected to WhatsApp. Please tap Send to complete your request.";
 const WA_REDIRECT_NOTICE_BN = "আপনাকে এখন WhatsApp-এ পাঠানো হচ্ছে। অনুরোধ সম্পূর্ণ করতে Send-এ ট্যাপ করুন।";
