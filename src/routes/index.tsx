@@ -21,7 +21,16 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { useLang } from "@/lib/i18n";
 import { Share2 } from "lucide-react";
 import { searchResources } from "@/lib/resources";
-import { LeadForm, type LeadFormValues } from "@/components/site/LeadForm";
+const WA_LEAD_NUMBER = "917602995502";
+const WA_REDIRECT_NOTICE_EN = "You will now be redirected to WhatsApp. Please tap Send to complete your request.";
+const WA_REDIRECT_NOTICE_BN = "আপনাকে এখন WhatsApp-এ পাঠানো হচ্ছে। অনুরোধ সম্পূর্ণ করতে Send-এ ট্যাপ করুন।";
+
+function openWhatsAppMessage(message: string) {
+  const url = `https://wa.me/${WA_LEAD_NUMBER}?text=${encodeURIComponent(message)}`;
+  if (typeof window !== "undefined") {
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
+}
 
 import heroImg from "@/assets/hero-hope.jpg";
 import aboutImg from "@/assets/about-team.jpg";
@@ -1094,34 +1103,24 @@ function ReferralForm() {
   const [phone, setPhone] = useState("");
   const [patient, setPatient] = useState("");
   const [summary, setSummary] = useState("");
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (!org.trim() || !phone.trim() || !summary.trim()) return;
+    const msg = `🏥 *New Referral Portal Submission*\n\nReferring Professional / Organization: ${org.trim()}\nContact Number: ${phone.trim()}\nPatient Name: ${patient.trim() || "-"}\nBrief Case Summary: ${summary.trim()}`;
+    toast.success(t(WA_REDIRECT_NOTICE_EN, WA_REDIRECT_NOTICE_BN));
+    openWhatsAppMessage(msg);
+    setOrg(""); setPhone(""); setPatient(""); setSummary("");
+  }
   return (
-    <LeadForm
-      formType="refer_patient"
-      className="grid gap-3"
-      successMessage={t("Referral received. Our team will respond shortly.", "রেফারেল গৃহীত হয়েছে। আমাদের দল শীঘ্রই সাড়া দেবে।")}
-      buildValues={(): LeadFormValues | null => {
-        if (!org.trim() || !phone.trim() || !summary.trim()) return null;
-        return {
-          name: org.trim(),
-          phone: phone.trim(),
-          message: summary.trim(),
-          extra: patient.trim() ? { patient_name: patient.trim() } : undefined,
-        };
-      }}
-      onSuccess={() => { setOrg(""); setPhone(""); setPatient(""); setSummary(""); }}
-    >
-      {({ submitting }) => (
-        <>
-          <Input required placeholder={t("Referring professional / organization", "রেফার করা পেশাদার / সংস্থা")} value={org} onChange={(e) => setOrg(e.target.value)} maxLength={200} />
-          <Input required placeholder={t("Contact number", "যোগাযোগ নম্বর")} value={phone} onChange={(e) => setPhone(e.target.value)} maxLength={40} inputMode="tel" />
-          <Input placeholder={t("Patient name (optional)", "রোগীর নাম (ঐচ্ছিক)")} value={patient} onChange={(e) => setPatient(e.target.value)} maxLength={200} />
-          <Textarea required placeholder={t("Brief case summary", "সংক্ষিপ্ত কেস সারাংশ")} rows={3} value={summary} onChange={(e) => setSummary(e.target.value)} maxLength={5000} />
-          <Button type="submit" disabled={submitting} className="gradient-primary text-primary-foreground border-0">
-            {submitting ? t("Sending…", "পাঠানো হচ্ছে…") : t("Refer a Patient Confidentially", "গোপনীয়ভাবে রেফার করুন")}
-          </Button>
-        </>
-      )}
-    </LeadForm>
+    <form className="grid gap-3" onSubmit={handleSubmit} noValidate>
+      <Input required placeholder={t("Referring professional / organization", "রেফার করা পেশাদার / সংস্থা")} value={org} onChange={(e) => setOrg(e.target.value)} maxLength={200} />
+      <Input required placeholder={t("Contact number", "যোগাযোগ নম্বর")} value={phone} onChange={(e) => setPhone(e.target.value)} maxLength={40} inputMode="tel" />
+      <Input placeholder={t("Patient name (optional)", "রোগীর নাম (ঐচ্ছিক)")} value={patient} onChange={(e) => setPatient(e.target.value)} maxLength={200} />
+      <Textarea required placeholder={t("Brief case summary", "সংক্ষিপ্ত কেস সারাংশ")} rows={3} value={summary} onChange={(e) => setSummary(e.target.value)} maxLength={5000} />
+      <Button type="submit" className="gradient-primary text-primary-foreground border-0">
+        {t("Refer a Patient Confidentially", "গোপনীয়ভাবে রেফার করুন")}
+      </Button>
+    </form>
   );
 }
 
@@ -1130,35 +1129,26 @@ function ConsultationForm() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [concern, setConcern] = useState("");
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (!phone.trim() || !concern.trim()) return;
+    const msg = `🔒 *New Confidential Consultation Request*\n\nName: ${name.trim() || "Anonymous"}\nPhone Number: ${phone.trim()}\nConcern: ${concern.trim()}`;
+    toast.success(t(WA_REDIRECT_NOTICE_EN, WA_REDIRECT_NOTICE_BN));
+    openWhatsAppMessage(msg);
+    setName(""); setPhone(""); setConcern("");
+  }
   return (
-    <LeadForm
-      formType="consultation"
-      className="grid gap-3"
-      successMessage={t("Request received confidentially. We'll call you back.", "অনুরোধ গোপনীয়ভাবে গৃহীত। আমরা কল করব।")}
-      buildValues={(): LeadFormValues | null => {
-        if (!phone.trim() || !concern.trim()) return null;
-        return {
-          name: name.trim() || "Anonymous",
-          phone: phone.trim(),
-          message: concern.trim(),
-        };
-      }}
-      onSuccess={() => { setName(""); setPhone(""); setConcern(""); }}
-    >
-      {({ submitting }) => (
-        <>
-          <Input placeholder={t("Name (optional)", "নাম (ঐচ্ছিক)")} value={name} onChange={(e) => setName(e.target.value)} maxLength={200} />
-          <Input required placeholder={t("Phone number", "ফোন নম্বর")} value={phone} onChange={(e) => setPhone(e.target.value)} maxLength={40} inputMode="tel" />
-          <Textarea required placeholder={t("Describe your concern…", "আপনার সমস্যা বর্ণনা করুন…")} rows={4} value={concern} onChange={(e) => setConcern(e.target.value)} maxLength={5000} />
-          <div className="flex items-center gap-2 text-xs text-muted-foreground">
-            <Lock className="h-3.5 w-3.5 text-success" /> {t("Encrypted & never shared. Read by trained counselors only.", "এনক্রিপ্টেড ও কখনো ভাগ করা হবে না। শুধুমাত্র প্রশিক্ষিত কাউন্সেলর পড়বেন।")}
-          </div>
-          <Button type="submit" disabled={submitting} className="gradient-accent text-accent-foreground border-0">
-            {submitting ? t("Sending…", "পাঠানো হচ্ছে…") : t("Request Confidential Consultation", "গোপনীয় পরামর্শের অনুরোধ করুন")}
-          </Button>
-        </>
-      )}
-    </LeadForm>
+    <form className="grid gap-3" onSubmit={handleSubmit} noValidate>
+      <Input placeholder={t("Name (optional)", "নাম (ঐচ্ছিক)")} value={name} onChange={(e) => setName(e.target.value)} maxLength={200} />
+      <Input required placeholder={t("Phone number", "ফোন নম্বর")} value={phone} onChange={(e) => setPhone(e.target.value)} maxLength={40} inputMode="tel" />
+      <Textarea required placeholder={t("Describe your concern…", "আপনার সমস্যা বর্ণনা করুন…")} rows={4} value={concern} onChange={(e) => setConcern(e.target.value)} maxLength={5000} />
+      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+        <Lock className="h-3.5 w-3.5 text-success" /> {t("Encrypted & never shared. Read by trained counselors only.", "এনক্রিপ্টেড ও কখনো ভাগ করা হবে না। শুধুমাত্র প্রশিক্ষিত কাউন্সেলর পড়বেন।")}
+      </div>
+      <Button type="submit" className="gradient-accent text-accent-foreground border-0">
+        {t("Request Confidential Consultation", "গোপনীয় পরামর্শের অনুরোধ করুন")}
+      </Button>
+    </form>
   );
 }
 
@@ -1166,27 +1156,22 @@ function CallbackForm() {
   const { t } = useLang();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (!name.trim() || !phone.trim()) return;
+    const msg = `📞 *New Callback Request*\n\nName: ${name.trim()}\nPhone Number: ${phone.trim()}`;
+    toast.success(t(WA_REDIRECT_NOTICE_EN, WA_REDIRECT_NOTICE_BN));
+    openWhatsAppMessage(msg);
+    setName(""); setPhone("");
+  }
   return (
-    <LeadForm
-      formType="callback"
-      className="relative grid gap-3 w-full md:w-auto md:min-w-[320px]"
-      successMessage={t("Callback scheduled. We'll reach you within 10 minutes.", "কলব্যাক নির্ধারিত। আমরা ১০ মিনিটের মধ্যে আপনাকে কল করব।")}
-      buildValues={(): LeadFormValues | null => {
-        if (!name.trim() || !phone.trim()) return null;
-        return { name: name.trim(), phone: phone.trim() };
-      }}
-      onSuccess={() => { setName(""); setPhone(""); }}
-    >
-      {({ submitting }) => (
-        <>
-          <Input required placeholder={t("Your name", "আপনার নাম")} value={name} onChange={(e) => setName(e.target.value)} maxLength={200} className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
-          <Input required placeholder={t("Phone number", "ফোন নম্বর")} value={phone} onChange={(e) => setPhone(e.target.value)} maxLength={40} inputMode="tel" className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
-          <Button type="submit" size="lg" disabled={submitting} className="bg-white text-primary hover:bg-white/95 font-semibold">
-            {submitting ? t("Sending…", "পাঠানো হচ্ছে…") : t("Request Callback Now", "এখনই কলব্যাক অনুরোধ করুন")} <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
-        </>
-      )}
-    </LeadForm>
+    <form className="relative grid gap-3 w-full md:w-auto md:min-w-[320px]" onSubmit={handleSubmit} noValidate>
+      <Input required placeholder={t("Your name", "আপনার নাম")} value={name} onChange={(e) => setName(e.target.value)} maxLength={200} className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
+      <Input required placeholder={t("Phone number", "ফোন নম্বর")} value={phone} onChange={(e) => setPhone(e.target.value)} maxLength={40} inputMode="tel" className="bg-white/15 border-white/30 text-white placeholder:text-white/70" />
+      <Button type="submit" size="lg" className="bg-white text-primary hover:bg-white/95 font-semibold">
+        {t("Request Callback Now", "এখনই কলব্যাক অনুরোধ করুন")} <ArrowRight className="ml-2 h-4 w-4" />
+      </Button>
+    </form>
   );
 }
 
@@ -1196,33 +1181,23 @@ function ContactForm() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (!name.trim() || !phone.trim() || !message.trim()) return;
+    const msg = `📩 *New Website Contact Message*\n\nFull Name: ${name.trim()}\nPhone Number: ${phone.trim()}\nEmail: ${email.trim() || "-"}\nMessage: ${message.trim()}`;
+    toast.success(t(WA_REDIRECT_NOTICE_EN, WA_REDIRECT_NOTICE_BN));
+    openWhatsAppMessage(msg);
+    setName(""); setPhone(""); setEmail(""); setMessage("");
+  }
   return (
-    <LeadForm
-      formType="contact"
-      className="grid sm:grid-cols-2 gap-3"
-      successMessage={t("Message sent. We'll be in touch shortly.", "বার্তা পাঠানো হয়েছে। আমরা শীঘ্রই যোগাযোগ করব।")}
-      buildValues={(): LeadFormValues | null => {
-        if (!name.trim() || !phone.trim() || !message.trim()) return null;
-        return {
-          name: name.trim(),
-          phone: phone.trim(),
-          email: email.trim() || undefined,
-          message: message.trim(),
-        };
-      }}
-      onSuccess={() => { setName(""); setPhone(""); setEmail(""); setMessage(""); }}
-    >
-      {({ submitting }) => (
-        <>
-          <Input required placeholder={t("Full name", "পুরো নাম")} value={name} onChange={(e) => setName(e.target.value)} maxLength={200} />
-          <Input required placeholder={t("Phone number", "ফোন নম্বর")} value={phone} onChange={(e) => setPhone(e.target.value)} maxLength={40} inputMode="tel" />
-          <Input className="sm:col-span-2" type="email" placeholder={t("Email", "ইমেইল")} value={email} onChange={(e) => setEmail(e.target.value)} maxLength={320} />
-          <Textarea className="sm:col-span-2" required placeholder={t("How can we help?", "আমরা কীভাবে সাহায্য করতে পারি?")} rows={4} value={message} onChange={(e) => setMessage(e.target.value)} maxLength={5000} />
-          <Button type="submit" disabled={submitting} className="sm:col-span-2 gradient-primary text-primary-foreground border-0 min-h-12 py-3">
-            {submitting ? t("Sending…", "পাঠানো হচ্ছে…") : t("Send Message", "বার্তা পাঠান")}
-          </Button>
-        </>
-      )}
-    </LeadForm>
+    <form className="grid sm:grid-cols-2 gap-3" onSubmit={handleSubmit} noValidate>
+      <Input required placeholder={t("Full name", "পুরো নাম")} value={name} onChange={(e) => setName(e.target.value)} maxLength={200} />
+      <Input required placeholder={t("Phone number", "ফোন নম্বর")} value={phone} onChange={(e) => setPhone(e.target.value)} maxLength={40} inputMode="tel" />
+      <Input className="sm:col-span-2" type="email" placeholder={t("Email", "ইমেইল")} value={email} onChange={(e) => setEmail(e.target.value)} maxLength={320} />
+      <Textarea className="sm:col-span-2" required placeholder={t("How can we help?", "আমরা কীভাবে সাহায্য করতে পারি?")} rows={4} value={message} onChange={(e) => setMessage(e.target.value)} maxLength={5000} />
+      <Button type="submit" className="sm:col-span-2 gradient-primary text-primary-foreground border-0 min-h-12 py-3">
+        {t("Send Message", "বার্তা পাঠান")}
+      </Button>
+    </form>
   );
 }
